@@ -2599,6 +2599,7 @@
             // 
             this.RS_sendHonorsGroupBox.Controls.Add(this.RS_sendHonorsInGame);
             this.RS_sendHonorsGroupBox.Controls.Add(this.RS_sendHonorsFacebook);
+            this.RS_sendHonorsGroupBox.Enabled = false;
             this.RS_sendHonorsGroupBox.Location = new System.Drawing.Point(9, 219);
             this.RS_sendHonorsGroupBox.Name = "RS_sendHonorsGroupBox";
             this.RS_sendHonorsGroupBox.Size = new System.Drawing.Size(168, 71);
@@ -2640,6 +2641,7 @@
             this.RS_buyKeysGroupBox.Controls.Add(this.RS_buyKeyHonorsNumericBox);
             this.RS_buyKeysGroupBox.Controls.Add(this.RS_buyKeyHonorsComboBox);
             this.RS_buyKeysGroupBox.Controls.Add(this.RS_buyKeyHonorsCheckBox);
+            this.RS_buyKeysGroupBox.Enabled = false;
             this.RS_buyKeysGroupBox.Location = new System.Drawing.Point(183, 219);
             this.RS_buyKeysGroupBox.Name = "RS_buyKeysGroupBox";
             this.RS_buyKeysGroupBox.Size = new System.Drawing.Size(296, 71);
@@ -2743,6 +2745,7 @@
             this.RS_inboxGroupBox.Controls.Add(this.RS_inboxGold);
             this.RS_inboxGroupBox.Controls.Add(this.RS_inboxKeys);
             this.RS_inboxGroupBox.Controls.Add(this.RS_inboxHonors);
+            this.RS_inboxGroupBox.Enabled = false;
             this.RS_inboxGroupBox.Location = new System.Drawing.Point(9, 90);
             this.RS_inboxGroupBox.Name = "RS_inboxGroupBox";
             this.RS_inboxGroupBox.Size = new System.Drawing.Size(470, 46);
@@ -2820,6 +2823,7 @@
             this.RS_sellingGroupBox.Controls.Add(this.RS_heroStarsComboBox);
             this.RS_sellingGroupBox.Controls.Add(this.RS_sellHeroesCheckBox);
             this.RS_sellingGroupBox.Controls.Add(this.RS_sellItemsCheckBox);
+            this.RS_sellingGroupBox.Enabled = false;
             this.RS_sellingGroupBox.Location = new System.Drawing.Point(9, 8);
             this.RS_sellingGroupBox.Name = "RS_sellingGroupBox";
             this.RS_sellingGroupBox.Size = new System.Drawing.Size(470, 75);
@@ -2977,6 +2981,7 @@
             // 
             this.RS_giftsGroupBox.Controls.Add(this.RS_luckyBoxCheckBox);
             this.RS_giftsGroupBox.Controls.Add(this.RS_luckyChestCheckBox);
+            this.RS_giftsGroupBox.Enabled = false;
             this.RS_giftsGroupBox.Location = new System.Drawing.Point(9, 142);
             this.RS_giftsGroupBox.Name = "RS_giftsGroupBox";
             this.RS_giftsGroupBox.Size = new System.Drawing.Size(168, 71);

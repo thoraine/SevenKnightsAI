@@ -30,9 +30,9 @@ namespace SevenKnightsAI.Classes.Mappings
 
         public static readonly PixelMapping RewardButtonRedIcon = new PixelMapping
         {
-            X = 747,
-            Y = 409,
-            Color = 4533015,
+            X = 759,
+            Y = 400,
+            Color = 13052162,
             Type = MappingType.ANCHOR
         };
     }
