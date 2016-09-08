@@ -904,9 +904,9 @@ namespace SevenKnightsAI.Classes.Mappings
 
         public static readonly PixelMapping World8_3Anchor_1 = new PixelMapping
         {
-            X = 61,
-            Y = 508,
-            Color = 13873751,
+            X = 393,
+            Y = 141,
+            Color = 7095156,
             Type = MappingType.ANCHOR
         };
 

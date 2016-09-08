@@ -17,9 +17,9 @@ namespace SevenKnightsAI.Classes.Mappings
 		
 		public static readonly PixelMapping GetStrongerButton = new PixelMapping
 		{
-			X = 902,
-			Y = 57,
-			Color = 14993494,
+			X = 900,
+			Y = 60,
+			Color = 15522425,
 			Type = MappingType.BOTH
 		};
 

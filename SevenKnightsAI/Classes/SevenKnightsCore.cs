@@ -111,6 +111,7 @@ namespace SevenKnightsAI.Classes
         private int RaidLimitCount;
         private int RubyCount;
         private int HeroCount;
+        private int MaxHeroUpCount;
         private string HeroMax;
         private SynchronizationContext SynchronizationContext;
         private Tesseractor Tesseractor;
@@ -1526,6 +1527,7 @@ namespace SevenKnightsAI.Classes
             this.ArenaLimitCount = 0;
             this.RaidLimitCount = 0;
             this.HeroCount = 0;
+            this.MaxHeroUpCount = 0;
             this.AdventureKeys = -1;
             this.AdventureKeyTime = TimeSpan.MaxValue;
             this.TowerKeys = -1;
@@ -2533,6 +2535,7 @@ namespace SevenKnightsAI.Classes
                                         case SceneType.LEVEL_30_DIALOG:
                                         case SceneType.LEVEL_30_MAX_DIALOG:
                                             this.Log("Hero Level 30", this.COLOR_LEVEL_30);
+
                                             if (this.AISettings.AD_Formation != Formation.None && this.AISettings.AD_HeroManagePositions != null && this.AISettings.AD_HeroManagePositions.Length > 0)
                                             {
                                                 this.ChangeObjective(Objective.HERO_MANAGEMENT);
@@ -4532,7 +4535,7 @@ namespace SevenKnightsAI.Classes
                     Scene result = new Scene(SceneType.ARENA_START);
                     return result;
                 }
-                if (this.MatchMapping(ArenaEndPM.QuickStartButton, 2) && this.MatchMapping(ArenaEndPM.Opponentbutton, 2) && this.MatchMapping(ArenaEndPM.ArenaButton, 2))
+                if (this.MatchMapping(ArenaEndPM.QuickStartButton, 2) && this.MatchMapping(ArenaEndPM.ArenaButton, 2))
                 {
                     Scene result = new Scene(SceneType.ARENA_END);
                     return result;
@@ -5598,9 +5601,52 @@ namespace SevenKnightsAI.Classes
                         this.HeroCount = curHero;
                     }else if (HeroCount <= curHero)
                     {
-                        this.HonorCount = curHero;
+                        this.HeroCount = curHero;
                     }
                     this.HeroMax = maxHero;
+                    this.ReportCount(Objective.HERO_MANAGEMENT);
+                }
+            }
+        }
+
+        private void HeroLVUPCount()
+        {
+            int curCount = MaxHeroUpCount;
+            string maxCount = "100";
+            Rectangle rect = Level30DialogPM.R_HeroLvlUpCount;
+            using (Bitmap bitmap = this.CropFrame(this.BlueStacks.MainWindowAS.CurrentFrame, rect).ScaleByPercent(128))
+            {
+                using (Page page = this.Tesseractor.Engine.Process(bitmap, null))
+                {
+                    string text = page.GetText();
+                    Utility.FilterAscii(text);
+                    if (text.Length >= 2)
+                    {
+                        string[] array = text.Split(new char[]
+                            {
+                                '/'
+                            });
+
+                        if (array.Length >= 1)
+                            int.TryParse(array[0], out curCount);
+                        if (array.Length >= 2)
+                        {
+                            maxCount = array[1].Substring(0, 3);
+                        }
+#if DEBUG
+                        this.Log(string.Format("HC: {0}/{1} String: {2}", curHero, maxHero, text.Trim()));
+                        bitmap.Save(string.Format("H_{0} of {1}.png", curHero, maxHero));
+#endif
+                    }
+                    if (MaxHeroUpCount == 0)
+                    {
+                        this.MaxHeroUpCount = curCount;
+                    }
+                    else if (MaxHeroUpCount <= curCount)
+                    {
+                        this.MaxHeroUpCount = curCount;
+                    }
+                    this.HeroMax = maxCount;
                     this.ReportCount(Objective.HERO_MANAGEMENT);
                 }
             }

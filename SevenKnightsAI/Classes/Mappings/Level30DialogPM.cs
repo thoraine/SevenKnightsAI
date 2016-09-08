@@ -1,12 +1,20 @@
 ﻿using System;
+using System.Drawing;
 
 namespace SevenKnightsAI.Classes.Mappings
 {
 	
 	internal static class Level30DialogPM
 	{
-		
-		public static readonly PixelMapping CharacterEye = new PixelMapping
+        public static readonly Rectangle R_HeroLvlUpCount = new Rectangle
+        {
+            X = 383,
+            Y = 163,
+            Width = 20,
+            Height = 20
+        };
+
+        public static readonly PixelMapping CharacterEye = new PixelMapping
 		{
 			X = 163,
 			Y = 118,
