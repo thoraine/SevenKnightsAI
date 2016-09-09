@@ -152,7 +152,13 @@ namespace SevenKnightsAI
 		{
 			ComboBox comboBox = sender as ComboBox;
 			this.AISettings.AD_Difficulty = comboBox.SelectedValue as Difficulty? ?? Difficulty.None;
-		}
+        }
+
+        private void AD_difficultyComboBox2nd_SelectedValueChanged(object sender, EventArgs e)
+        {
+            ComboBox comboBox = sender as ComboBox;
+            this.AISettings.AD_Difficulty2nd = comboBox.SelectedValue as Difficulty? ?? Difficulty.None;
+        }
 
 		private void AD_elementHeroesCheckBox_CheckedChanged(object sender, EventArgs e)
 		{
@@ -212,6 +218,32 @@ namespace SevenKnightsAI
 
 			this.AD_difficultyComboBox.SelectedValue = selectedDifficulty;
 		}
+        private void AD_PopulateDifficulty2nd(params Difficulty[] enabledDifficulties)
+        {
+            Dictionary<Difficulty, string> items = new Dictionary<Difficulty, string>();
+
+            List<Difficulty> difficulties = new List<Difficulty>(enabledDifficulties);
+            if (difficulties.Contains(Difficulty.None))
+                items.Add(Difficulty.None, "---");
+            if (difficulties.Contains(Difficulty.Easy))
+                items.Add(Difficulty.Easy, Difficulty.Easy.ToString());
+            if (difficulties.Contains(Difficulty.Normal))
+                items.Add(Difficulty.Normal, Difficulty.Normal.ToString());
+            if (difficulties.Contains(Difficulty.Hard))
+                items.Add(Difficulty.Hard, Difficulty.Hard.ToString());
+
+            Difficulty selectedDifficulty = this.AD_difficultyComboBox2nd.SelectedValue as Difficulty? ?? Difficulty.None;
+            if (!difficulties.Contains(selectedDifficulty))
+                selectedDifficulty = Difficulty.None;
+
+            this.AD_difficultyComboBox2nd.SelectedValueChanged -= this.AD_difficultyComboBox2nd_SelectedValueChanged;
+            this.AD_difficultyComboBox2nd.DisplayMember = "Value";
+            this.AD_difficultyComboBox2nd.ValueMember = "Key";
+            this.AD_difficultyComboBox2nd.DataSource = new BindingSource(items, null);
+            this.AD_difficultyComboBox2nd.SelectedValueChanged += this.AD_difficultyComboBox2nd_SelectedValueChanged;
+
+            this.AD_difficultyComboBox2nd.SelectedValue = selectedDifficulty;
+        }
 
         private void AD_posCheckBox_CheckedChanged(object sender, EventArgs e)
 		{
@@ -251,8 +283,14 @@ namespace SevenKnightsAI
 			CheckBox checkBox = sender as CheckBox;
 			this.AISettings.AD_StopOnFullHeroes = checkBox.Checked;
 		}
+  
+        private void AD_StopOnFullItems_Checkbox_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckBox checkBox = sender as CheckBox;
+            this.AISettings.AD_StopOnFullItems = checkBox.Checked;
+        }
 
-		private void AD_UpdateSequenceButton()
+        private void AD_UpdateSequenceButton()
 		{
 			if (!this.AD_sequenceButton.Enabled)
 			{
@@ -290,14 +328,8 @@ namespace SevenKnightsAI
 			{
 				this.AD_PopulateStage(10);
 			}
-			if (this.AISettings.AD_World == World.MoonlitIsle || this.AISettings.AD_World == World.WesternEmpire || this.AISettings.AD_World == World.EasternEmpire)
-			{
-				this.AD_PopulateDifficulty(Difficulty.None, Difficulty.Easy, Difficulty.Normal);
-			}
-			else
-			{
-				this.AD_PopulateDifficulty(Difficulty.None, Difficulty.Easy, Difficulty.Normal, Difficulty.Hard);
-			}
+			this.AD_PopulateDifficulty2nd(Difficulty.None, Difficulty.Easy, Difficulty.Normal);
+			this.AD_PopulateDifficulty(Difficulty.None, Difficulty.Easy, Difficulty.Normal, Difficulty.Hard);
 			if (this.loaded && this.AISettings.AD_World == World.Sequencer)
 			{
 				this.AD_ShowSequencerForm();
@@ -382,161 +414,161 @@ namespace SevenKnightsAI
 				return;
 			}
 			Label label = null;
-			switch (progressArgs.Type)
-			{
-				case ProgressType.OBJECTIVE:
-					this.statusToolStripLabel.Text = string.Format("Status: {0}", progressArgs.Message.ToString());
-					this.UpdateCurrentProfileStatus();
-					this.AppendLog("Changing objective to: " + progressArgs.Message.ToString(), Color.OrangeRed);
-					return;
+            switch (progressArgs.Type)
+            {
+                case ProgressType.OBJECTIVE:
+                    this.statusToolStripLabel.Text = string.Format("Status: {0}", progressArgs.Message.ToString());
+                    this.UpdateCurrentProfileStatus();
+                    this.AppendLog("Changing objective to: " + progressArgs.Message.ToString(), Color.OrangeRed);
+                    return;
 
-				case ProgressType.EVENT:
-					this.AppendLog(progressArgs.Message.ToString(), progressArgs.Color);
-					this.UpdateCurrentProfileStatus();
-					return;
+                case ProgressType.EVENT:
+                    this.AppendLog(progressArgs.Message.ToString(), progressArgs.Color);
+                    this.UpdateCurrentProfileStatus();
+                    return;
 
-				case ProgressType.ERROR:
-					this.AppendLog("ERROR: " + progressArgs.Message, Color.Firebrick);
-					return;
+                case ProgressType.ERROR:
+                    this.AppendLog("ERROR: " + progressArgs.Message, Color.Firebrick);
+                    return;
 
-				case ProgressType.WARNING:
-					this.AppendWarning(progressArgs.Message.ToString());
-					return;
+                case ProgressType.WARNING:
+                    this.AppendWarning(progressArgs.Message.ToString());
+                    return;
 
-				case ProgressType.COUNT:
-					{
-						Dictionary<string, object> dictionary = progressArgs.Message as Dictionary<string, object>;
-						Objective objective = (Objective)dictionary["objective"];
-						string arg = Utility.ToTitleCase(objective.ToString().Replace("_", " "));
-						if (objective == Objective.ARENA)
-						{
-							int num = (int)dictionary["winCount"];
-							int num2 = (int)dictionary["loseCount"];
-							this.arenaCountLabel.Text = string.Format("{0} (Win/Lose): {1}/{2}", arg, num, num2);
-							return;
-						}
+                case ProgressType.COUNT:
+                    {
+                        Dictionary<string, object> dictionary = progressArgs.Message as Dictionary<string, object>;
+                        Objective objective = (Objective)dictionary["objective"];
+                        string arg = Utility.ToTitleCase(objective.ToString().Replace("_", " "));
+                        if (objective == Objective.ARENA)
+                        {
+                            int num = (int)dictionary["winCount"];
+                            int num2 = (int)dictionary["loseCount"];
+                            this.arenaCountLabel.Text = string.Format("{0} (Win/Lose): {1}/{2}", arg, num, num2);
+                            return;
+                        }
 
-						int num3 = (int)dictionary["count"];
-						string text = string.Format("{0}: {1}", arg, num3);
+                        int num3 = (int)dictionary["count"];
+                        string text = string.Format("{0}: {1}", arg, num3);
                         if (objective == Objective.HERO_MANAGEMENT)
                         {
-                            string t1 = ""+dictionary["hc"];
-                            string t2 = ""+ dictionary["hm"];
-                            text = string.Format("H : {0} / {1}",t1 , t2);
+                            string t1 = "" + dictionary["hc"];
+                            string t2 = "" + dictionary["hm"];
+                            text = string.Format("H : {0} / {1}", t1, t2);
                         }
                         switch (objective)
-						{
-							case Objective.ADVENTURE:
-								this.adventureCountLabel.Text = text;
-								return;
+                        {
+                            case Objective.ADVENTURE:
+                                this.adventureCountLabel.Text = text;
+                                return;
 
-							case Objective.GOLD_CHAMBER:
-								this.goldChamberCountLabel.Text = text;
-								return;
+                            case Objective.GOLD_CHAMBER:
+                                this.goldChamberCountLabel.Text = text;
+                                return;
 
-							case Objective.ARENA:
-								break;
+                            case Objective.ARENA:
+                                break;
 
-							case Objective.RAID:
-								this.raidCountLabel.Text = text;
-								return;
+                            case Objective.RAID:
+                                this.raidCountLabel.Text = text;
+                                return;
 
                             case Objective.HERO_MANAGEMENT:
                                 this.HeroCountLabel.Text = text;
                                 return;
 
-							default:
-								return;
-						}
-						break;
-					}
-				case ProgressType.KEY:
-					{
-						Dictionary<string, object> dictionary = progressArgs.Message as Dictionary<string, object>;
-						Objective objective = (Objective)dictionary["objective"];
-						int num4 = (int)dictionary["keys"];
-						string text2;
-						if (num4 == -1)
-						{
-							text2 = "-";
-						}
-						else if (dictionary.ContainsKey("time"))
-						{
-							string arg2 = ((TimeSpan)dictionary["time"]).ToString("mm':'ss");
-							text2 = string.Format("x{0} ({1})", num4, arg2);
-						}
-						else
-						{
-							text2 = string.Format("x{0}", num4);
-						}
-						switch (objective)
-						{
-							case Objective.ADVENTURE:
-								label = this.adventureKeysLabel;
-								break;
+                            default:
+                                return;
+                        }
+                        break;
+                    }
+                case ProgressType.KEY:
+                    {
+                        Dictionary<string, object> dictionary = progressArgs.Message as Dictionary<string, object>;
+                        Objective objective = (Objective)dictionary["objective"];
+                        int num4 = (int)dictionary["keys"];
+                        string text2;
+                        if (num4 == -1)
+                        {
+                            text2 = "-";
+                        }
+                        else if (dictionary.ContainsKey("time"))
+                        {
+                            string arg2 = ((TimeSpan)dictionary["time"]).ToString("mm':'ss");
+                            text2 = string.Format("x{0} ({1})", num4, arg2);
+                        }
+                        else
+                        {
+                            text2 = string.Format("x{0}", num4);
+                        }
+                        switch (objective)
+                        {
+                            case Objective.ADVENTURE:
+                                label = this.adventureKeysLabel;
+                                break;
 
-							case Objective.GOLD_CHAMBER:
-								label = this.towerKeysLabel;
-								break;
+                            case Objective.GOLD_CHAMBER:
+                                label = this.towerKeysLabel;
+                                break;
 
-							case Objective.ARENA:
-								label = this.arenaKeysLabel;
-								break;
-						}
-						if (text2 != null)
-						{
-							label.Text = text2;
-							return;
-						}
-						break;
-					}
-				case ProgressType.RESOURCE:
-					{
-						Dictionary<string, object> dictionary = progressArgs.Message as Dictionary<string, object>;
-						ResourceType resourceType = (ResourceType)dictionary["resourceType"];
-						int num5 = (int)dictionary["value"];
-						string text2;
-						if (num5 == -1)
-						{
-							text2 = "-";
-						}
-						else
-						{
-							text2 = num5.ToString("N0");
-						}
-						switch (resourceType)
-						{
-							case ResourceType.GOLD:
-								label = this.goldLabel;
-								break;
+                            case Objective.ARENA:
+                                label = this.arenaKeysLabel;
+                                break;
+                        }
+                        if (text2 != null)
+                        {
+                            label.Text = text2;
+                            return;
+                        }
+                        break;
+                    }
+                case ProgressType.RESOURCE:
+                    {
+                        Dictionary<string, object> dictionary = progressArgs.Message as Dictionary<string, object>;
+                        ResourceType resourceType = (ResourceType)dictionary["resourceType"];
+                        int num5 = (int)dictionary["value"];
+                        string text2;
+                        if (num5 == -1)
+                        {
+                            text2 = "-";
+                        }
+                        else
+                        {
+                            text2 = num5.ToString("N0");
+                        }
+                        switch (resourceType)
+                        {
+                            case ResourceType.GOLD:
+                                label = this.goldLabel;
+                                break;
 
-							case ResourceType.RUBY:
-								label = this.rubyLabel;
-								break;
+                            case ResourceType.RUBY:
+                                label = this.rubyLabel;
+                                break;
 
-							case ResourceType.HONOR:
-								label = this.honorLabel;
-								break;
+                            case ResourceType.HONOR:
+                                label = this.honorLabel;
+                                break;
 
-							case ResourceType.TOPAZ:
-								label = this.topazLabel;
-								break;
-						}
-						if (text2 != null)
-						{
-							label.Text = text2;
-						}
-						break;
-					}
-				case ProgressType.CURSORPOS:
-					{
-						Point curpos = (Point)progressArgs.Message;
-						this.tsslCursorPosition.Text = string.Format("X: {0}, Y: {1}", curpos.X, curpos.Y);
-						break;
-					}
-				case ProgressType.Alert:
-					{
-						if ((string)progressArgs.Message == "Heroes Full")
+                            case ResourceType.TOPAZ:
+                                label = this.topazLabel;
+                                break;
+                        }
+                        if (text2 != null)
+                        {
+                            label.Text = text2;
+                        }
+                        break;
+                    }
+                case ProgressType.CURSORPOS:
+                    {
+                        Point curpos = (Point)progressArgs.Message;
+                        this.tsslCursorPosition.Text = string.Format("X: {0}, Y: {1}", curpos.X, curpos.Y);
+                        break;
+                    }
+                case ProgressType.Alert:
+                    {
+                        if ((string)progressArgs.Message == "Heroes Full")
 						{
 							if (this.AISettings.AD_StopOnFullHeroes)
 							{
@@ -545,7 +577,16 @@ namespace SevenKnightsAI
 								MessageBox.Show("Heroes Full");
 								this.AlertSound.Stop();
 							}
-						}
+						}else if ((string)progressArgs.Message == "Items Full")
+                        {
+                            if (this.AISettings.AD_StopOnFullItems)
+                            {
+                                this.PauseAI();
+                                this.AlertSound.PlayLooping();
+                                MessageBox.Show("Items Full");
+                                this.AlertSound.Stop();
+                            }
+                        }
 						break;
 					}
 				default:
@@ -673,12 +714,14 @@ namespace SevenKnightsAI
 			this.AD_worldComboBox.SelectedIndex = (int)this.AISettings.AD_World;
 			this.AD_stageComboBox.SelectedIndex = this.AISettings.AD_Stage;
 			this.AD_difficultyComboBox.SelectedValue = this.AISettings.AD_Difficulty;
-			this.AD_teamComboBox.SelectedIndex = (int)this.AISettings.AD_Team;
+            this.AD_difficultyComboBox2nd.SelectedValue = this.AISettings.AD_Difficulty2nd;
+            this.AD_teamComboBox.SelectedIndex = (int)this.AISettings.AD_Team;
 			this.AD_formationComboBox.SelectedIndex = (int)this.AISettings.AD_Formation;
 			this.AD_continuousCheckBox.Checked = this.AISettings.AD_Continuous;
 			this.AD_elementHeroesCheckBox.Checked = this.AISettings.AD_ElementHeroesOnly;
 			this.AD_masteryComboBox.SelectedIndex = (int)this.AISettings.AD_Mastery;
 			this.AD_StopOnFullHeroes_Checkbox.Checked = this.AISettings.AD_StopOnFullHeroes;
+            this.AD_StopOnFullItems_Checkbox.Checked = this.AISettings.AD_StopOnFullItems;
             this.AD_CheckingHeroes_Checkbox.Checked = this.AISettings.AD_CheckingHeroes;
 			this.AD_wave1LoopCheckBox.Checked = this.AISettings.AD_Wave1Loop;
 			this.AD_wave2LoopCheckBox.Checked = this.AISettings.AD_Wave2Loop;
@@ -1757,9 +1800,7 @@ namespace SevenKnightsAI
 		private void UpdateCurrentProfileStatus()
 		{
 			this.profileToolStripLabel.Text = string.Format("[Profile: {0}]", this.AIProfiles.CurrentProfileName);
-		}
-
-        #endregion Private Methods
+        }
 
         private void AD_CheckingHeroes_Checkbox_CheckedChanged(object sender, EventArgs e)
         {
@@ -1767,5 +1808,6 @@ namespace SevenKnightsAI
             this.AISettings.AD_CheckingHeroes = checkBox.Checked;
         }
 
-	}
+        #endregion Private Methods
+    }
 }

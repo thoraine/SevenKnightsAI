@@ -312,6 +312,9 @@
             this.goldLabel = new System.Windows.Forms.Label();
             this.resourcesTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.aiPause = new System.Windows.Forms.Button();
+            this.AD_difficultyComboBox2nd = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.AD_StopOnFullItems_Checkbox = new System.Windows.Forms.CheckBox();
             this.tabControl.SuspendLayout();
             this.adventureTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.AD_limitNumericBox)).BeginInit();
@@ -400,6 +403,7 @@
             // adventureTab
             // 
             this.adventureTab.Controls.Add(this.AD_limitLabel);
+            this.adventureTab.Controls.Add(this.AD_CheckingHeroes_Checkbox);
             this.adventureTab.Controls.Add(this.AD_limitNumericBox);
             this.adventureTab.Controls.Add(this.AD_limitCheckBox);
             this.adventureTab.Controls.Add(this.AD_mainPanel);
@@ -443,7 +447,8 @@
             // 
             // AD_mainPanel
             // 
-            this.AD_mainPanel.Controls.Add(this.AD_CheckingHeroes_Checkbox);
+            this.AD_mainPanel.Controls.Add(this.AD_difficultyComboBox2nd);
+            this.AD_mainPanel.Controls.Add(this.AD_StopOnFullItems_Checkbox);
             this.AD_mainPanel.Controls.Add(this.AD_StopOnFullHeroes_Checkbox);
             this.AD_mainPanel.Controls.Add(this.AD_sequenceButton);
             this.AD_mainPanel.Controls.Add(this.AD_elementHeroesCheckBox);
@@ -460,6 +465,7 @@
             this.AD_mainPanel.Controls.Add(this.AD_worldLabel);
             this.AD_mainPanel.Controls.Add(this.AD_difficultyComboBox);
             this.AD_mainPanel.Controls.Add(this.AD_skillGroupBox);
+            this.AD_mainPanel.Controls.Add(this.label1);
             this.AD_mainPanel.Controls.Add(this.AD_difficultyLabel);
             this.AD_mainPanel.Location = new System.Drawing.Point(0, 30);
             this.AD_mainPanel.Name = "AD_mainPanel";
@@ -469,22 +475,22 @@
             // AD_CheckingHeroes_Checkbox
             // 
             this.AD_CheckingHeroes_Checkbox.AutoSize = true;
-            this.AD_CheckingHeroes_Checkbox.Location = new System.Drawing.Point(209, 258);
+            this.AD_CheckingHeroes_Checkbox.Location = new System.Drawing.Point(117, 7);
             this.AD_CheckingHeroes_Checkbox.Name = "AD_CheckingHeroes_Checkbox";
-            this.AD_CheckingHeroes_Checkbox.Size = new System.Drawing.Size(138, 17);
+            this.AD_CheckingHeroes_Checkbox.Size = new System.Drawing.Size(146, 17);
             this.AD_CheckingHeroes_Checkbox.TabIndex = 26;
-            this.AD_CheckingHeroes_Checkbox.Text = "HERO MAX LV CHECK";
+            this.AD_CheckingHeroes_Checkbox.Text = "Check Max Heroes Level";
             this.AD_CheckingHeroes_Checkbox.UseVisualStyleBackColor = true;
             this.AD_CheckingHeroes_Checkbox.CheckedChanged += new System.EventHandler(this.AD_CheckingHeroes_Checkbox_CheckedChanged);
             // 
             // AD_StopOnFullHeroes_Checkbox
             // 
             this.AD_StopOnFullHeroes_Checkbox.AutoSize = true;
-            this.AD_StopOnFullHeroes_Checkbox.Location = new System.Drawing.Point(353, 258);
+            this.AD_StopOnFullHeroes_Checkbox.Location = new System.Drawing.Point(370, 258);
             this.AD_StopOnFullHeroes_Checkbox.Name = "AD_StopOnFullHeroes_Checkbox";
-            this.AD_StopOnFullHeroes_Checkbox.Size = new System.Drawing.Size(129, 17);
+            this.AD_StopOnFullHeroes_Checkbox.Size = new System.Drawing.Size(112, 17);
             this.AD_StopOnFullHeroes_Checkbox.TabIndex = 25;
-            this.AD_StopOnFullHeroes_Checkbox.Text = "Pause On Full Heroes";
+            this.AD_StopOnFullHeroes_Checkbox.Text = "Pause Full Heroes";
             this.AD_StopOnFullHeroes_Checkbox.UseVisualStyleBackColor = true;
             this.AD_StopOnFullHeroes_Checkbox.CheckedChanged += new System.EventHandler(this.AD_StopOnFullHeroes_Checkbox_CheckedChanged);
             // 
@@ -554,7 +560,7 @@
             "A",
             "B",
             "C"});
-            this.AD_teamComboBox.Location = new System.Drawing.Point(74, 106);
+            this.AD_teamComboBox.Location = new System.Drawing.Point(74, 107);
             this.AD_teamComboBox.Name = "AD_teamComboBox";
             this.AD_teamComboBox.Size = new System.Drawing.Size(52, 21);
             this.AD_teamComboBox.TabIndex = 9;
@@ -690,7 +696,7 @@
             // 
             // AD_teamLabel
             // 
-            this.AD_teamLabel.Location = new System.Drawing.Point(5, 109);
+            this.AD_teamLabel.Location = new System.Drawing.Point(6, 109);
             this.AD_teamLabel.Name = "AD_teamLabel";
             this.AD_teamLabel.Size = new System.Drawing.Size(62, 13);
             this.AD_teamLabel.TabIndex = 8;
@@ -724,7 +730,7 @@
             this.AD_difficultyComboBox.Location = new System.Drawing.Point(74, 80);
             this.AD_difficultyComboBox.MaxDropDownItems = 3;
             this.AD_difficultyComboBox.Name = "AD_difficultyComboBox";
-            this.AD_difficultyComboBox.Size = new System.Drawing.Size(79, 21);
+            this.AD_difficultyComboBox.Size = new System.Drawing.Size(60, 21);
             this.AD_difficultyComboBox.TabIndex = 7;
             this.AD_difficultyComboBox.SelectedValueChanged += new System.EventHandler(this.AD_difficultyComboBox_SelectedValueChanged);
             // 
@@ -1266,7 +1272,7 @@
             // 
             this.AD_difficultyLabel.Location = new System.Drawing.Point(6, 83);
             this.AD_difficultyLabel.Name = "AD_difficultyLabel";
-            this.AD_difficultyLabel.Size = new System.Drawing.Size(62, 13);
+            this.AD_difficultyLabel.Size = new System.Drawing.Size(54, 13);
             this.AD_difficultyLabel.TabIndex = 6;
             this.AD_difficultyLabel.Text = "Difficulty";
             // 
@@ -3829,6 +3835,41 @@
             this.aiPause.UseVisualStyleBackColor = true;
             this.aiPause.Click += new System.EventHandler(this.aiPause_Click);
             // 
+            // AD_difficultyComboBox2nd
+            // 
+            this.AD_difficultyComboBox2nd.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.AD_difficultyComboBox2nd.FormattingEnabled = true;
+            this.AD_difficultyComboBox2nd.Items.AddRange(new object[] {
+            "--",
+            "Easy",
+            "Normal",
+            "Hard"});
+            this.AD_difficultyComboBox2nd.Location = new System.Drawing.Point(161, 80);
+            this.AD_difficultyComboBox2nd.MaxDropDownItems = 3;
+            this.AD_difficultyComboBox2nd.Name = "AD_difficultyComboBox2nd";
+            this.AD_difficultyComboBox2nd.Size = new System.Drawing.Size(60, 21);
+            this.AD_difficultyComboBox2nd.TabIndex = 27;
+            this.AD_difficultyComboBox2nd.SelectedValueChanged += new System.EventHandler(this.AD_difficultyComboBox2nd_SelectedValueChanged);
+            // 
+            // label1
+            // 
+            this.label1.Location = new System.Drawing.Point(135, 83);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(32, 13);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "2nd";
+            // 
+            // AD_StopOnFullItems_Checkbox
+            // 
+            this.AD_StopOnFullItems_Checkbox.AutoSize = true;
+            this.AD_StopOnFullItems_Checkbox.Location = new System.Drawing.Point(244, 258);
+            this.AD_StopOnFullItems_Checkbox.Name = "AD_StopOnFullItems_Checkbox";
+            this.AD_StopOnFullItems_Checkbox.Size = new System.Drawing.Size(120, 17);
+            this.AD_StopOnFullItems_Checkbox.TabIndex = 25;
+            this.AD_StopOnFullItems_Checkbox.Text = "Pause On Full Items";
+            this.AD_StopOnFullItems_Checkbox.UseVisualStyleBackColor = true;
+            this.AD_StopOnFullItems_Checkbox.CheckedChanged += new System.EventHandler(this.AD_StopOnFullItems_Checkbox_CheckedChanged);
+            // 
             // MainForm
             // 
             this.AcceptButton = this.aiButton;
@@ -4813,5 +4854,8 @@
         private System.Windows.Forms.Label HeroCountLabel;
         private System.Windows.Forms.CheckBox AD_CheckingHeroes_Checkbox;
 		private System.Windows.Forms.ToolStripStatusLabel tsslBuildInfo;
-	}
+        private System.Windows.Forms.ComboBox AD_difficultyComboBox2nd;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.CheckBox AD_StopOnFullItems_Checkbox;
+    }
 }

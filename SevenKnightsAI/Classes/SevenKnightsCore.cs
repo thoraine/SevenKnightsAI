@@ -119,6 +119,7 @@ namespace SevenKnightsAI.Classes
         private int TowerKeys;
         private TimeSpan TowerKeyTime;
         private BackgroundWorker Worker;
+        private string MapZone;
 
         #endregion Private Fields
 
@@ -2142,6 +2143,7 @@ namespace SevenKnightsAI.Classes
                                                         this.WeightedClick(MapSelectPM.ContinentButton, 1.0, 1.0, 1, 0, "left");
                                                         SevenKnightsCore.Sleep(1000);
                                                     }
+                                                    this.MapZone = "Aisha";
                                                     this.SelectStageAisha(world, stage);
                                                 }
                                                 else
@@ -2151,6 +2153,7 @@ namespace SevenKnightsAI.Classes
                                                         this.WeightedClick(MapSelectPM.ContinentButton, 1.0, 1.0, 1, 0, "left");
                                                         SevenKnightsCore.Sleep(1000);
                                                     }
+                                                    this.MapZone = "Asgar";
                                                     this.SelectStageAsgar(world, stage);
                                                 }
                                             }
@@ -2165,6 +2168,11 @@ namespace SevenKnightsAI.Classes
                                             break;
 
                                         case SceneType.FULL_ITEM_POPUP:
+                                            if (this.AISettings.AD_StopOnFullItems)
+                                            {
+                                                this.Alert("Items Full");
+                                                this.Escape();
+                                            }
                                             if (!flag)
                                             {
                                                 this.PushNote("Item Full!", "Your inventory is full. AI will start selling them if enabled.");
@@ -4759,8 +4767,17 @@ namespace SevenKnightsAI.Classes
                 MapSelectPM.DifficultyBoxSelectNormal,
                 MapSelectPM.DifficultyBoxSelectHard
             };
-            Difficulty aD_Difficulty = this.AISettings.AD_Difficulty;
-            PixelMapping mapping = array[(int)aD_Difficulty];
+            Difficulty aD_Difficulty = Difficulty.None;
+            PixelMapping mapping;
+            if (MapZone.Equals("Asgar"))
+            {
+                aD_Difficulty = this.AISettings.AD_Difficulty;
+            }
+            else if (MapZone.Equals("Aisha"))
+            {
+                aD_Difficulty = this.AISettings.AD_Difficulty2nd;
+            }
+            mapping = array[(int)aD_Difficulty];
             if (this.MatchMapping(MapSelectPM.DifficultyBoxExpanded, 2))
             {
                 this.WeightedClick(mapping, 1.0, 1.0, 1, 0, "left");
@@ -5596,13 +5613,7 @@ namespace SevenKnightsAI.Classes
                         bitmap.Save(string.Format("H_{0} of {1}.png", curHero, maxHero));
 #endif
                     }
-                    if (HeroCount == 0)
-                    {
-                        this.HeroCount = curHero;
-                    }else if (HeroCount <= curHero)
-                    {
-                        this.HeroCount = curHero;
-                    }
+                    this.HeroCount = curHero;
                     this.HeroMax = maxHero;
                     this.ReportCount(Objective.HERO_MANAGEMENT);
                 }

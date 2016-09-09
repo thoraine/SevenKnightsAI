@@ -21,7 +21,10 @@ namespace SevenKnightsAI.Classes
 		[XmlElement(ElementName = "AD_Difficulty")]
 		public Difficulty AD_Difficulty;
 
-		[XmlElement(ElementName = "AD_ElementHeroesOnly")]
+        [XmlElement(ElementName = "AD_Difficulty2nd")]
+        public Difficulty AD_Difficulty2nd;
+
+        [XmlElement(ElementName = "AD_ElementHeroesOnly")]
 		public bool AD_ElementHeroesOnly;
 
 		[XmlElement(ElementName = "AD_Enable")]
@@ -53,6 +56,9 @@ namespace SevenKnightsAI.Classes
 
 		[XmlElement(ElementName = "AD_StopOnFullHeroes")]
 		public bool AD_StopOnFullHeroes;
+
+        [XmlElement(ElementName = "AD_StopOnFullItems")]
+        public bool AD_StopOnFullItems;
 
         [XmlElement(ElementName = "AD_CheckingHeroes")]
         public bool AD_CheckingHeroes;
@@ -273,6 +279,7 @@ namespace SevenKnightsAI.Classes
 			this.AD_ElementHeroesOnly = false;
 			this.AD_SkillType = SkillType.Both;
 			this.AD_StopOnFullHeroes = true;
+            this.AD_StopOnFullItems = true;
             this.AD_CheckingHeroes = true;
 			this.AD_Wave1Loop = false;
 			this.AD_Wave2Loop = false;
@@ -364,7 +371,13 @@ namespace SevenKnightsAI.Classes
 				}
 				catch (Exception)
 				{ }
-				try
+                try
+                {
+                    aISettings.AD_Difficulty2nd = (Difficulty)Convert.ToInt32(dictionary["AD_Difficulty2nd"]);
+                }
+                catch (Exception)
+                { }
+                try
 				{
 					aISettings.AD_World = (World)Convert.ToInt32(dictionary["AD_World"]);
 				}
@@ -442,6 +455,12 @@ namespace SevenKnightsAI.Classes
 				}
 				catch (Exception)
 				{ }
+                try
+                {
+                    aISettings.AD_StopOnFullItems = (bool)dictionary["AD_StopOnFullItems"];
+                }
+                catch (Exception)
+                { }
                 try
                 {
                     aISettings.AD_CheckingHeroes = (bool)dictionary["AD_CheckingHeroes"];
@@ -857,7 +876,11 @@ namespace SevenKnightsAI.Classes
 					"AD_Difficulty",
 					this.AD_Difficulty
 				},
-				{
+                {
+                    "AD_Difficulty2nd",
+                    this.AD_Difficulty2nd
+                },
+                {
 					"AD_World",
 					this.AD_World
 				},
@@ -909,7 +932,11 @@ namespace SevenKnightsAI.Classes
 					"AD_StopOnFullHeroes",
 					this.AD_StopOnFullHeroes
 				},
-                                {
+                {
+                    "AD_StopOnFullItems",
+                    this.AD_StopOnFullItems
+                },
+                {
                     "AD_CheckingHeroes",
                     this.AD_CheckingHeroes
                 },
