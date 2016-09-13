@@ -187,10 +187,13 @@ namespace SevenKnightsAI
 			if (selectedIndex > num)
 			{
 				this.AD_stageComboBox.SelectedIndex = num;
-				return;
+                //Console.WriteLine("> num ="+this.AD_stageComboBox.SelectedIndex);
+                return;
 			}
-			this.AD_stageComboBox.SelectedIndex = selectedIndex;
-		}
+            //Console.WriteLine("num =" + this.AD_stageComboBox.SelectedIndex);
+            //this.AD_stageComboBox.SelectedIndex = selectedIndex;
+            //Console.WriteLine("populate");
+        }
 
 		private void AD_PopulateDifficulty(params Difficulty[] enabledDifficulties)
 		{
@@ -247,7 +250,7 @@ namespace SevenKnightsAI
 
         private void AD_posCheckBox_CheckedChanged(object sender, EventArgs e)
 		{
-			List<int> list = new List<int>();
+            List<int> list = new List<int>();
 			CheckBox[] array = this._formationCheckBoxes[0];
 			for (int i = 0; i < array.Length; i++)
 			{
@@ -694,17 +697,17 @@ namespace SevenKnightsAI
 			this.AI = new SevenKnightsCore(this.AIProfiles);
 		}
 
-		private void InitAdventureTab()
-		{
-			this._formationCheckBoxes[0] = new CheckBox[]
-			{
-				this.AD_pos1CheckBox,
-				this.AD_pos2CheckBox,
-				this.AD_pos3CheckBox,
-				this.AD_pos4CheckBox,
-				this.AD_pos5CheckBox
-			};
-			for (int i = 0; i < 3; i++)
+        private void InitAdventureTab()
+        {
+            this._formationCheckBoxes[0] = new CheckBox[]
+            {
+                this.AD_pos1CheckBox,
+                this.AD_pos2CheckBox,
+                this.AD_pos3CheckBox,
+                this.AD_pos4CheckBox,
+                this.AD_pos5CheckBox
+            };
+            for (int i = 0; i < 3; i++)
 			{
 				this._skillButtons[i] = new List<Button>();
 			}
@@ -729,14 +732,22 @@ namespace SevenKnightsAI
 			if (this.AISettings.AD_HeroManagePositions != null)
 			{
 				int[] aD_HeroManagePositions = this.AISettings.AD_HeroManagePositions;
-				for (int j = 0; j < aD_HeroManagePositions.Length; j++)
+                foreach (Control control in AD_formationPanel.Controls)
+                {
+                    if (control.GetType() == typeof(CheckBox))
+                    {
+                        ((CheckBox)control).Checked = false;
+                    }
+                }
+                for (int j = 0; j < aD_HeroManagePositions.Length; j++)
 				{
 					int num = aD_HeroManagePositions[j];
-					CheckBox checkBox = this._formationCheckBoxes[0][num];
-					checkBox.Checked = false;
-					checkBox.Checked = true;
+                    CheckBox checkBox = this._formationCheckBoxes[0][num];
+                    checkBox.Checked = false;
+                    checkBox.Checked = true;
 				}
 			}
+
 			switch (this.AISettings.AD_SkillType)
 			{
 				case SkillType.Auto:
@@ -747,7 +758,7 @@ namespace SevenKnightsAI
 					this.AD_manualSkillRadio.Checked = true;
 					break;
 
-				case SkillType.Both:
+                case SkillType.Both:
 					this.AD_bothSkillRadio.Checked = true;
 					break;
 			}
@@ -763,7 +774,7 @@ namespace SevenKnightsAI
 				this.AISettings.AD_Wave2Skills,
 				this.AISettings.AD_Wave3Skills
 			};
-			this.LoadWaveSkills(wavePanels, waveSkill, 0);
+            this.LoadWaveSkills(wavePanels, waveSkill, 0);
 		}
 
 		private void InitArenaTab()
@@ -916,7 +927,8 @@ namespace SevenKnightsAI
 			this.ST_reconnectInterruptCheckBox.Checked = this.AIProfiles.ST_ReconnectInterruptEnable;
 			this.ST_reconnectNumericUpDown.Value = this.AIProfiles.ST_ReconnectInterruptInterval;
 			this.ST_hotTimeProfileCheckBox.Checked = this.AIProfiles.ST_EnableHotTimeProfile;
-			this.ST_forceActiveCheckBox.Checked = this.AIProfiles.ST_BlueStacksForceActive;
+            this.ST_AutoProfileCheckBox.Checked = this.AIProfiles.ST_EnableAutoProfile;
+            this.ST_forceActiveCheckBox.Checked = this.AIProfiles.ST_BlueStacksForceActive;
 			this.ST_pushbulletCheckBox.Checked = this.AIProfiles.ST_PushbulletEnable;
 			this.ST_pushbulletEmailTextBox.Text = this.AIProfiles.ST_PushbulletEmail;
 			this.ST_foregroundMode.Checked = this.AIProfiles.ST_ForegroundMode;
@@ -1058,9 +1070,16 @@ namespace SevenKnightsAI
 
 		private void LoadWaveSkills(Panel[] wavePanels, int[][] waveSkill, int offset)
 		{
-			for (int i = 0; i < wavePanels.Length; i++)
+            for (int i = 0; i < wavePanels.Length; i++)
 			{
-				if (waveSkill[i] != null)
+                foreach (Control c in wavePanels[i].Controls)
+                {
+                    if (c is Button && c.Tag != null)
+                    {
+                        ((Button)c).Text = "";
+                    }
+                }
+                if (waveSkill[i] != null)
 				{
 					int[] array = waveSkill[i];
 					for (int j = 0; j < array.Length; j++)
@@ -1609,8 +1628,8 @@ namespace SevenKnightsAI
 			ComboBox comboBox = sender as ComboBox;
 			ProfileComboBoxItem profileComboBoxItem = comboBox.SelectedItem as ProfileComboBoxItem;
 			this.AIProfiles.ChangeProfile(profileComboBoxItem.Key);
-			this.ReloadTabs(false);
-		}
+            this.ReloadTabs(false);
+        }
 
 		private void ST_delayTrackBar_ValueChanged(object sender, EventArgs e)
 		{
@@ -1642,7 +1661,14 @@ namespace SevenKnightsAI
 			this.AIProfiles.ST_EnableHotTimeProfile = @checked;
 		}
 
-		private void ST_hotTimeProfileComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void ST_autoProfileCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckBox checkBox = sender as CheckBox;
+            bool @checked = checkBox.Checked;
+            this.AIProfiles.ST_EnableAutoProfile = @checked;
+        }
+
+        private void ST_hotTimeProfileComboBox_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			ComboBox comboBox = sender as ComboBox;
 			ProfileComboBoxItem profileComboBoxItem = comboBox.SelectedItem as ProfileComboBoxItem;

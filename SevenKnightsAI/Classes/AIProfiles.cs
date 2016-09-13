@@ -24,6 +24,9 @@ namespace SevenKnightsAI.Classes
         [XmlElement(ElementName = "ST_EnableHotTimeProfile")]
         public bool ST_EnableHotTimeProfile;
 
+        [XmlElement(ElementName = "ST_EnableAutoProfile")]
+        public bool ST_EnableAutoProfile;
+
         [XmlElement(ElementName = "ST_ForegroundMode")]
         public bool ST_ForegroundMode;
 
@@ -61,6 +64,7 @@ namespace SevenKnightsAI.Classes
 			this.ST_ReconnectInterruptEnable = true;
 			this.ST_ReconnectInterruptInterval = 0;
 			this.ST_EnableHotTimeProfile = false;
+            this.ST_EnableAutoProfile = false;
 			this.ST_HotTimeProfile = null;
 			this.ST_BlueStacksForceActive = false;
 			this.ST_PushbulletEnable = false;
@@ -116,7 +120,13 @@ namespace SevenKnightsAI.Classes
 				}
 				catch (Exception)
 				{ }
-				try
+                try
+                {
+                    aIProfiles.ST_EnableAutoProfile = (bool)dictionary["ST_EnableAutoProfile"];
+                }
+                catch (Exception)
+                { }
+                try
 				{
 					aIProfiles.ST_HotTimeProfile = (string)dictionary["ST_HotTimeProfile"];
 				}
@@ -192,7 +202,11 @@ namespace SevenKnightsAI.Classes
 					"ST_EnableHotTimeProfile",
 					this.ST_EnableHotTimeProfile
 				},
-				{
+                {
+                    "ST_EnableAutoProfile",
+                    this.ST_EnableAutoProfile
+                },
+                {
 					"ST_HotTimeProfile",
 					this.ST_HotTimeProfile
 				},

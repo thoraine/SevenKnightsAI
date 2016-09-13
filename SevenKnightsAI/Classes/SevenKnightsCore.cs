@@ -9,6 +9,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.Net.Mail;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Timers;
 using System.Windows.Forms;
@@ -111,7 +112,7 @@ namespace SevenKnightsAI.Classes
         private int RaidLimitCount;
         private int RubyCount;
         private int HeroCount;
-        private int MaxHeroUpCount;
+        private bool MaxHeroUpCount;
         private string HeroMax;
         private SynchronizationContext SynchronizationContext;
         private Tesseractor Tesseractor;
@@ -1528,7 +1529,7 @@ namespace SevenKnightsAI.Classes
             this.ArenaLimitCount = 0;
             this.RaidLimitCount = 0;
             this.HeroCount = 0;
-            this.MaxHeroUpCount = 0;
+            this.MaxHeroUpCount = false;
             this.AdventureKeys = -1;
             this.AdventureKeyTime = TimeSpan.MaxValue;
             this.TowerKeys = -1;
@@ -2543,7 +2544,7 @@ namespace SevenKnightsAI.Classes
                                         case SceneType.LEVEL_30_DIALOG:
                                         case SceneType.LEVEL_30_MAX_DIALOG:
                                             this.Log("Hero Level 30", this.COLOR_LEVEL_30);
-
+                                            this.HeroLVUPCount();
                                             if (this.AISettings.AD_Formation != Formation.None && this.AISettings.AD_HeroManagePositions != null && this.AISettings.AD_HeroManagePositions.Length > 0)
                                             {
                                                 this.ChangeObjective(Objective.HERO_MANAGEMENT);
@@ -3597,6 +3598,12 @@ namespace SevenKnightsAI.Classes
         {
             if (this.AIProfiles.ST_EnableHotTimeProfile && ((HotTimeHelper.IsNowHotTime() && !this.AIProfiles.TMP_UsingHotTimeProfile) || (!HotTimeHelper.IsNowHotTime() && this.AIProfiles.TMP_UsingHotTimeProfile)))
             {
+                this.AIProfiles.ToggleHotTimeProfile();
+                MainForm.Instance.InvokeReloadTabs(true);
+            }
+            if (this.AIProfiles.ST_EnableAutoProfile && MaxHeroUpCount)
+            {
+                this.MaxHeroUpCount = false;
                 this.AIProfiles.ToggleHotTimeProfile();
                 MainForm.Instance.InvokeReloadTabs(true);
             }
@@ -5622,44 +5629,56 @@ namespace SevenKnightsAI.Classes
 
         private void HeroLVUPCount()
         {
-            int curCount = MaxHeroUpCount;
+            int curCount = 0;
             string maxCount = "100";
             Rectangle rect = Level30DialogPM.R_HeroLvlUpCount;
             using (Bitmap bitmap = this.CropFrame(this.BlueStacks.MainWindowAS.CurrentFrame, rect).ScaleByPercent(128))
             {
                 using (Page page = this.Tesseractor.Engine.Process(bitmap, null))
                 {
-                    string text = page.GetText();
+                    string text = page.GetText().Trim();
                     Utility.FilterAscii(text);
+#if DEBUG
+                    bitmap.Save(string.Format("HeroCount1_{0} of {1}.png", curCount, maxCount));
+                    Console.WriteLine("firstbreak");
+#endif
                     if (text.Length >= 2)
                     {
                         string[] array = text.Split(new char[]
                             {
                                 '/'
                             });
-
+                        string mystr = Regex.Replace(array[0], @"\d", "");
+                        //string mynumber = Regex.Replace(array[0], @"\D", "");
                         if (array.Length >= 1)
+                            array[0] = Regex.Replace(array[0], @"\D", "");
                             int.TryParse(array[0], out curCount);
                         if (array.Length >= 2)
                         {
                             maxCount = array[1].Substring(0, 3);
                         }
 #if DEBUG
-                        this.Log(string.Format("HC: {0}/{1} String: {2}", curHero, maxHero, text.Trim()));
-                        bitmap.Save(string.Format("H_{0} of {1}.png", curHero, maxHero));
+                        //Console.WriteLine(mynumber);
+                        Console.WriteLine(curCount);
+                        //Console.WriteLine(sub);
+                        this.Log(string.Format("Debug HLC: {0}/{1} String: {2}", curCount, maxCount, text.Trim()));
+                        Console.WriteLine(string.Format("Max Heroes  level up per day : {0}/{1}", curCount, maxCount));
+                        Console.WriteLine(string.Format("HLC: {0}/{1} String: {2}", curCount, maxCount, text.Trim()));
+                        bitmap.Save(string.Format("HeroCount2_{0} of {1}.png", curCount, maxCount));
+                        Console.WriteLine("endbreak");
 #endif
                     }
-                    if (MaxHeroUpCount == 0)
+                    if (curCount==100)
                     {
-                        this.MaxHeroUpCount = curCount;
+                        this.MaxHeroUpCount = true;
                     }
-                    else if (MaxHeroUpCount <= curCount)
+                    else
                     {
-                        this.MaxHeroUpCount = curCount;
+                        this.MaxHeroUpCount = false;
                     }
-                    this.HeroMax = maxCount;
-                    this.ReportCount(Objective.HERO_MANAGEMENT);
+                    this.Log(string.Format("Max Heroes level up per day : {0}/{1}", curCount, maxCount));
                 }
+                
             }
         }
 
@@ -6078,6 +6097,6 @@ namespace SevenKnightsAI.Classes
             this.BlueStacks.MainWindowAS.Click(mapping.X, mapping.Y, numClicks, delay, button);
         }
 
-        #endregion Private Methods
+#endregion Private Methods
     }
 }

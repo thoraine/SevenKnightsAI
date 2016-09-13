@@ -21,10 +21,12 @@
             this.tabControl = new System.Windows.Forms.TabControl();
             this.adventureTab = new System.Windows.Forms.TabPage();
             this.AD_limitLabel = new System.Windows.Forms.Label();
+            this.AD_CheckingHeroes_Checkbox = new System.Windows.Forms.CheckBox();
             this.AD_limitNumericBox = new System.Windows.Forms.NumericUpDown();
             this.AD_limitCheckBox = new System.Windows.Forms.CheckBox();
             this.AD_mainPanel = new System.Windows.Forms.Panel();
-            this.AD_CheckingHeroes_Checkbox = new System.Windows.Forms.CheckBox();
+            this.AD_difficultyComboBox2nd = new System.Windows.Forms.ComboBox();
+            this.AD_StopOnFullItems_Checkbox = new System.Windows.Forms.CheckBox();
             this.AD_StopOnFullHeroes_Checkbox = new System.Windows.Forms.CheckBox();
             this.AD_sequenceButton = new System.Windows.Forms.Button();
             this.AD_elementHeroesCheckBox = new System.Windows.Forms.CheckBox();
@@ -90,6 +92,7 @@
             this.AD_w1Skill02Button = new System.Windows.Forms.Button();
             this.AD_wave1Label = new System.Windows.Forms.Label();
             this.AD_w1Skill01Button = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.AD_difficultyLabel = new System.Windows.Forms.Label();
             this.AD_enableCheckBox = new System.Windows.Forms.CheckBox();
             this.goldChamberTab = new System.Windows.Forms.TabPage();
@@ -312,9 +315,7 @@
             this.goldLabel = new System.Windows.Forms.Label();
             this.resourcesTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.aiPause = new System.Windows.Forms.Button();
-            this.AD_difficultyComboBox2nd = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.AD_StopOnFullItems_Checkbox = new System.Windows.Forms.CheckBox();
+            this.ST_AutoProfileCheckBox = new System.Windows.Forms.CheckBox();
             this.tabControl.SuspendLayout();
             this.adventureTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.AD_limitNumericBox)).BeginInit();
@@ -425,6 +426,17 @@
             this.AD_limitLabel.TabIndex = 16;
             this.AD_limitLabel.Text = "times per visit";
             // 
+            // AD_CheckingHeroes_Checkbox
+            // 
+            this.AD_CheckingHeroes_Checkbox.AutoSize = true;
+            this.AD_CheckingHeroes_Checkbox.Location = new System.Drawing.Point(117, 7);
+            this.AD_CheckingHeroes_Checkbox.Name = "AD_CheckingHeroes_Checkbox";
+            this.AD_CheckingHeroes_Checkbox.Size = new System.Drawing.Size(146, 17);
+            this.AD_CheckingHeroes_Checkbox.TabIndex = 26;
+            this.AD_CheckingHeroes_Checkbox.Text = "Check Max Heroes Level";
+            this.AD_CheckingHeroes_Checkbox.UseVisualStyleBackColor = true;
+            this.AD_CheckingHeroes_Checkbox.CheckedChanged += new System.EventHandler(this.AD_CheckingHeroes_Checkbox_CheckedChanged);
+            // 
             // AD_limitNumericBox
             // 
             this.AD_limitNumericBox.Location = new System.Drawing.Point(365, 5);
@@ -472,16 +484,32 @@
             this.AD_mainPanel.Size = new System.Drawing.Size(487, 278);
             this.AD_mainPanel.TabIndex = 13;
             // 
-            // AD_CheckingHeroes_Checkbox
+            // AD_difficultyComboBox2nd
             // 
-            this.AD_CheckingHeroes_Checkbox.AutoSize = true;
-            this.AD_CheckingHeroes_Checkbox.Location = new System.Drawing.Point(117, 7);
-            this.AD_CheckingHeroes_Checkbox.Name = "AD_CheckingHeroes_Checkbox";
-            this.AD_CheckingHeroes_Checkbox.Size = new System.Drawing.Size(146, 17);
-            this.AD_CheckingHeroes_Checkbox.TabIndex = 26;
-            this.AD_CheckingHeroes_Checkbox.Text = "Check Max Heroes Level";
-            this.AD_CheckingHeroes_Checkbox.UseVisualStyleBackColor = true;
-            this.AD_CheckingHeroes_Checkbox.CheckedChanged += new System.EventHandler(this.AD_CheckingHeroes_Checkbox_CheckedChanged);
+            this.AD_difficultyComboBox2nd.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.AD_difficultyComboBox2nd.FormattingEnabled = true;
+            this.AD_difficultyComboBox2nd.Items.AddRange(new object[] {
+            "--",
+            "Easy",
+            "Normal",
+            "Hard"});
+            this.AD_difficultyComboBox2nd.Location = new System.Drawing.Point(161, 80);
+            this.AD_difficultyComboBox2nd.MaxDropDownItems = 3;
+            this.AD_difficultyComboBox2nd.Name = "AD_difficultyComboBox2nd";
+            this.AD_difficultyComboBox2nd.Size = new System.Drawing.Size(60, 21);
+            this.AD_difficultyComboBox2nd.TabIndex = 27;
+            this.AD_difficultyComboBox2nd.SelectedValueChanged += new System.EventHandler(this.AD_difficultyComboBox2nd_SelectedValueChanged);
+            // 
+            // AD_StopOnFullItems_Checkbox
+            // 
+            this.AD_StopOnFullItems_Checkbox.AutoSize = true;
+            this.AD_StopOnFullItems_Checkbox.Location = new System.Drawing.Point(244, 258);
+            this.AD_StopOnFullItems_Checkbox.Name = "AD_StopOnFullItems_Checkbox";
+            this.AD_StopOnFullItems_Checkbox.Size = new System.Drawing.Size(120, 17);
+            this.AD_StopOnFullItems_Checkbox.TabIndex = 25;
+            this.AD_StopOnFullItems_Checkbox.Text = "Pause On Full Items";
+            this.AD_StopOnFullItems_Checkbox.UseVisualStyleBackColor = true;
+            this.AD_StopOnFullItems_Checkbox.CheckedChanged += new System.EventHandler(this.AD_StopOnFullItems_Checkbox_CheckedChanged);
             // 
             // AD_StopOnFullHeroes_Checkbox
             // 
@@ -1267,6 +1295,14 @@
             this.AD_w1Skill01Button.Tag = "0";
             this.AD_w1Skill01Button.UseVisualStyleBackColor = true;
             this.AD_w1Skill01Button.Click += new System.EventHandler(this.skillButton_Click);
+            // 
+            // label1
+            // 
+            this.label1.Location = new System.Drawing.Point(135, 83);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(32, 13);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "2nd";
             // 
             // AD_difficultyLabel
             // 
@@ -3172,12 +3208,13 @@
             // 
             this.ST_profileGroupBox.Controls.Add(this.ST_manageProfileButton);
             this.ST_profileGroupBox.Controls.Add(this.ST_hotTimeProfileComboBox);
+            this.ST_profileGroupBox.Controls.Add(this.ST_AutoProfileCheckBox);
             this.ST_profileGroupBox.Controls.Add(this.ST_hotTimeProfileCheckBox);
             this.ST_profileGroupBox.Controls.Add(this.ST_currentProfileComboBox);
             this.ST_profileGroupBox.Controls.Add(this.ST_currentProfileLabel);
-            this.ST_profileGroupBox.Location = new System.Drawing.Point(8, 92);
+            this.ST_profileGroupBox.Location = new System.Drawing.Point(8, 79);
             this.ST_profileGroupBox.Name = "ST_profileGroupBox";
-            this.ST_profileGroupBox.Size = new System.Drawing.Size(299, 68);
+            this.ST_profileGroupBox.Size = new System.Drawing.Size(299, 81);
             this.ST_profileGroupBox.TabIndex = 6;
             this.ST_profileGroupBox.TabStop = false;
             this.ST_profileGroupBox.Text = "Profile";
@@ -3185,7 +3222,7 @@
             // ST_manageProfileButton
             // 
             this.ST_manageProfileButton.Enabled = false;
-            this.ST_manageProfileButton.Location = new System.Drawing.Point(214, 14);
+            this.ST_manageProfileButton.Location = new System.Drawing.Point(214, 9);
             this.ST_manageProfileButton.Name = "ST_manageProfileButton";
             this.ST_manageProfileButton.Size = new System.Drawing.Size(80, 23);
             this.ST_manageProfileButton.TabIndex = 2;
@@ -3197,7 +3234,7 @@
             // 
             this.ST_hotTimeProfileComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ST_hotTimeProfileComboBox.FormattingEnabled = true;
-            this.ST_hotTimeProfileComboBox.Location = new System.Drawing.Point(182, 41);
+            this.ST_hotTimeProfileComboBox.Location = new System.Drawing.Point(182, 34);
             this.ST_hotTimeProfileComboBox.Name = "ST_hotTimeProfileComboBox";
             this.ST_hotTimeProfileComboBox.Size = new System.Drawing.Size(112, 21);
             this.ST_hotTimeProfileComboBox.TabIndex = 4;
@@ -3206,7 +3243,7 @@
             // ST_hotTimeProfileCheckBox
             // 
             this.ST_hotTimeProfileCheckBox.AutoSize = true;
-            this.ST_hotTimeProfileCheckBox.Location = new System.Drawing.Point(9, 43);
+            this.ST_hotTimeProfileCheckBox.Location = new System.Drawing.Point(9, 36);
             this.ST_hotTimeProfileCheckBox.Name = "ST_hotTimeProfileCheckBox";
             this.ST_hotTimeProfileCheckBox.Size = new System.Drawing.Size(167, 17);
             this.ST_hotTimeProfileCheckBox.TabIndex = 3;
@@ -3218,7 +3255,7 @@
             // 
             this.ST_currentProfileComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ST_currentProfileComboBox.FormattingEnabled = true;
-            this.ST_currentProfileComboBox.Location = new System.Drawing.Point(85, 15);
+            this.ST_currentProfileComboBox.Location = new System.Drawing.Point(85, 10);
             this.ST_currentProfileComboBox.Name = "ST_currentProfileComboBox";
             this.ST_currentProfileComboBox.Size = new System.Drawing.Size(112, 21);
             this.ST_currentProfileComboBox.TabIndex = 1;
@@ -3227,7 +3264,7 @@
             // ST_currentProfileLabel
             // 
             this.ST_currentProfileLabel.AutoSize = true;
-            this.ST_currentProfileLabel.Location = new System.Drawing.Point(6, 19);
+            this.ST_currentProfileLabel.Location = new System.Drawing.Point(6, 14);
             this.ST_currentProfileLabel.Name = "ST_currentProfileLabel";
             this.ST_currentProfileLabel.Size = new System.Drawing.Size(73, 13);
             this.ST_currentProfileLabel.TabIndex = 0;
@@ -3835,40 +3872,16 @@
             this.aiPause.UseVisualStyleBackColor = true;
             this.aiPause.Click += new System.EventHandler(this.aiPause_Click);
             // 
-            // AD_difficultyComboBox2nd
+            // ST_AutoProfileCheckBox
             // 
-            this.AD_difficultyComboBox2nd.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.AD_difficultyComboBox2nd.FormattingEnabled = true;
-            this.AD_difficultyComboBox2nd.Items.AddRange(new object[] {
-            "--",
-            "Easy",
-            "Normal",
-            "Hard"});
-            this.AD_difficultyComboBox2nd.Location = new System.Drawing.Point(161, 80);
-            this.AD_difficultyComboBox2nd.MaxDropDownItems = 3;
-            this.AD_difficultyComboBox2nd.Name = "AD_difficultyComboBox2nd";
-            this.AD_difficultyComboBox2nd.Size = new System.Drawing.Size(60, 21);
-            this.AD_difficultyComboBox2nd.TabIndex = 27;
-            this.AD_difficultyComboBox2nd.SelectedValueChanged += new System.EventHandler(this.AD_difficultyComboBox2nd_SelectedValueChanged);
-            // 
-            // label1
-            // 
-            this.label1.Location = new System.Drawing.Point(135, 83);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(32, 13);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "2nd";
-            // 
-            // AD_StopOnFullItems_Checkbox
-            // 
-            this.AD_StopOnFullItems_Checkbox.AutoSize = true;
-            this.AD_StopOnFullItems_Checkbox.Location = new System.Drawing.Point(244, 258);
-            this.AD_StopOnFullItems_Checkbox.Name = "AD_StopOnFullItems_Checkbox";
-            this.AD_StopOnFullItems_Checkbox.Size = new System.Drawing.Size(120, 17);
-            this.AD_StopOnFullItems_Checkbox.TabIndex = 25;
-            this.AD_StopOnFullItems_Checkbox.Text = "Pause On Full Items";
-            this.AD_StopOnFullItems_Checkbox.UseVisualStyleBackColor = true;
-            this.AD_StopOnFullItems_Checkbox.CheckedChanged += new System.EventHandler(this.AD_StopOnFullItems_Checkbox_CheckedChanged);
+            this.ST_AutoProfileCheckBox.AutoSize = true;
+            this.ST_AutoProfileCheckBox.Location = new System.Drawing.Point(9, 52);
+            this.ST_AutoProfileCheckBox.Name = "ST_AutoProfileCheckBox";
+            this.ST_AutoProfileCheckBox.Size = new System.Drawing.Size(142, 17);
+            this.ST_AutoProfileCheckBox.TabIndex = 3;
+            this.ST_AutoProfileCheckBox.Text = "Use auto change profile ";
+            this.ST_AutoProfileCheckBox.UseVisualStyleBackColor = true;
+            this.ST_AutoProfileCheckBox.CheckedChanged += new System.EventHandler(this.ST_autoProfileCheckBox_CheckedChanged);
             // 
             // MainForm
             // 
@@ -4857,5 +4870,6 @@
         private System.Windows.Forms.ComboBox AD_difficultyComboBox2nd;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox AD_StopOnFullItems_Checkbox;
+        private System.Windows.Forms.CheckBox ST_AutoProfileCheckBox;
     }
 }
