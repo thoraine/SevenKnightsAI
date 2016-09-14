@@ -5630,45 +5630,31 @@ namespace SevenKnightsAI.Classes
         private void HeroLVUPCount()
         {
             int curCount = 0;
-            string maxCount = "100";
+            string maxCount="";
             Rectangle rect = Level30DialogPM.R_HeroLvlUpCount;
-            using (Bitmap bitmap = this.CropFrame(this.BlueStacks.MainWindowAS.CurrentFrame, rect).ScaleByPercent(128))
+            using (Bitmap bitmap = this.CropFrame(this.BlueStacks.MainWindowAS.CurrentFrame, rect))
             {
                 using (Page page = this.Tesseractor.Engine.Process(bitmap, null))
                 {
-                    string text = page.GetText().Trim();
+                    string text = page.GetText().ToLower().Replace("o", "0").Replace(" ", "").Replace("i","/").Replace("=","").Replace(":","").Trim();
                     Utility.FilterAscii(text);
-#if DEBUG
-                    bitmap.Save(string.Format("HeroCount1_{0} of {1}.png", curCount, maxCount));
-                    Console.WriteLine("firstbreak");
-#endif
                     if (text.Length >= 2)
                     {
                         string[] array = text.Split(new char[]
                             {
                                 '/'
                             });
-                        string mystr = Regex.Replace(array[0], @"\d", "");
-                        //string mynumber = Regex.Replace(array[0], @"\D", "");
                         if (array.Length >= 1)
+                        {
                             array[0] = Regex.Replace(array[0], @"\D", "");
                             int.TryParse(array[0], out curCount);
+                        }
                         if (array.Length >= 2)
                         {
                             maxCount = array[1].Substring(0, 3);
                         }
-#if DEBUG
-                        //Console.WriteLine(mynumber);
-                        Console.WriteLine(curCount);
-                        //Console.WriteLine(sub);
-                        this.Log(string.Format("Debug HLC: {0}/{1} String: {2}", curCount, maxCount, text.Trim()));
-                        Console.WriteLine(string.Format("Max Heroes  level up per day : {0}/{1}", curCount, maxCount));
-                        Console.WriteLine(string.Format("HLC: {0}/{1} String: {2}", curCount, maxCount, text.Trim()));
-                        bitmap.Save(string.Format("HeroCount2_{0} of {1}.png", curCount, maxCount));
-                        Console.WriteLine("endbreak");
-#endif
                     }
-                    if (curCount==100)
+                    if (curCount == 100)
                     {
                         this.MaxHeroUpCount = true;
                     }
@@ -5676,9 +5662,9 @@ namespace SevenKnightsAI.Classes
                     {
                         this.MaxHeroUpCount = false;
                     }
-                    this.Log(string.Format("Max Heroes level up per day : {0}/{1}", curCount, maxCount));
+                    this.Log(string.Format("Max Heroes  level up per day : {0}/{1}", curCount, maxCount));
                 }
-                
+
             }
         }
 
