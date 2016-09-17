@@ -18,7 +18,7 @@ namespace SevenKnightsAI.Classes.Mappings
 		{
 			X = 884,
 			Y = 274,
-			Color = 5786939,
+			Color = 5721150,
 			Type = MappingType.ANCHOR
 		};
 
@@ -30,11 +30,12 @@ namespace SevenKnightsAI.Classes.Mappings
 			Type = MappingType.ANCHOR
 		};
 
-		public static readonly PixelMapping BorderTopLeft = new PixelMapping
-		{
-			X = 130,
-			Y = 114,
-			Color = 16777214,
+        public static readonly PixelMapping BorderTopLeft = new PixelMapping
+        {
+            X = 130,
+            Y = 114,
+            //win10Color = 16777214,
+            Color = 16776956,
 			Type = MappingType.ANCHOR
 		};
 
