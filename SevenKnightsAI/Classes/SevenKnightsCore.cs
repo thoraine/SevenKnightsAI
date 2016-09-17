@@ -1841,11 +1841,30 @@ namespace SevenKnightsAI.Classes
                                 }
                                 Scene scene = this.SceneSearch();
                                 bool flag4 = false;
-                                string text2;
+                                string text2="";
                                 if (scene == null)
                                 {
-                                    text2 = "...";
-                                    flag4 = true;
+                                    Sleep(this.AIProfiles.ST_Delay);
+                                    int sleep = 0;
+                                    for (int i=0;i<5 ;i++)
+                                    {
+                                        this.CaptureFrame();
+                                        scene = this.SearchScenes();
+                                        if (scene != null)
+                                        {
+                                            text2 = scene.SceneType.ToString();
+                                            break;
+                                        }
+                                        sleep += 1000;
+                                        Sleep(sleep);
+                                    }
+                                    if (scene == null)
+                                    {
+                                        text2 = "...";
+                                        flag4 = true;
+                                        this.IdleCounter += sT_Delay;
+                                        this.Log("IdleCounter = " + IdleCounter);
+                                    }
                                 }
                                 else
                                 {
@@ -1863,9 +1882,10 @@ namespace SevenKnightsAI.Classes
                                         this.LogScene("BACKABLE");
                                         this.Escape();
                                     }
-                                    else if (this.IdleCounter >= 8000)
+                                    else if (this.IdleCounter >= sT_Delay)
                                     {
                                         this.Escape();
+                                        this.Log("Escape");
                                         this.IdleCounter = 0;
                                     }
                                 }
@@ -3909,7 +3929,7 @@ namespace SevenKnightsAI.Classes
                     bool flag2 = this.AISettings.AD_SkillType == SkillType.Both;
                     bool shouldAssign = !flag || flag2;
                     this.ToggleAutoSkill(flag);
-                    if (this.MatchMapping(AdventureFightPM.AtTurn1Of1, 4) || (this.MatchMapping(AdventureFightPM.AtTurn1Of2, 4) && this.MatchMapping(AdventureFightPM.Turn2Of2, 3)) || (this.MatchMapping(AdventureFightPM.AtTurn1Of3_1, 4) && this.MatchMapping(AdventureFightPM.AtTurn1Of3_2, 4) && this.MatchMapping(AdventureFightPM.Turn2Of3, 3)))
+                    if (this.MatchMapping(AdventureFightPM.AtTurn1Of1, 5) || (this.MatchMapping(AdventureFightPM.AtTurn1Of2, 5) && this.MatchMapping(AdventureFightPM.Turn2Of2, 5)) || (this.MatchMapping(AdventureFightPM.AtTurn1Of3_1, 5) && this.MatchMapping(AdventureFightPM.AtTurn1Of3_2, 5) && this.MatchMapping(AdventureFightPM.Turn2Of3, 5)))
                     {
                         int num3 = 1;
                         this.LoopSkill = this.AISettings.AD_Wave1Loop;
@@ -3920,7 +3940,7 @@ namespace SevenKnightsAI.Classes
                             this.AssignSkillSet(shouldAssign, this.AISettings.AD_Wave1Skills);
                         }
                     }
-                    else if ((this.MatchMapping(AdventureFightPM.AtTurn2Of2, 4) && this.MatchMapping(AdventureFightPM.Turn1Of2, 3)) || (this.MatchMapping(AdventureFightPM.AtTurn2Of3_1, 4) && this.MatchMapping(AdventureFightPM.AtTurn2Of3_2, 4) && this.MatchMapping(AdventureFightPM.Turn1Of3, 3)))
+                    else if ((this.MatchMapping(AdventureFightPM.AtTurn2Of2, 5) && this.MatchMapping(AdventureFightPM.Turn1Of2, 5)) || (this.MatchMapping(AdventureFightPM.AtTurn2Of3_1, 5) && this.MatchMapping(AdventureFightPM.AtTurn2Of3_2, 5) && this.MatchMapping(AdventureFightPM.Turn1Of3, 5)))
                     {
                         int num4 = 2;
                         this.LoopSkill = this.AISettings.AD_Wave2Loop;
@@ -3931,7 +3951,7 @@ namespace SevenKnightsAI.Classes
                             this.AssignSkillSet(shouldAssign, this.AISettings.AD_Wave2Skills);
                         }
                     }
-                    else if (this.MatchMapping(AdventureFightPM.AtTurn3Of3_1, 4) && this.MatchMapping(AdventureFightPM.AtTurn3Of3_2, 4) && this.MatchMapping(AdventureFightPM.Turn2Of3, 3))
+                    else if (this.MatchMapping(AdventureFightPM.AtTurn3Of3_1, 5) && this.MatchMapping(AdventureFightPM.AtTurn3Of3_2, 5) && this.MatchMapping(AdventureFightPM.Turn2Of3, 5))
                     {
                         int num5 = 3;
                         this.LoopSkill = this.AISettings.AD_Wave3Loop;
@@ -4348,8 +4368,8 @@ namespace SevenKnightsAI.Classes
                     return result;
                 }
                 if (this.ExpectedFightScene(SceneType.ADVENTURE_FIGHT) &&
-                    (this.MatchMapping(SharedPM.Fight_PauseButton, 2)) &&
-                    (this.MatchMapping(SharedPM.Fight_ChatButton, 2)) &&
+                    (this.MatchMapping(SharedPM.Fight_PauseButton, 5)) &&
+                    (this.MatchMapping(SharedPM.Fight_ChatButton, 5)) &&
                     (this.MatchMapping(AdventureFightPM.GoldIcon, 5))
                     )
                 {
@@ -4362,7 +4382,7 @@ namespace SevenKnightsAI.Classes
                     return result;
                 }
                 if (this.ExpectedFightScene(SceneType.TOWER_FIGHT) &&
-                    this.MatchMapping(TowerFightPM.PauseButton, 2) &&
+                    (this.MatchMapping(TowerFightPM.PauseButton, 2)) &&
                     this.MatchMapping(TowerFightPM.ChatButton, 2) &&
                     !(this.MatchMapping(AdventureFightPM.GoldIcon, 5))
                     )
@@ -4710,7 +4730,7 @@ namespace SevenKnightsAI.Classes
                     Scene result = new Scene(SceneType.NOTICE);
                     return result;
                 }
-                if (this.MatchMapping(AdsPM.SkipTodayCheckBox_1, 2) && this.MatchMapping(AdsPM.SkipTodayCheckBox_2, 2))
+                if (this.MatchMapping(AdsPM.SkipTodayCheckBox_1, 2) && this.MatchMapping(AdsPM.SkipTodayCheckBox_2, 2) || this.MatchMapping(AdsPM.CloseButton, 2))
                 {
                     Scene result = new Scene(SceneType.ADS);
                     return result;
@@ -5632,37 +5652,69 @@ namespace SevenKnightsAI.Classes
             int curCount = 0;
             string maxCount="";
             Rectangle rect = Level30DialogPM.R_HeroLvlUpCount;
-            using (Bitmap bitmap = this.CropFrame(this.BlueStacks.MainWindowAS.CurrentFrame, rect))
+            using (Bitmap bitmap = this.CropFrame(this.BlueStacks.MainWindowAS.CurrentFrame, rect).ScaleByPercent(200))
             {
                 using (Page page = this.Tesseractor.Engine.Process(bitmap, null))
                 {
-                    string text = page.GetText().ToLower().Replace("o", "0").Replace(" ", "").Replace("i","/").Replace("=","").Replace(":","").Trim();
+                    string text = page.GetText().ToLower().Replace("o", "0").Replace(" ", "").Replace("i","/").Replace("=","").Replace(":","").Replace("l","1").Replace("[","").Replace("(","").Trim();
+                    Console.WriteLine("FirstText =" + "'" + text + "'");
                     Utility.FilterAscii(text);
+#if DEBUG
+                    bitmap.Save("HeroCount.png");
+                    Console.WriteLine("firstbreak");
+                    Console.WriteLine("firsText=" + "'" + text + "'");
+                    string test1 = Regex.Replace(text, @"\D", "");
+                    Console.WriteLine("Rextext=" + "'" + test1 + "'");
+                    Console.WriteLine("RextextLength=" + "'" + test1.Length + "'");
+                    if (test1.Length == 6 && !test1.Equals("100100"))
+                    {
+                        Console.WriteLine("not100");
+                        test1 = test1.Substring(1, 2);
+                    }
+                    else if (test1.Length == 5)
+                    {
+                        test1 = test1.Substring(0, 2);
+                    }
+                    else if (test1.Length == 4)
+                    {
+                        test1 = test1.Substring(0, 1);
+                    }
+                    Console.WriteLine("Finaltext =" + "'" + test1 + "'");
+#endif
                     if (text.Length >= 2)
                     {
+                        Console.WriteLine("FilterText ="+"'"+text+"'");
+                        Console.WriteLine("Break1");
                         string[] array = text.Split(new char[]
                             {
                                 '/'
                             });
-                        if (array.Length >= 1)
+                        if (array[0].Length >= 1)
                         {
+                            Console.WriteLine("array[0] =" + array[0]);
                             array[0] = Regex.Replace(array[0], @"\D", "");
+                            Console.WriteLine("array[0] process =" + array[0]);
+                            Console.WriteLine("Break2");
                             int.TryParse(array[0], out curCount);
-                        }
+                            if (curCount<=100)
+                            {               
+                                this.Log(string.Format("Max Heroes  level up per day : {0}/100", curCount));
+                            }
+                            if (curCount == 100)
+                            {
+                                this.MaxHeroUpCount = true;
+                            }
+                            else
+                            {
+                                this.MaxHeroUpCount = false;
+                            }
+
+                        }/*
                         if (array.Length >= 2)
                         {
                             maxCount = array[1].Substring(0, 3);
-                        }
+                        }*/
                     }
-                    if (curCount == 100)
-                    {
-                        this.MaxHeroUpCount = true;
-                    }
-                    else
-                    {
-                        this.MaxHeroUpCount = false;
-                    }
-                    this.Log(string.Format("Max Heroes  level up per day : {0}/{1}", curCount, maxCount));
                 }
 
             }

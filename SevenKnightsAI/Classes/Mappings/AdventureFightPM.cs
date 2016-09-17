@@ -80,9 +80,9 @@ namespace SevenKnightsAI.Classes.Mappings
 
 		public static readonly PixelMapping GoldIcon = new PixelMapping
 		{
-			X = 654,
-			Y = 22,
-			Color = 16775858,
+			X = 825,
+			Y = 25,
+			Color = 3552323,
 			Type = MappingType.ANCHOR
 		};
 

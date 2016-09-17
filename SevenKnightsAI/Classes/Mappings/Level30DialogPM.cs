@@ -12,6 +12,7 @@ namespace SevenKnightsAI.Classes.Mappings
             Y = 485,
             Width = 80,
             Height = 20
+
         };
 
         public static readonly PixelMapping CharacterEye = new PixelMapping
