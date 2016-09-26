@@ -293,6 +293,18 @@ namespace SevenKnightsAI
             this.AISettings.AD_StopOnFullItems = checkBox.Checked;
         }
 
+        private void AD_StopOnLV30_Checkbox_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckBox checkBox = sender as CheckBox;
+            this.AISettings.AD_StopOnLV30 = checkBox.Checked;
+        }
+
+        private void RD_StopOnDragonFound_Checkbox_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckBox checkBox = sender as CheckBox;
+            this.AISettings.RD_StopOnDragonFound = checkBox.Checked;
+        }
+
         private void AD_UpdateSequenceButton()
 		{
 			if (!this.AD_sequenceButton.Enabled)
@@ -589,8 +601,21 @@ namespace SevenKnightsAI
                                 MessageBox.Show("Items Full");
                                 this.AlertSound.Stop();
                             }
+                        }else if ((string)progressArgs.Message == "Hero Level 30")
+                        {
+                            this.PauseAI();
+                            this.AlertSound.PlayLooping();
+                            Thread.Sleep(1500);
+                            this.AlertSound.Stop();
                         }
-						break;
+                        else if ((string)progressArgs.Message == "Dragon Found")
+                        {
+                            this.PauseAI();
+                            this.AlertSound.PlayLooping();
+                            Thread.Sleep(1500);
+                            this.AlertSound.Stop();
+                        }
+                        break;
 					}
 				default:
 					return;
@@ -725,6 +750,8 @@ namespace SevenKnightsAI
 			this.AD_masteryComboBox.SelectedIndex = (int)this.AISettings.AD_Mastery;
 			this.AD_StopOnFullHeroes_Checkbox.Checked = this.AISettings.AD_StopOnFullHeroes;
             this.AD_StopOnFullItems_Checkbox.Checked = this.AISettings.AD_StopOnFullItems;
+            this.RD_StopOnDragonFound_Checkbox.Checked = this.AISettings.RD_StopOnDragonFound;
+            this.AD_StopOnLV30_Checkbox.Checked = this.AISettings.AD_StopOnLV30;
             this.AD_CheckingHeroes_Checkbox.Checked = this.AISettings.AD_CheckingHeroes;
 			this.AD_wave1LoopCheckBox.Checked = this.AISettings.AD_Wave1Loop;
 			this.AD_wave2LoopCheckBox.Checked = this.AISettings.AD_Wave2Loop;

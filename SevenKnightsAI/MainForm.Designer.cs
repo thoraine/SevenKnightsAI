@@ -254,6 +254,7 @@
             this.ST_profileGroupBox = new System.Windows.Forms.GroupBox();
             this.ST_manageProfileButton = new System.Windows.Forms.Button();
             this.ST_hotTimeProfileComboBox = new System.Windows.Forms.ComboBox();
+            this.ST_AutoProfileCheckBox = new System.Windows.Forms.CheckBox();
             this.ST_hotTimeProfileCheckBox = new System.Windows.Forms.CheckBox();
             this.ST_currentProfileComboBox = new System.Windows.Forms.ComboBox();
             this.ST_currentProfileLabel = new System.Windows.Forms.Label();
@@ -315,7 +316,8 @@
             this.goldLabel = new System.Windows.Forms.Label();
             this.resourcesTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.aiPause = new System.Windows.Forms.Button();
-            this.ST_AutoProfileCheckBox = new System.Windows.Forms.CheckBox();
+            this.AD_StopOnLV30_Checkbox = new System.Windows.Forms.CheckBox();
+            this.RD_StopOnDragonFound_Checkbox = new System.Windows.Forms.CheckBox();
             this.tabControl.SuspendLayout();
             this.adventureTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.AD_limitNumericBox)).BeginInit();
@@ -460,6 +462,7 @@
             // AD_mainPanel
             // 
             this.AD_mainPanel.Controls.Add(this.AD_difficultyComboBox2nd);
+            this.AD_mainPanel.Controls.Add(this.AD_StopOnLV30_Checkbox);
             this.AD_mainPanel.Controls.Add(this.AD_StopOnFullItems_Checkbox);
             this.AD_mainPanel.Controls.Add(this.AD_StopOnFullHeroes_Checkbox);
             this.AD_mainPanel.Controls.Add(this.AD_sequenceButton);
@@ -535,11 +538,11 @@
             // AD_elementHeroesCheckBox
             // 
             this.AD_elementHeroesCheckBox.AutoSize = true;
-            this.AD_elementHeroesCheckBox.Location = new System.Drawing.Point(74, 251);
+            this.AD_elementHeroesCheckBox.Location = new System.Drawing.Point(6, 251);
             this.AD_elementHeroesCheckBox.Name = "AD_elementHeroesCheckBox";
-            this.AD_elementHeroesCheckBox.Size = new System.Drawing.Size(121, 17);
+            this.AD_elementHeroesCheckBox.Size = new System.Drawing.Size(86, 17);
             this.AD_elementHeroesCheckBox.TabIndex = 13;
-            this.AD_elementHeroesCheckBox.Text = "First Element heroes";
+            this.AD_elementHeroesCheckBox.Text = "First Element";
             this.AD_elementHeroesCheckBox.UseVisualStyleBackColor = true;
             this.AD_elementHeroesCheckBox.CheckedChanged += new System.EventHandler(this.AD_elementHeroesCheckBox_CheckedChanged);
             // 
@@ -2090,6 +2093,7 @@
             // 
             // RD_mainPanel
             // 
+            this.RD_mainPanel.Controls.Add(this.RD_StopOnDragonFound_Checkbox);
             this.RD_mainPanel.Controls.Add(this.RD_DragonLimit_lbl);
             this.RD_mainPanel.Controls.Add(this.RD_DragonLimitNumericBox);
             this.RD_mainPanel.Controls.Add(this.RD_DragonLimitCheckBox);
@@ -3240,6 +3244,17 @@
             this.ST_hotTimeProfileComboBox.TabIndex = 4;
             this.ST_hotTimeProfileComboBox.SelectedIndexChanged += new System.EventHandler(this.ST_hotTimeProfileComboBox_SelectedIndexChanged);
             // 
+            // ST_AutoProfileCheckBox
+            // 
+            this.ST_AutoProfileCheckBox.AutoSize = true;
+            this.ST_AutoProfileCheckBox.Location = new System.Drawing.Point(9, 52);
+            this.ST_AutoProfileCheckBox.Name = "ST_AutoProfileCheckBox";
+            this.ST_AutoProfileCheckBox.Size = new System.Drawing.Size(142, 17);
+            this.ST_AutoProfileCheckBox.TabIndex = 3;
+            this.ST_AutoProfileCheckBox.Text = "Use auto change profile ";
+            this.ST_AutoProfileCheckBox.UseVisualStyleBackColor = true;
+            this.ST_AutoProfileCheckBox.CheckedChanged += new System.EventHandler(this.ST_autoProfileCheckBox_CheckedChanged);
+            // 
             // ST_hotTimeProfileCheckBox
             // 
             this.ST_hotTimeProfileCheckBox.AutoSize = true;
@@ -3872,16 +3887,27 @@
             this.aiPause.UseVisualStyleBackColor = true;
             this.aiPause.Click += new System.EventHandler(this.aiPause_Click);
             // 
-            // ST_AutoProfileCheckBox
+            // AD_StopOnLV30_Checkbox
             // 
-            this.ST_AutoProfileCheckBox.AutoSize = true;
-            this.ST_AutoProfileCheckBox.Location = new System.Drawing.Point(9, 52);
-            this.ST_AutoProfileCheckBox.Name = "ST_AutoProfileCheckBox";
-            this.ST_AutoProfileCheckBox.Size = new System.Drawing.Size(142, 17);
-            this.ST_AutoProfileCheckBox.TabIndex = 3;
-            this.ST_AutoProfileCheckBox.Text = "Use auto change profile ";
-            this.ST_AutoProfileCheckBox.UseVisualStyleBackColor = true;
-            this.ST_AutoProfileCheckBox.CheckedChanged += new System.EventHandler(this.ST_autoProfileCheckBox_CheckedChanged);
+            this.AD_StopOnLV30_Checkbox.AutoSize = true;
+            this.AD_StopOnLV30_Checkbox.Location = new System.Drawing.Point(95, 251);
+            this.AD_StopOnLV30_Checkbox.Name = "AD_StopOnLV30_Checkbox";
+            this.AD_StopOnLV30_Checkbox.Size = new System.Drawing.Size(101, 17);
+            this.AD_StopOnLV30_Checkbox.TabIndex = 25;
+            this.AD_StopOnLV30_Checkbox.Text = "Pause On LV30";
+            this.AD_StopOnLV30_Checkbox.UseVisualStyleBackColor = true;
+            this.AD_StopOnLV30_Checkbox.CheckedChanged += new System.EventHandler(this.AD_StopOnLV30_Checkbox_CheckedChanged);
+            // 
+            // RD_StopOnDragonFound_Checkbox
+            // 
+            this.RD_StopOnDragonFound_Checkbox.AutoSize = true;
+            this.RD_StopOnDragonFound_Checkbox.Location = new System.Drawing.Point(9, 29);
+            this.RD_StopOnDragonFound_Checkbox.Name = "RD_StopOnDragonFound_Checkbox";
+            this.RD_StopOnDragonFound_Checkbox.Size = new System.Drawing.Size(144, 17);
+            this.RD_StopOnDragonFound_Checkbox.TabIndex = 29;
+            this.RD_StopOnDragonFound_Checkbox.Text = "Pause On Dragon Found";
+            this.RD_StopOnDragonFound_Checkbox.UseVisualStyleBackColor = true;
+            this.RD_StopOnDragonFound_Checkbox.CheckedChanged += new System.EventHandler(this.RD_StopOnDragonFound_Checkbox_CheckedChanged);
             // 
             // MainForm
             // 
@@ -4871,5 +4897,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox AD_StopOnFullItems_Checkbox;
         private System.Windows.Forms.CheckBox ST_AutoProfileCheckBox;
+        private System.Windows.Forms.CheckBox AD_StopOnLV30_Checkbox;
+        private System.Windows.Forms.CheckBox RD_StopOnDragonFound_Checkbox;
     }
 }

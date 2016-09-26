@@ -1925,6 +1925,10 @@ namespace SevenKnightsAI.Classes
                                             }
                                             break;
 
+                                        case SceneType.BLUESTACK_HOME:
+                                            this.WeightedClick(BluestackPM.SearchIcon, 1.0, 1.0, 1, 0, "left");
+                                            break;
+                                        
                                         case SceneType._DIALOG:
                                             this.Escape();
                                             SevenKnightsCore.Sleep(300);
@@ -2563,6 +2567,13 @@ namespace SevenKnightsAI.Classes
 
                                         case SceneType.LEVEL_30_DIALOG:
                                         case SceneType.LEVEL_30_MAX_DIALOG:
+                                            if (this.AISettings.AD_StopOnLV30)
+                                            {
+                                                this.Alert("Hero Level 30");
+                                                this.Escape();
+                                                this.AIProfiles.TMP_Paused = true;
+                                                break;
+                                            }
                                             this.Log("Hero Level 30", this.COLOR_LEVEL_30);
                                             this.HeroLVUPCount();
                                             if (this.AISettings.AD_Formation != Formation.None && this.AISettings.AD_HeroManagePositions != null && this.AISettings.AD_HeroManagePositions.Length > 0)
@@ -2633,6 +2644,14 @@ namespace SevenKnightsAI.Classes
                                             break;
 
                                         case SceneType.RAID_DRAGON:
+                                            if (this.AISettings.RD_StopOnDragonFound)
+                                            {
+                                                this.Alert("Dragon Found");
+                                                this.Escape();
+                                                this.AIProfiles.TMP_Paused = true;
+                                                break;
+                                            }
+                                            /*
                                             this.PushNote("The dragon appears!", "AI will fight the dragon or ignore it depending on your settings.");
                                             if (this.AISettings.RD_Enable)
                                             {
@@ -2640,6 +2659,7 @@ namespace SevenKnightsAI.Classes
                                             }
                                             this.WeightedClick(RaidDragonPM.TapArea, 1.0, 1.0, 1, 0, "left");
                                             SevenKnightsCore.Sleep(500);
+                                            */
                                             break;
 
                                         case SceneType.RAID_LOBBY:
@@ -4300,6 +4320,11 @@ namespace SevenKnightsAI.Classes
                     Scene result = new Scene(SceneType._ANDROID_POPUP);
                     return result;
                 }
+                if (this.MatchMapping(BluestackPM.SevenKnightIcon, 2) && this.MatchMapping(BluestackPM.SearchIcon, 2) && this.MatchMapping(BluestackPM.Background, 2))
+                {
+                    Scene result = new Scene(SceneType.BLUESTACK_HOME);
+                    return result;
+                }
                 if (this.MatchMapping(HeroesPM.IconLeft, 2) && this.MatchMapping(HeroesPM.IconMiddle, 2) && this.MatchMapping(HeroesPM.IconRight, 2) && this.MatchMapping(HeroesPM.OptimizeBorder, 4))
                 {
                     Scene result = new Scene(SceneType.HEROES);
@@ -5700,7 +5725,7 @@ namespace SevenKnightsAI.Classes
                             {               
                                 this.Log(string.Format("Max Heroes  level up per day : {0}/100", curCount));
                             }
-                            if (curCount == 100)
+                            if (curCount == 100 && array[1].Equals("100"))
                             {
                                 this.MaxHeroUpCount = true;
                             }
@@ -5789,8 +5814,8 @@ namespace SevenKnightsAI.Classes
             {
                 if (this.MatchMapping(keyPMs[i], 5))
                 {
-                    num = i;
-                    break;
+                    num = i+1;
+                    //break;
                 }
             }
             if (num < 5)

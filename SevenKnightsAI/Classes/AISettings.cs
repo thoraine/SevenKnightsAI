@@ -60,6 +60,12 @@ namespace SevenKnightsAI.Classes
         [XmlElement(ElementName = "AD_StopOnFullItems")]
         public bool AD_StopOnFullItems;
 
+        [XmlElement(ElementName = "RD_StopOnDragonFound")]
+        public bool RD_StopOnDragonFound;
+
+        [XmlElement(ElementName = "AD_StopOnLV30")]
+        public bool AD_StopOnLV30;
+
         [XmlElement(ElementName = "AD_CheckingHeroes")]
         public bool AD_CheckingHeroes;
 
@@ -280,6 +286,8 @@ namespace SevenKnightsAI.Classes
 			this.AD_SkillType = SkillType.Both;
 			this.AD_StopOnFullHeroes = true;
             this.AD_StopOnFullItems = true;
+            this.RD_StopOnDragonFound = true;
+            this.AD_StopOnLV30 = true;
             this.AD_CheckingHeroes = true;
 			this.AD_Wave1Loop = false;
 			this.AD_Wave2Loop = false;
@@ -458,6 +466,18 @@ namespace SevenKnightsAI.Classes
                 try
                 {
                     aISettings.AD_StopOnFullItems = (bool)dictionary["AD_StopOnFullItems"];
+                }
+                catch (Exception)
+                { }
+                try
+                {
+                    aISettings.RD_StopOnDragonFound = (bool)dictionary["RD_StopOnDragonFound"];
+                }
+                catch (Exception)
+                { }
+                try
+                {
+                    aISettings.AD_StopOnLV30 = (bool)dictionary["AD_StopOnLV30"];
                 }
                 catch (Exception)
                 { }
@@ -935,6 +955,14 @@ namespace SevenKnightsAI.Classes
                 {
                     "AD_StopOnFullItems",
                     this.AD_StopOnFullItems
+                },
+                {
+                    "RD_StopOnDragonFound",
+                    this.RD_StopOnDragonFound
+                },
+                {
+                    "AD_StopOnLV30",
+                    this.AD_StopOnLV30
                 },
                 {
                     "AD_CheckingHeroes",

@@ -98,6 +98,7 @@ namespace SevenKnightsAI.Classes
         SEND_HONOR_FAILED_POPUP,
         SEND_HONOR_CONFIRM_POPUP,
         SEND_HONOR_FULL_POPUP,
-        ADS_CLOSE
+        ADS_CLOSE,
+        BLUESTACK_HOME
     }
 }
