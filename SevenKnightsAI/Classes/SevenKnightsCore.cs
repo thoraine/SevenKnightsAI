@@ -2644,6 +2644,7 @@ namespace SevenKnightsAI.Classes
                                             break;
 
                                         case SceneType.RAID_DRAGON:
+                                            this.Log("The dragon appears!");
                                             if (this.AISettings.RD_StopOnDragonFound)
                                             {
                                                 this.Alert("Dragon Found");
@@ -2651,6 +2652,8 @@ namespace SevenKnightsAI.Classes
                                                 this.AIProfiles.TMP_Paused = true;
                                                 break;
                                             }
+                                            this.WeightedClick(RaidDragonPM.TapArea, 1.0, 1.0, 1, 0, "left");
+                                            break;
                                             /*
                                             this.PushNote("The dragon appears!", "AI will fight the dragon or ignore it depending on your settings.");
                                             if (this.AISettings.RD_Enable)
@@ -2660,7 +2663,6 @@ namespace SevenKnightsAI.Classes
                                             this.WeightedClick(RaidDragonPM.TapArea, 1.0, 1.0, 1, 0, "left");
                                             SevenKnightsCore.Sleep(500);
                                             */
-                                            break;
 
                                         case SceneType.RAID_LOBBY:
                                             if (this.CurrentObjective == Objective.RAID)
