@@ -2,16 +2,14 @@
 
 namespace SevenKnightsAI.Classes
 {
-	
-	internal enum ResourceType
-	{
-		
-		GOLD,
-		
-		RUBY,
-		
-		HONOR,
-		
-		TOPAZ
-	}
+    internal enum ResourceType
+    {
+        GOLD,
+
+        RUBY,
+
+        HONOR,
+
+        TOPAZ
+    }
 }

@@ -2,16 +2,14 @@
 
 namespace SevenKnightsAI.Classes
 {
-	
-	public enum Team
-	{
-		
-		None,
-		
-		A,
-		
-		B,
-		
-		C
-	}
+    public enum Team
+    {
+        None,
+
+        A,
+
+        B,
+
+        C
+    }
 }

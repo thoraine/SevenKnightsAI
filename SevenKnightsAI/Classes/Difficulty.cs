@@ -2,16 +2,14 @@
 
 namespace SevenKnightsAI.Classes
 {
-	
-	public enum Difficulty
-	{
-		
-		None,
-		
-		Easy,
-		
-		Normal,
-		
-		Hard
-	}
+    public enum Difficulty
+    {
+        None,
+
+        Easy,
+
+        Normal,
+
+        Hard
+    }
 }
