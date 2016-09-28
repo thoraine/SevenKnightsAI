@@ -513,7 +513,11 @@ namespace SevenKnightsAI.Classes
         {
             if (!this.MasteryChecked && !this.IsSelectedMastery(sceneType))
             {
-                if (sceneType == SceneType.ARENA_START)
+                if (sceneType == SceneType.LOBBY)
+                {
+                    this.WeightedClick(LobbyPM.MasteryButton, 1.0, 1.0, 1, 0, "left");
+                }
+                else if (sceneType == SceneType.ARENA_START)
                 {
                     this.WeightedClick(ArenaStartPM.MasteryButton, 1.0, 1.0, 1, 0, "left");
                 }
@@ -1645,10 +1649,21 @@ namespace SevenKnightsAI.Classes
                 ArenaStartPM.Mastery_2,
                 ArenaStartPM.Mastery_3
             };
-            int tolerance = 3;
+            PixelMapping[] RDarray = new PixelMapping[]
+            {
+                MasteryPopupPM.Tab1,
+                MasteryPopupPM.Tab2,
+                MasteryPopupPM.Tab3
+            };
+            int tolerance = 5;
             int num = -1;
             PixelMapping[] array3 = null;
-            if (sceneType != SceneType.ADVENTURE_START)
+            if (sceneType == SceneType.LOBBY && this.CurrentObjective == Objective.RAID)
+            {
+                num = (int)this.AISettings.RD_Mastery;
+                array3 = RDarray;
+            }
+            else if (sceneType != SceneType.ADVENTURE_START && (this.CurrentObjective == Objective.ARENA || this.CurrentObjective == Objective.GOLD_CHAMBER))
             {
                 if (sceneType != SceneType.TOWER_START)
                 {
@@ -1664,7 +1679,7 @@ namespace SevenKnightsAI.Classes
                     array3 = array;
                 }
             }
-            else
+            else if (this.CurrentObjective == Objective.ADVENTURE)
             {
                 num = (int)this.AISettings.AD_Mastery;
                 array3 = array;
@@ -1841,12 +1856,12 @@ namespace SevenKnightsAI.Classes
                                 }
                                 Scene scene = this.SceneSearch();
                                 bool flag4 = false;
-                                string text2="";
+                                string text2 = "";
                                 if (scene == null)
                                 {
                                     Sleep(this.AIProfiles.ST_Delay);
                                     int sleep = 0;
-                                    for (int i=0;i<5 ;i++)
+                                    for (int i = 0; i < 5; i++)
                                     {
                                         this.CaptureFrame();
                                         scene = this.SearchScenes();
@@ -1863,7 +1878,7 @@ namespace SevenKnightsAI.Classes
                                         text2 = "...";
                                         flag4 = true;
                                         this.IdleCounter += sT_Delay;
-                                        this.Log("IdleCounter = " + IdleCounter);
+                                        //this.Log("IdleCounter = " + IdleCounter);
                                     }
                                 }
                                 else
@@ -1885,7 +1900,7 @@ namespace SevenKnightsAI.Classes
                                     else if (this.IdleCounter >= sT_Delay)
                                     {
                                         this.Escape();
-                                        this.Log("Escape");
+                                        this.Log("cannot find scene escape");
                                         this.IdleCounter = 0;
                                     }
                                 }
@@ -1928,7 +1943,7 @@ namespace SevenKnightsAI.Classes
                                         case SceneType.BLUESTACK_HOME:
                                             this.WeightedClick(BluestackPM.SearchIcon, 1.0, 1.0, 1, 0, "left");
                                             break;
-                                        
+
                                         case SceneType._DIALOG:
                                             this.Escape();
                                             SevenKnightsCore.Sleep(300);
@@ -2021,6 +2036,10 @@ namespace SevenKnightsAI.Classes
                                                 }
                                                 if (this.CurrentObjective == Objective.ADVENTURE || this.CurrentObjective == Objective.GOLD_CHAMBER || this.CurrentObjective == Objective.RAID)
                                                 {
+                                                    if (this.CurrentObjective == Objective.RAID)
+                                                    {
+                                                        this.CheckMastery(scene.SceneType);
+                                                    }
                                                     this.WeightedClick(LobbyPM.AdventureButton, 1.0, 1.0, 1, 0, "left");
                                                 }
                                                 else if (this.CurrentObjective == Objective.ARENA)
@@ -2078,42 +2097,45 @@ namespace SevenKnightsAI.Classes
                                             break;
 
                                         case SceneType.MASTERY_POPUP:
+                                            if (this.MasteryChecked)
                                             {
-                                                if (this.MasteryChecked)
-                                                {
-                                                    this.WeightedClick(MasteryPopupPM.CloseButton, 1.0, 1.0, 1, 0, "left");
-                                                    return;
-                                                }
-                                                int num = -1;
-                                                if (this.CurrentObjective == Objective.ADVENTURE)
-                                                {
-                                                    num = (int)this.AISettings.AD_Mastery;
-                                                }
-                                                else if (this.CurrentObjective == Objective.GOLD_CHAMBER)
-                                                {
-                                                    num = (int)this.AISettings.GC_Mastery;
-                                                }
-                                                else if (this.CurrentObjective == Objective.ARENA)
-                                                {
-                                                    num = (int)this.AISettings.AR_Mastery;
-                                                }
-                                                if (num == 0 || num == -1)
-                                                {
-                                                    this.WeightedClick(MasteryPopupPM.CloseButton, 1.0, 1.0, 1, 0, "left");
-                                                    return;
-                                                }
-                                                PixelMapping[] array = new PixelMapping[]
-                                                {
-                                            MasteryPopupPM.Tab1,
-                                            MasteryPopupPM.Tab2,
-                                            MasteryPopupPM.Tab3
-                                                };
-                                                this.WeightedClick(array[num - 1], 1.0, 1.0, 1, 0, "left");
-                                                SevenKnightsCore.Sleep(500);
-                                                this.MasteryChecked = true;
                                                 this.WeightedClick(MasteryPopupPM.CloseButton, 1.0, 1.0, 1, 0, "left");
                                                 break;
                                             }
+                                            int num = -1;
+                                            if (this.CurrentObjective == Objective.ADVENTURE)
+                                            {
+                                                num = (int)this.AISettings.AD_Mastery;
+                                            }
+                                            else if (this.CurrentObjective == Objective.GOLD_CHAMBER)
+                                            {
+                                                num = (int)this.AISettings.GC_Mastery;
+                                            }
+                                            else if (this.CurrentObjective == Objective.ARENA)
+                                            {
+                                                num = (int)this.AISettings.AR_Mastery;
+                                            }
+                                            else if (this.CurrentObjective == Objective.RAID)
+                                            {
+                                                num = (int)this.AISettings.RD_Mastery;
+                                            }
+                                            if (num == 0 || num == -1)
+                                            {
+                                                this.WeightedClick(MasteryPopupPM.CloseButton, 1.0, 1.0, 1, 0, "left");
+                                                break;
+                                            }
+                                            PixelMapping[] array = new PixelMapping[]
+                                            {
+                                                    MasteryPopupPM.Tab1,
+                                                    MasteryPopupPM.Tab2,
+                                                    MasteryPopupPM.Tab3
+                                            };
+                                            this.WeightedClick(array[num - 1], 1.0, 1.0, 1, 0, "left");
+                                            SevenKnightsCore.Sleep(500);
+                                            this.MasteryChecked = true;
+                                            this.WeightedClick(MasteryPopupPM.CloseButton, 1.0, 1.0, 1, 0, "left");
+                                            break;
+
                                         case SceneType.ADVENTURE_MODES:
                                             this.UpdateAdventureKeys(scene.SceneType);
                                             this.UpdateGold(scene.SceneType);
@@ -2128,6 +2150,10 @@ namespace SevenKnightsAI.Classes
                                             }
                                             else if (this.CurrentObjective == Objective.RAID)
                                             {
+                                                if (!this.MasteryChecked && AISettings.RD_Mastery != 0)
+                                                {
+                                                    this.Escape();
+                                                }
                                                 this.WeightedClick(AdventureModesPM.RaidButton, 1.0, 1.0, 1, 0, "left");
                                             }
                                             else
@@ -2653,20 +2679,25 @@ namespace SevenKnightsAI.Classes
                                                 break;
                                             }
                                             this.WeightedClick(RaidDragonPM.TapArea, 1.0, 1.0, 1, 0, "left");
-                                            break;
-                                            /*
-                                            this.PushNote("The dragon appears!", "AI will fight the dragon or ignore it depending on your settings.");
-                                            if (this.AISettings.RD_Enable)
-                                            {
-                                                this.ChangeObjective(Objective.RAID);
-                                            }
-                                            this.WeightedClick(RaidDragonPM.TapArea, 1.0, 1.0, 1, 0, "left");
                                             SevenKnightsCore.Sleep(500);
-                                            */
+                                            break;
+                                        /*
+                                        this.PushNote("The dragon appears!", "AI will fight the dragon or ignore it depending on your settings.");
+                                        if (this.AISettings.RD_Enable)
+                                        {
+                                            this.ChangeObjective(Objective.RAID);
+                                        }
+                                        this.WeightedClick(RaidDragonPM.TapArea, 1.0, 1.0, 1, 0, "left");
+                                        SevenKnightsCore.Sleep(500);
+                                        */
 
                                         case SceneType.RAID_LOBBY:
                                             if (this.CurrentObjective == Objective.RAID)
                                             {
+                                                if (!this.MasteryChecked && AISettings.RD_Mastery != 0)
+                                                {
+                                                    this.Escape();
+                                                }
                                                 if (this.EnableRaidRewards)
                                                 {
                                                     this.WeightedClick(RaidLobbyPM.DefeatedTab, 1.0, 1.0, 1, 0, "left");
@@ -2696,6 +2727,7 @@ namespace SevenKnightsAI.Classes
                                                         this.DoneRaid();
                                                     }
                                                 }
+                                                this.MasteryChecked = !this.MasteryChecked;
                                             }
                                             else
                                             {
@@ -3226,7 +3258,7 @@ namespace SevenKnightsAI.Classes
                 this.HeroSortReset(true, true);
                 this.Log("Finding heroes...", this.COLOR_HEROES_MANAGEMENT);
                 bool flag = false;
-                bool flag4 = false; 
+                bool flag4 = false;
                 ulong num2 = 0uL;
                 double num3 = 91.0;
                 int num4 = 0;
@@ -3306,7 +3338,8 @@ namespace SevenKnightsAI.Classes
                                     this.DoneManageHeroes();
                                     return;
                                 }
-                                else{
+                                else
+                                {
                                     this.WeightedClick(HeroesPM.ElementButton, 1.0, 1.0, 1, 0, "left");
                                     SevenKnightsCore.Sleep(1000);
                                     num2 = 0uL;
@@ -4174,8 +4207,8 @@ namespace SevenKnightsAI.Classes
                 case Objective.HERO_MANAGEMENT:
                     break;
             }
-                
-                 Dictionary<string, object> message = new Dictionary<string, object>
+
+            Dictionary<string, object> message = new Dictionary<string, object>
                 {
                     {
                         "objective",
@@ -5640,8 +5673,8 @@ namespace SevenKnightsAI.Classes
 
         private void UpdateHeroCount()
         {
-            int curHero=HeroCount;
-            string maxHero=HeroMax;
+            int curHero = HeroCount;
+            string maxHero = HeroMax;
             Rectangle rect = HeroesPM.R_HeroCount;
             using (Bitmap bitmap = this.CropFrame(this.BlueStacks.MainWindowAS.CurrentFrame, rect).ScaleByPercent(128))
             {
@@ -5660,7 +5693,7 @@ namespace SevenKnightsAI.Classes
                             int.TryParse(array[0], out curHero);
                         if (array.Length >= 2)
                         {
-                            maxHero = array[1].Substring(0,3);
+                            maxHero = array[1].Substring(0, 3);
                         }
 #if DEBUG
                         this.Log(string.Format("HC: {0}/{1} String: {2}", curHero, maxHero, text.Trim()));
@@ -5677,13 +5710,13 @@ namespace SevenKnightsAI.Classes
         private void HeroLVUPCount()
         {
             int curCount = 0;
-            string maxCount="";
+            //string maxCount="";
             Rectangle rect = Level30DialogPM.R_HeroLvlUpCount;
             using (Bitmap bitmap = this.CropFrame(this.BlueStacks.MainWindowAS.CurrentFrame, rect).ScaleByPercent(200))
             {
                 using (Page page = this.Tesseractor.Engine.Process(bitmap, null))
                 {
-                    string text = page.GetText().ToLower().Replace("o", "0").Replace(" ", "").Replace("i","/").Replace("=","").Replace(":","").Replace("l","1").Replace("[","").Replace("(","").Trim();
+                    string text = page.GetText().ToLower().Replace("o", "0").Replace(" ", "").Replace("i", "/").Replace("=", "").Replace(":", "").Replace("l", "1").Replace("[", "").Replace("(", "").Trim();
                     Console.WriteLine("FirstText =" + "'" + text + "'");
                     Utility.FilterAscii(text);
 #if DEBUG
@@ -5710,7 +5743,7 @@ namespace SevenKnightsAI.Classes
 #endif
                     if (text.Length >= 2)
                     {
-                        Console.WriteLine("FilterText ="+"'"+text+"'");
+                        Console.WriteLine("FilterText =" + "'" + text + "'");
                         Console.WriteLine("Break1");
                         string[] array = text.Split(new char[]
                             {
@@ -5723,8 +5756,8 @@ namespace SevenKnightsAI.Classes
                             Console.WriteLine("array[0] process =" + array[0]);
                             Console.WriteLine("Break2");
                             int.TryParse(array[0], out curCount);
-                            if (curCount<=100)
-                            {               
+                            if (curCount <= 100)
+                            {
                                 this.Log(string.Format("Max Heroes  level up per day : {0}/100", curCount));
                             }
                             if (curCount == 100 && array[1].Equals("100"))
@@ -5735,7 +5768,6 @@ namespace SevenKnightsAI.Classes
                             {
                                 this.MaxHeroUpCount = false;
                             }
-
                         }/*
                         if (array.Length >= 2)
                         {
@@ -5743,7 +5775,6 @@ namespace SevenKnightsAI.Classes
                         }*/
                     }
                 }
-
             }
         }
 
@@ -5811,12 +5842,12 @@ namespace SevenKnightsAI.Classes
                 ArenaStartPM.Key_3,
                 ArenaStartPM.Key_4
             };
-            int num = 5;
+            int num = 0;
             for (int i = 0; i < keyPMs.Length; i++)
             {
                 if (this.MatchMapping(keyPMs[i], 5))
                 {
-                    num = i+1;
+                    num = i + 1;
                     //break;
                 }
             }
@@ -6162,6 +6193,6 @@ namespace SevenKnightsAI.Classes
             this.BlueStacks.MainWindowAS.Click(mapping.X, mapping.Y, numClicks, delay, button);
         }
 
-#endregion Private Methods
+        #endregion Private Methods
     }
 }

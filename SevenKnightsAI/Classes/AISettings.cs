@@ -165,7 +165,10 @@ namespace SevenKnightsAI.Classes
 		[XmlElement(ElementName = "RD_Limit")]
 		public int RD_Limit;
 
-		[XmlElement(ElementName = "RD_SkillType")]
+        [XmlElement(ElementName = "RD_Mastery")]
+        public Mastery RD_Mastery;
+
+        [XmlElement(ElementName = "RD_SkillType")]
 		public SkillType RD_SkillType;
 
 		[XmlElement(ElementName = "RD_Team1Loop")]
@@ -648,7 +651,13 @@ namespace SevenKnightsAI.Classes
 					aISettings.RD_Limit = Convert.ToInt32(dictionary["RD_Limit"]);
 				}
 				catch (Exception)
-				{ }
+                { }
+                try
+                {
+                    aISettings.RD_Mastery = (Mastery)Convert.ToInt32(dictionary["RD_Mastery"]);
+                }
+                catch (Exception)
+                { }
 				try
 				{
 					aISettings.RD_EnableDragonLimit = (bool)dictionary["RD_EnableDragonLimit"];
@@ -1076,7 +1085,11 @@ namespace SevenKnightsAI.Classes
 					"RD_Limit",
 					this.RD_Limit
 				},
-				{
+                {
+                    "RD_Mastery",
+                    this.RD_Mastery
+                },
+                {
 					"RD_EnableDragonLimit",
 					this.RD_EnableDragonLimit
 				},

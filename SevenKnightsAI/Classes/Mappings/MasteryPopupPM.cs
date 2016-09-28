@@ -28,7 +28,7 @@ namespace SevenKnightsAI.Classes.Mappings
 		{
 			X = 660,
 			Y = 95,
-			Color = 0,
+			Color = 13614466,
 			Type = MappingType.BUTTON
 		};
 
@@ -37,7 +37,7 @@ namespace SevenKnightsAI.Classes.Mappings
 		{
 			X = 728,
 			Y = 95,
-			Color = 0,
+			Color = 13283180,
 			Type = MappingType.BUTTON
 		};
 
@@ -46,7 +46,7 @@ namespace SevenKnightsAI.Classes.Mappings
 		{
 			X = 796,
 			Y = 95,
-			Color = 0,
+			Color = 11760142,
 			Type = MappingType.BUTTON
 		};
 

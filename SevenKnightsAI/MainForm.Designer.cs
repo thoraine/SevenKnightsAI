@@ -26,6 +26,7 @@
             this.AD_limitCheckBox = new System.Windows.Forms.CheckBox();
             this.AD_mainPanel = new System.Windows.Forms.Panel();
             this.AD_difficultyComboBox2nd = new System.Windows.Forms.ComboBox();
+            this.AD_StopOnLV30_Checkbox = new System.Windows.Forms.CheckBox();
             this.AD_StopOnFullItems_Checkbox = new System.Windows.Forms.CheckBox();
             this.AD_StopOnFullHeroes_Checkbox = new System.Windows.Forms.CheckBox();
             this.AD_sequenceButton = new System.Windows.Forms.Button();
@@ -160,6 +161,7 @@
             this.RD_limitNumericBox = new System.Windows.Forms.NumericUpDown();
             this.RD_limitCheckBox = new System.Windows.Forms.CheckBox();
             this.RD_mainPanel = new System.Windows.Forms.Panel();
+            this.RD_StopOnDragonFound_Checkbox = new System.Windows.Forms.CheckBox();
             this.RD_DragonLimit_lbl = new System.Windows.Forms.Label();
             this.RD_DragonLimitNumericBox = new System.Windows.Forms.NumericUpDown();
             this.RD_DragonLimitCheckBox = new System.Windows.Forms.CheckBox();
@@ -316,8 +318,8 @@
             this.goldLabel = new System.Windows.Forms.Label();
             this.resourcesTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.aiPause = new System.Windows.Forms.Button();
-            this.AD_StopOnLV30_Checkbox = new System.Windows.Forms.CheckBox();
-            this.RD_StopOnDragonFound_Checkbox = new System.Windows.Forms.CheckBox();
+            this.RD_masteryComboBox = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.tabControl.SuspendLayout();
             this.adventureTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.AD_limitNumericBox)).BeginInit();
@@ -401,7 +403,6 @@
             this.tabControl.SelectedIndex = 0;
             this.tabControl.Size = new System.Drawing.Size(496, 335);
             this.tabControl.TabIndex = 1;
-            this.tabControl.SelectedIndexChanged += new System.EventHandler(this.teamComboBox_SelectedIndexChanged);
             // 
             // adventureTab
             // 
@@ -502,6 +503,17 @@
             this.AD_difficultyComboBox2nd.Size = new System.Drawing.Size(60, 21);
             this.AD_difficultyComboBox2nd.TabIndex = 27;
             this.AD_difficultyComboBox2nd.SelectedValueChanged += new System.EventHandler(this.AD_difficultyComboBox2nd_SelectedValueChanged);
+            // 
+            // AD_StopOnLV30_Checkbox
+            // 
+            this.AD_StopOnLV30_Checkbox.AutoSize = true;
+            this.AD_StopOnLV30_Checkbox.Location = new System.Drawing.Point(95, 251);
+            this.AD_StopOnLV30_Checkbox.Name = "AD_StopOnLV30_Checkbox";
+            this.AD_StopOnLV30_Checkbox.Size = new System.Drawing.Size(101, 17);
+            this.AD_StopOnLV30_Checkbox.TabIndex = 25;
+            this.AD_StopOnLV30_Checkbox.Text = "Pause On LV30";
+            this.AD_StopOnLV30_Checkbox.UseVisualStyleBackColor = true;
+            this.AD_StopOnLV30_Checkbox.CheckedChanged += new System.EventHandler(this.AD_StopOnLV30_Checkbox_CheckedChanged);
             // 
             // AD_StopOnFullItems_Checkbox
             // 
@@ -2103,6 +2115,17 @@
             this.RD_mainPanel.Size = new System.Drawing.Size(487, 278);
             this.RD_mainPanel.TabIndex = 15;
             // 
+            // RD_StopOnDragonFound_Checkbox
+            // 
+            this.RD_StopOnDragonFound_Checkbox.AutoSize = true;
+            this.RD_StopOnDragonFound_Checkbox.Location = new System.Drawing.Point(9, 29);
+            this.RD_StopOnDragonFound_Checkbox.Name = "RD_StopOnDragonFound_Checkbox";
+            this.RD_StopOnDragonFound_Checkbox.Size = new System.Drawing.Size(144, 17);
+            this.RD_StopOnDragonFound_Checkbox.TabIndex = 29;
+            this.RD_StopOnDragonFound_Checkbox.Text = "Pause On Dragon Found";
+            this.RD_StopOnDragonFound_Checkbox.UseVisualStyleBackColor = true;
+            this.RD_StopOnDragonFound_Checkbox.CheckedChanged += new System.EventHandler(this.RD_StopOnDragonFound_Checkbox_CheckedChanged);
+            // 
             // RD_DragonLimit_lbl
             // 
             this.RD_DragonLimit_lbl.AutoSize = true;
@@ -2139,6 +2162,8 @@
             // 
             // RD_skillGroupBox
             // 
+            this.RD_skillGroupBox.Controls.Add(this.RD_masteryComboBox);
+            this.RD_skillGroupBox.Controls.Add(this.label2);
             this.RD_skillGroupBox.Controls.Add(this.RD_bothSkillRadio);
             this.RD_skillGroupBox.Controls.Add(this.RD_team2Panel);
             this.RD_skillGroupBox.Controls.Add(this.RD_manualSkillRadio);
@@ -2146,7 +2171,7 @@
             this.RD_skillGroupBox.Controls.Add(this.RD_team1Panel);
             this.RD_skillGroupBox.Location = new System.Drawing.Point(228, 5);
             this.RD_skillGroupBox.Name = "RD_skillGroupBox";
-            this.RD_skillGroupBox.Size = new System.Drawing.Size(254, 168);
+            this.RD_skillGroupBox.Size = new System.Drawing.Size(254, 189);
             this.RD_skillGroupBox.TabIndex = 25;
             this.RD_skillGroupBox.TabStop = false;
             this.RD_skillGroupBox.Tag = "2";
@@ -2155,7 +2180,7 @@
             // RD_bothSkillRadio
             // 
             this.RD_bothSkillRadio.AutoSize = true;
-            this.RD_bothSkillRadio.Location = new System.Drawing.Point(187, 23);
+            this.RD_bothSkillRadio.Location = new System.Drawing.Point(187, 44);
             this.RD_bothSkillRadio.Name = "RD_bothSkillRadio";
             this.RD_bothSkillRadio.Size = new System.Drawing.Size(47, 17);
             this.RD_bothSkillRadio.TabIndex = 7;
@@ -2178,7 +2203,7 @@
             this.RD_team2Panel.Controls.Add(this.RD_t2Skill02Button);
             this.RD_team2Panel.Controls.Add(this.RD_team2Label);
             this.RD_team2Panel.Controls.Add(this.RD_t2Skill01Button);
-            this.RD_team2Panel.Location = new System.Drawing.Point(7, 108);
+            this.RD_team2Panel.Location = new System.Drawing.Point(7, 129);
             this.RD_team2Panel.Name = "RD_team2Panel";
             this.RD_team2Panel.Size = new System.Drawing.Size(241, 51);
             this.RD_team2Panel.TabIndex = 9;
@@ -2318,7 +2343,7 @@
             // RD_manualSkillRadio
             // 
             this.RD_manualSkillRadio.AutoSize = true;
-            this.RD_manualSkillRadio.Location = new System.Drawing.Point(95, 23);
+            this.RD_manualSkillRadio.Location = new System.Drawing.Point(95, 44);
             this.RD_manualSkillRadio.Name = "RD_manualSkillRadio";
             this.RD_manualSkillRadio.Size = new System.Drawing.Size(82, 17);
             this.RD_manualSkillRadio.TabIndex = 6;
@@ -2331,7 +2356,7 @@
             // 
             this.RD_autoSkillRadio.AutoSize = true;
             this.RD_autoSkillRadio.Checked = true;
-            this.RD_autoSkillRadio.Location = new System.Drawing.Point(16, 23);
+            this.RD_autoSkillRadio.Location = new System.Drawing.Point(16, 44);
             this.RD_autoSkillRadio.Name = "RD_autoSkillRadio";
             this.RD_autoSkillRadio.Size = new System.Drawing.Size(69, 17);
             this.RD_autoSkillRadio.TabIndex = 5;
@@ -2355,7 +2380,7 @@
             this.RD_team1Panel.Controls.Add(this.RD_t1Skill02Button);
             this.RD_team1Panel.Controls.Add(this.RD_team1Label);
             this.RD_team1Panel.Controls.Add(this.RD_t1Skill01Button);
-            this.RD_team1Panel.Location = new System.Drawing.Point(7, 51);
+            this.RD_team1Panel.Location = new System.Drawing.Point(7, 72);
             this.RD_team1Panel.Name = "RD_team1Panel";
             this.RD_team1Panel.Size = new System.Drawing.Size(241, 51);
             this.RD_team1Panel.TabIndex = 8;
@@ -3887,27 +3912,30 @@
             this.aiPause.UseVisualStyleBackColor = true;
             this.aiPause.Click += new System.EventHandler(this.aiPause_Click);
             // 
-            // AD_StopOnLV30_Checkbox
+            // RD_masteryComboBox
             // 
-            this.AD_StopOnLV30_Checkbox.AutoSize = true;
-            this.AD_StopOnLV30_Checkbox.Location = new System.Drawing.Point(95, 251);
-            this.AD_StopOnLV30_Checkbox.Name = "AD_StopOnLV30_Checkbox";
-            this.AD_StopOnLV30_Checkbox.Size = new System.Drawing.Size(101, 17);
-            this.AD_StopOnLV30_Checkbox.TabIndex = 25;
-            this.AD_StopOnLV30_Checkbox.Text = "Pause On LV30";
-            this.AD_StopOnLV30_Checkbox.UseVisualStyleBackColor = true;
-            this.AD_StopOnLV30_Checkbox.CheckedChanged += new System.EventHandler(this.AD_StopOnLV30_Checkbox_CheckedChanged);
+            this.RD_masteryComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.RD_masteryComboBox.FormattingEnabled = true;
+            this.RD_masteryComboBox.Items.AddRange(new object[] {
+            "--",
+            "1",
+            "2",
+            "3"});
+            this.RD_masteryComboBox.Location = new System.Drawing.Point(203, 12);
+            this.RD_masteryComboBox.Name = "RD_masteryComboBox";
+            this.RD_masteryComboBox.Size = new System.Drawing.Size(46, 21);
+            this.RD_masteryComboBox.TabIndex = 16;
+            this.RD_masteryComboBox.Tag = "3";
+            this.RD_masteryComboBox.SelectedIndexChanged += new System.EventHandler(this.masteryComboBox_SelectedIndexChanged);
             // 
-            // RD_StopOnDragonFound_Checkbox
+            // label2
             // 
-            this.RD_StopOnDragonFound_Checkbox.AutoSize = true;
-            this.RD_StopOnDragonFound_Checkbox.Location = new System.Drawing.Point(9, 29);
-            this.RD_StopOnDragonFound_Checkbox.Name = "RD_StopOnDragonFound_Checkbox";
-            this.RD_StopOnDragonFound_Checkbox.Size = new System.Drawing.Size(144, 17);
-            this.RD_StopOnDragonFound_Checkbox.TabIndex = 29;
-            this.RD_StopOnDragonFound_Checkbox.Text = "Pause On Dragon Found";
-            this.RD_StopOnDragonFound_Checkbox.UseVisualStyleBackColor = true;
-            this.RD_StopOnDragonFound_Checkbox.CheckedChanged += new System.EventHandler(this.RD_StopOnDragonFound_Checkbox_CheckedChanged);
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(151, 16);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(44, 13);
+            this.label2.TabIndex = 15;
+            this.label2.Text = "Mastery";
             // 
             // MainForm
             // 
@@ -4899,5 +4927,7 @@
         private System.Windows.Forms.CheckBox ST_AutoProfileCheckBox;
         private System.Windows.Forms.CheckBox AD_StopOnLV30_Checkbox;
         private System.Windows.Forms.CheckBox RD_StopOnDragonFound_Checkbox;
+        private System.Windows.Forms.ComboBox RD_masteryComboBox;
+        private System.Windows.Forms.Label label2;
     }
 }

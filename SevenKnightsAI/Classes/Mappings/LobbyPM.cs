@@ -4,9 +4,41 @@ namespace SevenKnightsAI.Classes.Mappings
 {
 	internal static class LobbyPM
 	{
-		#region Public Fields
+        #region Public Fields
 
-		public static readonly PixelMapping AdventureButton = new PixelMapping
+        public static readonly PixelMapping MasteryButton= new PixelMapping
+        {
+            X = 291,
+            Y = 81,
+            Color = 11438155,
+            Type = MappingType.BUTTON
+        };
+
+        public static readonly PixelMapping Mastery_1 = new PixelMapping
+        {
+            X = 396,
+            Y = 152,
+            Color = 15782941,
+            Type = MappingType.ANCHOR
+        };
+
+        public static readonly PixelMapping Mastery_2 = new PixelMapping
+        {
+            X = 399,
+            Y = 162,
+            Color = 15454237,
+            Type = MappingType.ANCHOR
+        };
+
+        public static readonly PixelMapping Mastery_3 = new PixelMapping
+        {
+            X = 400,
+            Y = 159,
+            Color = 16769568,
+            Type = MappingType.ANCHOR
+        };
+
+        public static readonly PixelMapping AdventureButton = new PixelMapping
 		{
 			X = 883,
 			Y = 496,
