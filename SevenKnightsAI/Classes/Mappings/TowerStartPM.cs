@@ -79,6 +79,30 @@ namespace SevenKnightsAI.Classes.Mappings
             Type = MappingType.ANCHOR
         };
 
+        public static readonly PixelMapping Mastery_1 = new PixelMapping
+        {
+            X = 398,
+            Y = 152,
+            Color = 15782942,
+            Type = MappingType.ANCHOR
+        };
+
+        public static readonly PixelMapping Mastery_2 = new PixelMapping
+        {
+            X = 399,
+            Y = 162,
+            Color = 15519773,
+            Type = MappingType.ANCHOR
+        };
+
+        public static readonly PixelMapping Mastery_3 = new PixelMapping
+        {
+            X = 404,
+            Y = 160,
+            Color = 10455571,
+            Type = MappingType.ANCHOR
+        };
+
         #endregion Public Fields
     }
 }

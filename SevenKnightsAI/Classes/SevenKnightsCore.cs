@@ -1655,6 +1655,12 @@ namespace SevenKnightsAI.Classes
                 MasteryPopupPM.Tab2,
                 MasteryPopupPM.Tab3
             };
+            PixelMapping[] GCarray = new PixelMapping[]
+            {
+                TowerStartPM.Mastery_1,
+                TowerStartPM.Mastery_2,
+                TowerStartPM.Mastery_3
+            };
             int tolerance = 5;
             int num = -1;
             PixelMapping[] array3 = null;
@@ -1676,7 +1682,7 @@ namespace SevenKnightsAI.Classes
                 else
                 {
                     num = (int)this.AISettings.GC_Mastery;
-                    array3 = array;
+                    array3 = GCarray;
                 }
             }
             else if (this.CurrentObjective == Objective.ADVENTURE)
@@ -1689,6 +1695,7 @@ namespace SevenKnightsAI.Classes
                 return true;
             }
             int num2 = num - 1;
+            Sleep(1000);
             bool flag = this.MatchMapping(array3[num2], tolerance);
             if (flag)
             {
@@ -2130,7 +2137,10 @@ namespace SevenKnightsAI.Classes
                                                     MasteryPopupPM.Tab2,
                                                     MasteryPopupPM.Tab3
                                             };
-                                            this.WeightedClick(array[num - 1], 1.0, 1.0, 1, 0, "left");
+                                            if(this.ExpectingScene(SceneType.MASTERY_POPUP, 5, 500))
+                                            {
+                                                this.WeightedClick(array[num - 1], 1.0, 1.0, 1, 0, "left");
+                                            }
                                             SevenKnightsCore.Sleep(500);
                                             this.MasteryChecked = true;
                                             this.WeightedClick(MasteryPopupPM.CloseButton, 1.0, 1.0, 1, 0, "left");
