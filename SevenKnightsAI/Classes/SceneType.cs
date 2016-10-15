@@ -99,6 +99,11 @@ namespace SevenKnightsAI.Classes
         SEND_HONOR_CONFIRM_POPUP,
         SEND_HONOR_FULL_POPUP,
         ADS_CLOSE,
-        BLUESTACK_HOME
+        BLUESTACK_HOME,
+        ALICE_PACKADGE_POPUP,
+        HONOR_FRIEND_POPUP,
+        ANIVERSARY_POPUP,
+        RACHEL_PACKADGE_POPUP,
+        EVENT_PACKADGE_POPUP,
     }
 }

@@ -1969,6 +1969,26 @@ namespace SevenKnightsAI.Classes
                                             this.Escape();
                                             break;
 
+                                        case SceneType.ALICE_PACKADGE_POPUP:
+                                            this.Escape();
+                                            break;
+
+                                        case SceneType.HONOR_FRIEND_POPUP:
+                                            this.Escape();
+                                            break;
+
+                                        case SceneType.ANIVERSARY_POPUP:
+                                            this.Escape();
+                                            break;
+
+                                        case SceneType.RACHEL_PACKADGE_POPUP:
+                                            this.Escape();
+                                            break;
+
+                                        case SceneType.EVENT_PACKADGE_POPUP:
+                                            this.Escape();
+                                            break;
+
                                         case SceneType.ADS_CLOSE:
                                             this.WeightedClick(AdsClosePM.CloseButton, 1.0, 1.0, 1, 0, "left");
                                             break;
@@ -4803,6 +4823,31 @@ namespace SevenKnightsAI.Classes
                 if (this.MatchMapping(AdsPM.SkipTodayCheckBox_1, 2) && this.MatchMapping(AdsPM.SkipTodayCheckBox_2, 2) || this.MatchMapping(AdsPM.CloseButton, 2))
                 {
                     Scene result = new Scene(SceneType.ADS);
+                    return result;
+                }
+                if (this.MatchMapping(AdsPM.AliceTop, 2) && this.MatchMapping(AdsPM.AliceBottom, 2))
+                {
+                    Scene result = new Scene(SceneType.ALICE_PACKADGE_POPUP);
+                    return result;
+                }
+                if (this.MatchMapping(AdsPM.HonorTop, 2) && this.MatchMapping(AdsPM.HonorButton, 2))
+                {
+                    Scene result = new Scene(SceneType.HONOR_FRIEND_POPUP);
+                    return result;
+                }
+                if (this.MatchMapping(AdsPM.Aniversary1, 2) && this.MatchMapping(AdsPM.Aniversary2, 2))
+                {
+                    Scene result = new Scene(SceneType.ANIVERSARY_POPUP);
+                    return result;
+                }
+                if (this.MatchMapping(AdsPM.Rachel1, 2) && this.MatchMapping(AdsPM.Rachel2, 2))
+                {
+                    Scene result = new Scene(SceneType.RACHEL_PACKADGE_POPUP);
+                    return result;
+                }
+                if (this.MatchMapping(AdsPM.EventX, 2))
+                {
+                    Scene result = new Scene(SceneType.EVENT_PACKADGE_POPUP);
                     return result;
                 }
                 if (this.MatchMapping(AdsClosePM.CloseButton, 2) && this.MatchMapping(AdsClosePM.CancleButton, 2))

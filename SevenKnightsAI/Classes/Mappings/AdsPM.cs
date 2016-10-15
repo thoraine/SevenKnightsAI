@@ -27,5 +27,77 @@ namespace SevenKnightsAI.Classes.Mappings
             Color = 5592405,
             Type = MappingType.BOTH
         };
+
+        public static readonly PixelMapping AliceTop = new PixelMapping
+        {
+            X = 310,
+            Y = 115,
+            Color = 14868443,
+            Type = MappingType.BOTH
+        };
+
+        public static readonly PixelMapping AliceBottom = new PixelMapping
+        {
+            X = 187,
+            Y = 457,
+            Color = 9672347,
+            Type = MappingType.BOTH
+        };
+
+        public static readonly PixelMapping HonorTop = new PixelMapping
+        {
+            X = 724,
+            Y = 146,
+            Color = 1049861,
+            Type = MappingType.BOTH
+        };
+
+        public static readonly PixelMapping HonorButton = new PixelMapping
+        {
+            X = 540,
+            Y = 414,
+            Color = 3612176,
+            Type = MappingType.BOTH
+        };
+
+        public static readonly PixelMapping Aniversary1 = new PixelMapping
+        {
+            X = 119,
+            Y = 303,
+            Color = 15260642,
+            Type = MappingType.BOTH
+        };
+
+        public static readonly PixelMapping Aniversary2 = new PixelMapping
+        {
+            X = 832,
+            Y = 218,
+            Color = 5914426,
+            Type = MappingType.BOTH
+        };
+
+        public static readonly PixelMapping Rachel1 = new PixelMapping
+        {
+            X = 218,
+            Y = 89,
+            Color = 9523030,
+            Type = MappingType.BOTH
+        };
+
+        public static readonly PixelMapping Rachel2 = new PixelMapping
+        {
+            X = 400,
+            Y = 450,
+            Color = 3808785,
+            Type = MappingType.BOTH
+        };
+
+        public static readonly PixelMapping EventX = new PixelMapping
+        {
+            X = 891,
+            Y = 47,
+            Color = 12597259,
+            Type = MappingType.BOTH
+        };
     }
 }
