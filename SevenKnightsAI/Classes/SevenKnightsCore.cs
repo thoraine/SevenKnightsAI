@@ -2157,7 +2157,7 @@ namespace SevenKnightsAI.Classes
                                                     MasteryPopupPM.Tab2,
                                                     MasteryPopupPM.Tab3
                                             };
-                                            if(this.ExpectingScene(SceneType.MASTERY_POPUP, 5, 500))
+                                            if (this.ExpectingScene(SceneType.MASTERY_POPUP, 5, 500))
                                             {
                                                 this.WeightedClick(array[num - 1], 1.0, 1.0, 1, 0, "left");
                                             }
@@ -2217,7 +2217,7 @@ namespace SevenKnightsAI.Classes
                                                     world = worldStageFromSequencer.Item1;
                                                     stage = worldStageFromSequencer.Item2;
                                                 }
-                                                if (world == World.MoonlitIsle || world == World.WesternEmpire || world == World.EasternEmpire)
+                                                if (world == World.MoonlitIsle || world == World.WesternEmpire || world == World.EasternEmpire || world == World.DarkSanctuary)
                                                 {
                                                     if (this.MatchMapping(MapSelectPM.DifficultyBoxBorderLeft, 2) && this.MatchMapping(MapSelectPM.DifficultyBoxBorderRight, 2))
                                                     {
@@ -2701,6 +2701,18 @@ namespace SevenKnightsAI.Classes
 
                                         case SceneType.RAID_DRAGON:
                                             this.Log("The dragon appears!");
+                                            this.PushNote("The dragon appears!", "AI will fight the dragon or ignore it depending on your settings.");
+                                            /*
+                                            if (this.AISettings.RD_Enable)
+                                            {
+                                                this.ChangeObjective(Objective.RAID);
+                                            }
+                                            */
+                                            this.ChangeObjective(Objective.RAID);
+                                            SevenKnightsCore.Sleep(70000);
+                                            //this.WeightedClick(RaidLobbyPM.AttackedTab, 1.0, 1.0, 1, 0, "left");
+                                            this.WeightedClick(RaidDragonPM.TapArea, 1.0, 1.0, 1, 0, "left");
+                                            this.Log("end count");
                                             if (this.AISettings.RD_StopOnDragonFound)
                                             {
                                                 this.Alert("Dragon Found");
@@ -2708,26 +2720,17 @@ namespace SevenKnightsAI.Classes
                                                 this.AIProfiles.TMP_Paused = true;
                                                 break;
                                             }
-                                            this.WeightedClick(RaidDragonPM.TapArea, 1.0, 1.0, 1, 0, "left");
-                                            SevenKnightsCore.Sleep(500);
                                             break;
-                                        /*
-                                        this.PushNote("The dragon appears!", "AI will fight the dragon or ignore it depending on your settings.");
-                                        if (this.AISettings.RD_Enable)
-                                        {
-                                            this.ChangeObjective(Objective.RAID);
-                                        }
-                                        this.WeightedClick(RaidDragonPM.TapArea, 1.0, 1.0, 1, 0, "left");
-                                        SevenKnightsCore.Sleep(500);
-                                        */
 
                                         case SceneType.RAID_LOBBY:
                                             if (this.CurrentObjective == Objective.RAID)
                                             {
+                                                /* mastery check
                                                 if (!this.MasteryChecked && AISettings.RD_Mastery != 0)
                                                 {
                                                     this.Escape();
                                                 }
+                                                */
                                                 if (this.EnableRaidRewards)
                                                 {
                                                     this.WeightedClick(RaidLobbyPM.DefeatedTab, 1.0, 1.0, 1, 0, "left");
@@ -5152,6 +5155,11 @@ namespace SevenKnightsAI.Classes
                 {
                     MapSelectPM.World10_2Anchor_1,
                     MapSelectPM.World10_2Anchor_2
+                },
+                new PixelMapping[]
+                {
+                    MapSelectPM.World11_1Anchor_1,
+                    MapSelectPM.World11_1Anchor_2
                 }
             };
             PixelMapping[][] stages = new PixelMapping[][]
@@ -5210,6 +5218,15 @@ namespace SevenKnightsAI.Classes
                     MapSelectPM.World10_2Stage9,
                     MapSelectPM.World10_2Stage10
                 }
+                ,
+                new PixelMapping[]
+                {
+                    MapSelectPM.World11_1Stage1,
+                    MapSelectPM.World11_1Stage2,
+                    MapSelectPM.World11_1Stage3,
+                    MapSelectPM.World11_1Stage4,
+                    MapSelectPM.World11_1Stage5
+                }
             };
             int pageDestIndex = array.Length + 1;
 
@@ -5266,6 +5283,14 @@ namespace SevenKnightsAI.Classes
                 else if (stage < 10)
                 {
                     pageDestIndex = 8;
+                }
+            }
+            else if (world == World.DarkSanctuary)
+            {
+                stageMapping = stages[3][stage];
+                if (stage < 5)
+                {
+                    pageDestIndex = 9;
                 }
             }
             else

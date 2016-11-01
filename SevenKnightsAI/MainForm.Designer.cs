@@ -166,6 +166,8 @@
             this.RD_DragonLimitNumericBox = new System.Windows.Forms.NumericUpDown();
             this.RD_DragonLimitCheckBox = new System.Windows.Forms.CheckBox();
             this.RD_skillGroupBox = new System.Windows.Forms.GroupBox();
+            this.RD_masteryComboBox = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.RD_bothSkillRadio = new System.Windows.Forms.RadioButton();
             this.RD_team2Panel = new System.Windows.Forms.Panel();
             this.RD_team2LoopCheckBox = new System.Windows.Forms.CheckBox();
@@ -318,8 +320,6 @@
             this.goldLabel = new System.Windows.Forms.Label();
             this.resourcesTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.aiPause = new System.Windows.Forms.Button();
-            this.RD_masteryComboBox = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.tabControl.SuspendLayout();
             this.adventureTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.AD_limitNumericBox)).BeginInit();
@@ -647,7 +647,8 @@
             "7 - Purgatory",
             "8 - Moonlit Isle",
             "9 - Western Empire",
-            "10 - Eastern Empire"});
+            "10 - Eastern Empire",
+            "11 - Dark Sanctuary"});
             this.AD_worldComboBox.Location = new System.Drawing.Point(74, 4);
             this.AD_worldComboBox.Name = "AD_worldComboBox";
             this.AD_worldComboBox.Size = new System.Drawing.Size(127, 21);
@@ -2176,6 +2177,31 @@
             this.RD_skillGroupBox.TabStop = false;
             this.RD_skillGroupBox.Tag = "2";
             this.RD_skillGroupBox.Text = "Skill Management";
+            // 
+            // RD_masteryComboBox
+            // 
+            this.RD_masteryComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.RD_masteryComboBox.FormattingEnabled = true;
+            this.RD_masteryComboBox.Items.AddRange(new object[] {
+            "--",
+            "1",
+            "2",
+            "3"});
+            this.RD_masteryComboBox.Location = new System.Drawing.Point(203, 12);
+            this.RD_masteryComboBox.Name = "RD_masteryComboBox";
+            this.RD_masteryComboBox.Size = new System.Drawing.Size(46, 21);
+            this.RD_masteryComboBox.TabIndex = 16;
+            this.RD_masteryComboBox.Tag = "3";
+            this.RD_masteryComboBox.SelectedIndexChanged += new System.EventHandler(this.masteryComboBox_SelectedIndexChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(151, 16);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(44, 13);
+            this.label2.TabIndex = 15;
+            this.label2.Text = "Mastery";
             // 
             // RD_bothSkillRadio
             // 
@@ -3911,31 +3937,6 @@
             this.aiPause.Text = "&Pause";
             this.aiPause.UseVisualStyleBackColor = true;
             this.aiPause.Click += new System.EventHandler(this.aiPause_Click);
-            // 
-            // RD_masteryComboBox
-            // 
-            this.RD_masteryComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.RD_masteryComboBox.FormattingEnabled = true;
-            this.RD_masteryComboBox.Items.AddRange(new object[] {
-            "--",
-            "1",
-            "2",
-            "3"});
-            this.RD_masteryComboBox.Location = new System.Drawing.Point(203, 12);
-            this.RD_masteryComboBox.Name = "RD_masteryComboBox";
-            this.RD_masteryComboBox.Size = new System.Drawing.Size(46, 21);
-            this.RD_masteryComboBox.TabIndex = 16;
-            this.RD_masteryComboBox.Tag = "3";
-            this.RD_masteryComboBox.SelectedIndexChanged += new System.EventHandler(this.masteryComboBox_SelectedIndexChanged);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(151, 16);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(44, 13);
-            this.label2.TabIndex = 15;
-            this.label2.Text = "Mastery";
             // 
             // MainForm
             // 

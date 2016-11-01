@@ -667,7 +667,7 @@ namespace SevenKnightsAI.Classes
                 { }
                 try
                 {
-                    aISettings.RD_DragonLimit = (int)dictionary["RD_DragonLimit"];
+                    aISettings.RD_DragonLimit = Convert.ToInt32(dictionary["RD_DragonLimit"]);
                 }
                 catch (Exception)
                 { }

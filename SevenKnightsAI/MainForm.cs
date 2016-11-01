@@ -341,6 +341,10 @@ namespace SevenKnightsAI
             {
                 this.AD_PopulateStage(10);
             }
+            else if (this.AISettings.AD_World == World.DarkSanctuary)
+            {
+                this.AD_PopulateStage(5);
+            }
             else
             {
                 this.AD_PopulateStage(10);

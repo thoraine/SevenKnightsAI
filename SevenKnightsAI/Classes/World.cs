@@ -15,6 +15,7 @@ namespace SevenKnightsAI.Classes
         Purgatory,
         MoonlitIsle,
         WesternEmpire,
-        EasternEmpire
+        EasternEmpire,
+        DarkSanctuary
     }
 }
