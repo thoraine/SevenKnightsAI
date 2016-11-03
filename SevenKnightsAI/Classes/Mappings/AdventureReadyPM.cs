@@ -16,8 +16,8 @@ namespace SevenKnightsAI.Classes.Mappings
 
         public static readonly PixelMapping ReadyButton = new PixelMapping
         {
-            X = 404,
-            Y = 478,
+            X = 314,
+            Y = 481,
             Color = 0,
             Type = MappingType.BUTTON
         };

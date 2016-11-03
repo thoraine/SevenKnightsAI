@@ -524,7 +524,7 @@ namespace SevenKnightsAI.Classes.Mappings
         {
             X = 366,
             Y = 478,
-            Color = 12752445,
+            Color = 15714408,
             Type = MappingType.BUTTON
         };
 

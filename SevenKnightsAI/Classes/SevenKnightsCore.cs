@@ -2303,12 +2303,8 @@ namespace SevenKnightsAI.Classes
                                         case SceneType.ADVENTURE_READY:
                                             if (this.CurrentObjective == Objective.ADVENTURE)
                                             {
-                                                if(ExpectingScene(SceneType.ADVENTURE_READY, 5, 500))
-                                                {
-                                                    Sleep(1000);
-                                                    this.WeightedClick(AdventureReadyPM.ReadyButton, 1.0, 1.0, 1, 0, "left");
-                                                }
-                                                
+                                                this.WeightedClick(AdventureReadyPM.ReadyButton, 1.0, 1.0, 1, 0, "left");
+                                                break;
                                             }
                                             else
                                             {
@@ -2319,7 +2315,7 @@ namespace SevenKnightsAI.Classes
                                         case SceneType.ADVENTURE_START:
                                             this.UpdateAdventureKeys(scene.SceneType);
                                             this.UpdateGold(scene.SceneType);
-                                            SevenKnightsCore.Sleep(1000);
+                                            SevenKnightsCore.Sleep(2000);
                                             if (this.CurrentObjective == Objective.ADVENTURE)
                                             {
                                                 World world2 = this.AISettings.AD_World;
@@ -2355,7 +2351,7 @@ namespace SevenKnightsAI.Classes
                                             }
                                             else if (this.CurrentObjective == Objective.HERO_MANAGEMENT)
                                             {
-                                                    this.WeightedClick(SharedPM.PrepareFight_ManageButton, 1.0, 1.0, 1, 0, "left");
+                                                this.WeightedClick(SharedPM.PrepareFight_ManageButton, 1.0, 1.0, 1, 0, "left");
                                             }
                                             else
                                             {
@@ -4684,7 +4680,7 @@ namespace SevenKnightsAI.Classes
                     Scene result = new Scene(SceneType.OUT_OF_SWORDS_POPUP);
                     return result;
                 }
-                if (this.MatchMapping(AdventureReadyPM.ReadyButtonBackground, 2))
+                if (this.MatchMapping(AdventureReadyPM.ReadyButtonBackground, 2) && this.MatchMapping(AdventureReadyPM.CloseButton ,2))
                 {
                     Scene result = new Scene(SceneType.ADVENTURE_READY);
                     return result;
@@ -4965,10 +4961,7 @@ namespace SevenKnightsAI.Classes
             {
                 this.SelectDifficulty();
                 SevenKnightsCore.Sleep(1000);
-                if (ExpectingScene(SceneType.MAP_SELECT, 5, 500))
-                {
-                    this.WeightedClick(stageMapping, 1.0, 1.0, 1, 0, "left");
-                }
+                this.WeightedClick(stageMapping, 1.0, 1.0, 1, 0, "left");
             }
         }
 
@@ -5306,7 +5299,6 @@ namespace SevenKnightsAI.Classes
             {
                 return;
             }
-
             this.SelectStage(array, stageMapping, pageDestIndex);
         }
 
