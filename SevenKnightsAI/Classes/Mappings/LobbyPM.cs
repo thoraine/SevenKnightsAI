@@ -172,17 +172,17 @@ namespace SevenKnightsAI.Classes.Mappings
 
         public static readonly PixelMapping MenuButtonYellowLeft = new PixelMapping
         {
-            X = 883,
-            Y = 27,
-            Color = 13610070,
+            X = 847,
+            Y = 17,
+            Color = 16769626,
             Type = MappingType.ANCHOR
         };
 
         public static readonly PixelMapping MenuButtonYellowRight = new PixelMapping
         {
-            X = 915,
-            Y = 28,
-            Color = 10189117,
+            X = 898,
+            Y = 17,
+            Color = 15980922,
             Type = MappingType.ANCHOR
         };
 

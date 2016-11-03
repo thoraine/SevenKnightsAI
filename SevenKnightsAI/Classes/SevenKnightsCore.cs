@@ -2303,7 +2303,12 @@ namespace SevenKnightsAI.Classes
                                         case SceneType.ADVENTURE_READY:
                                             if (this.CurrentObjective == Objective.ADVENTURE)
                                             {
-                                                this.WeightedClick(AdventureReadyPM.ReadyButton, 1.0, 1.0, 1, 0, "left");
+                                                if(ExpectingScene(SceneType.ADVENTURE_READY, 5, 500))
+                                                {
+                                                    Sleep(1000);
+                                                    this.WeightedClick(AdventureReadyPM.ReadyButton, 1.0, 1.0, 1, 0, "left");
+                                                }
+                                                
                                             }
                                             else
                                             {
@@ -2314,6 +2319,7 @@ namespace SevenKnightsAI.Classes
                                         case SceneType.ADVENTURE_START:
                                             this.UpdateAdventureKeys(scene.SceneType);
                                             this.UpdateGold(scene.SceneType);
+                                            SevenKnightsCore.Sleep(1000);
                                             if (this.CurrentObjective == Objective.ADVENTURE)
                                             {
                                                 World world2 = this.AISettings.AD_World;
@@ -2349,7 +2355,7 @@ namespace SevenKnightsAI.Classes
                                             }
                                             else if (this.CurrentObjective == Objective.HERO_MANAGEMENT)
                                             {
-                                                this.WeightedClick(SharedPM.PrepareFight_ManageButton, 1.0, 1.0, 1, 0, "left");
+                                                    this.WeightedClick(SharedPM.PrepareFight_ManageButton, 1.0, 1.0, 1, 0, "left");
                                             }
                                             else
                                             {
@@ -4958,8 +4964,11 @@ namespace SevenKnightsAI.Classes
             if (num3 == pageDestIndex)
             {
                 this.SelectDifficulty();
-                SevenKnightsCore.Sleep(500);
-                this.WeightedClick(stageMapping, 1.0, 1.0, 1, 0, "left");
+                SevenKnightsCore.Sleep(1000);
+                if (ExpectingScene(SceneType.MAP_SELECT, 5, 500))
+                {
+                    this.WeightedClick(stageMapping, 1.0, 1.0, 1, 0, "left");
+                }
             }
         }
 
