@@ -887,6 +887,8 @@ namespace SevenKnightsAI
             this.RD_enableCheckBox.Checked = this.AISettings.RD_Enable;
             this.RD_limitCheckBox.Checked = this.AISettings.RD_EnableLimit;
             this.RD_limitNumericBox.Value = this.AISettings.RD_Limit;
+            this.RD_DragonLVCheckBox.Checked = this.AISettings.RD_EnableDragonLV;
+            this.RD_DragonLVNum.Value = this.AISettings.RD_DragonLV;
             this.RD_DragonLimitCheckBox.Checked = this.AISettings.RD_EnableDragonLimit;
             this.RD_DragonLimitNumericBox.Value = this.AISettings.RD_DragonLimit;
             this.RD_masteryComboBox.SelectedIndex = (int)this.AISettings.RD_Mastery;
@@ -1068,6 +1070,10 @@ namespace SevenKnightsAI
                     this.AISettings.RD_EnableDragonLimit = @checked;
                     return;
 
+                case 5:
+                    this.AISettings.RD_EnableDragonLV = @checked;
+                    return;
+
                 default:
                     return;
             }
@@ -1098,6 +1104,10 @@ namespace SevenKnightsAI
 
                 case 4:
                     this.AISettings.RD_DragonLimit = num2;
+                    return;
+
+                case 5:
+                    this.AISettings.RD_DragonLV = num2;
                     return;
 
                 default:

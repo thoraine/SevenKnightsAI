@@ -183,6 +183,12 @@ namespace SevenKnightsAI.Classes
         [XmlElement(ElementName = "RD_Team2Skills")]
         public int[] RD_Team2Skills;
 
+        [XmlElement(ElementName = "RD_EnableDragonLV")]
+        public bool RD_EnableDragonLV;
+
+        [XmlElement(ElementName = "RD_DragonLV")]
+        public int RD_DragonLV;
+
         [XmlElement(ElementName = "RS_BuyKeyHonors")]
         public bool RS_BuyKeyHonors;
 
@@ -310,8 +316,10 @@ namespace SevenKnightsAI.Classes
             this.AR_UseRubyAmount = 0;
             this.RD_Enable = true;
             this.RD_EnableLimit = false;
+            this.RD_EnableDragonLV = false;
             this.RD_EnableDragonLimit = false;
             this.RD_DragonLimit = 1;
+            this.RD_DragonLV = 1;
             this.RD_Limit = 0;
             this.RD_SkillType = SkillType.Both;
             this.RD_Team1Loop = false;
@@ -649,6 +657,12 @@ namespace SevenKnightsAI.Classes
                 { }
                 try
                 {
+                    aISettings.RD_EnableDragonLV = (bool)dictionary["RD_EnableDragonLV"];
+                }
+                catch (Exception)
+                { }
+                try
+                {
                     aISettings.RD_Limit = Convert.ToInt32(dictionary["RD_Limit"]);
                 }
                 catch (Exception)
@@ -668,6 +682,12 @@ namespace SevenKnightsAI.Classes
                 try
                 {
                     aISettings.RD_DragonLimit = Convert.ToInt32(dictionary["RD_DragonLimit"]);
+                }
+                catch (Exception)
+                { }
+                try
+                {
+                    aISettings.RD_DragonLV = Convert.ToInt32(dictionary["RD_DragonLV"]);
                 }
                 catch (Exception)
                 { }
@@ -1081,6 +1101,14 @@ namespace SevenKnightsAI.Classes
                 {
                     "RD_EnableLimit",
                     this.RD_EnableLimit
+                },
+                {
+                    "RD_EnableDragonLV",
+                    this.RD_EnableDragonLV
+                },
+                {
+                    "RD_DragonLV",
+                    this.RD_DragonLV
                 },
                 {
                     "RD_Limit",

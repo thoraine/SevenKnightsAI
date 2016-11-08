@@ -320,6 +320,8 @@
             this.goldLabel = new System.Windows.Forms.Label();
             this.resourcesTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.aiPause = new System.Windows.Forms.Button();
+            this.RD_DragonLVCheckBox = new System.Windows.Forms.CheckBox();
+            this.RD_DragonLVNum = new System.Windows.Forms.NumericUpDown();
             this.tabControl.SuspendLayout();
             this.adventureTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.AD_limitNumericBox)).BeginInit();
@@ -387,6 +389,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.rubyPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.goldPictureBox)).BeginInit();
             this.resourcesTableLayoutPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.RD_DragonLVNum)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl
@@ -2106,8 +2109,10 @@
             // 
             // RD_mainPanel
             // 
+            this.RD_mainPanel.Controls.Add(this.RD_DragonLVCheckBox);
             this.RD_mainPanel.Controls.Add(this.RD_StopOnDragonFound_Checkbox);
             this.RD_mainPanel.Controls.Add(this.RD_DragonLimit_lbl);
+            this.RD_mainPanel.Controls.Add(this.RD_DragonLVNum);
             this.RD_mainPanel.Controls.Add(this.RD_DragonLimitNumericBox);
             this.RD_mainPanel.Controls.Add(this.RD_DragonLimitCheckBox);
             this.RD_mainPanel.Controls.Add(this.RD_skillGroupBox);
@@ -3938,6 +3943,37 @@
             this.aiPause.UseVisualStyleBackColor = true;
             this.aiPause.Click += new System.EventHandler(this.aiPause_Click);
             // 
+            // RD_DragonLVCheckBox
+            // 
+            this.RD_DragonLVCheckBox.AutoSize = true;
+            this.RD_DragonLVCheckBox.Location = new System.Drawing.Point(9, 49);
+            this.RD_DragonLVCheckBox.Name = "RD_DragonLVCheckBox";
+            this.RD_DragonLVCheckBox.Size = new System.Drawing.Size(92, 17);
+            this.RD_DragonLVCheckBox.TabIndex = 29;
+            this.RD_DragonLVCheckBox.Tag = "5";
+            this.RD_DragonLVCheckBox.Text = "Dragon LV >=";
+            this.RD_DragonLVCheckBox.UseVisualStyleBackColor = true;
+            this.RD_DragonLVCheckBox.CheckedChanged += new System.EventHandler(this.limitCheckBox_CheckedChanged);
+            // 
+            // RD_DragonLVNum
+            // 
+            this.RD_DragonLVNum.Location = new System.Drawing.Point(100, 48);
+            this.RD_DragonLVNum.Maximum = new decimal(new int[] {
+            99,
+            0,
+            0,
+            0});
+            this.RD_DragonLVNum.Name = "RD_DragonLVNum";
+            this.RD_DragonLVNum.Size = new System.Drawing.Size(37, 20);
+            this.RD_DragonLVNum.TabIndex = 27;
+            this.RD_DragonLVNum.Tag = "5";
+            this.RD_DragonLVNum.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.RD_DragonLVNum.ValueChanged += new System.EventHandler(this.limitNumericBox_ValueChanged);
+            // 
             // MainForm
             // 
             this.AcceptButton = this.aiButton;
@@ -4059,6 +4095,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.goldPictureBox)).EndInit();
             this.resourcesTableLayoutPanel.ResumeLayout(false);
             this.resourcesTableLayoutPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.RD_DragonLVNum)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -4930,5 +4967,7 @@
         private System.Windows.Forms.CheckBox RD_StopOnDragonFound_Checkbox;
         private System.Windows.Forms.ComboBox RD_masteryComboBox;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.CheckBox RD_DragonLVCheckBox;
+        private System.Windows.Forms.NumericUpDown RD_DragonLVNum;
     }
 }

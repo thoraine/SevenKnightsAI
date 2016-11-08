@@ -105,5 +105,6 @@ namespace SevenKnightsAI.Classes
         ANIVERSARY_POPUP,
         RACHEL_PACKADGE_POPUP,
         EVENT_PACKADGE_POPUP,
+        EXITPM_POPUP
     }
 }

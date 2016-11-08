@@ -47,6 +47,54 @@ namespace SevenKnightsAI.Classes.Mappings
             Type = MappingType.ANCHOR
         };
 
+        public static readonly PixelMapping Blood25 = new PixelMapping
+        {
+            X = 868,
+            Y = 200,
+            Color = 13873749,
+            Type = MappingType.BOTH
+        };
+
+        public static readonly PixelMapping Blood50 = new PixelMapping
+        {
+            X = 745,
+            Y = 227,
+            Color = 6902069,
+            Type = MappingType.BOTH
+        };
+
+        public static readonly PixelMapping Blood75 = new PixelMapping
+        {
+            X = 830,
+            Y = 227,
+            Color = 6902069,
+            Type = MappingType.BOTH
+        };
+
+        public static readonly Rectangle Ownner = new Rectangle
+        {
+            X = 729,
+            Y = 297,
+            Height = 24,
+            Width = 53
+        };
+
+        public static readonly Rectangle Attacker = new Rectangle
+        {
+            X = 729,
+            Y = 297,
+            Height = 24,
+            Width = 53
+        };
+
+        public static readonly Rectangle DragonLV = new Rectangle
+        {
+            X = 729,
+            Y = 297,
+            Height = 24,
+            Width = 53
+        };
+
         #endregion Public Fields
     }
 }

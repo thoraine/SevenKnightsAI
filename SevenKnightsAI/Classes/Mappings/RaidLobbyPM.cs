@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 
 namespace SevenKnightsAI.Classes.Mappings
 {
@@ -24,7 +25,35 @@ namespace SevenKnightsAI.Classes.Mappings
         {
             X = 868,
             Y = 200,
+            //Color = 13873749,
+            Color = 13478737,
+            Type = MappingType.BOTH
+        };
+
+        public static readonly PixelMapping EnterButton2 = new PixelMapping
+        {
+            X = 868,
+            Y = 270,
+            Color = 13017932,
+            //Color = 3151113,
+            Type = MappingType.BOTH
+        };
+
+        public static readonly PixelMapping EnterButton3 = new PixelMapping
+        {
+            X = 868,
+            Y = 350,
+            //Color = 13939542,
             Color = 13873749,
+            Type = MappingType.BOTH
+        };
+
+        public static readonly PixelMapping EnterButton4 = new PixelMapping
+        {
+            X = 868,
+            Y = 420,
+            Color = 10254382,
+            //Color = 13610579,
             Type = MappingType.BOTH
         };
 
@@ -90,6 +119,90 @@ namespace SevenKnightsAI.Classes.Mappings
             Y = 130,
             Color = 0,
             Type = MappingType.BUTTON
+        };
+
+        public static readonly int SCROLL_DELTA = 138;
+
+        public static readonly int SCROLL_DOUBLE_DELTA = 275;
+
+        public static readonly PixelMapping ScrollAreaDown = new PixelMapping
+        {
+            X = 450,
+            Y = 430,
+            Color = 0,
+            Type = MappingType.BUTTON
+        };
+
+        public static readonly PixelMapping ScrollAreaUp = new PixelMapping
+        {
+            X = 450,
+            Y = 200,
+            Color = 0,
+            Type = MappingType.BUTTON
+        };
+
+        public static readonly Rectangle DLV1 = new Rectangle
+        {
+            X = 226,
+            Y = 175,
+            Height = 22,
+            Width = 27
+        };
+
+        public static readonly Rectangle DLV2 = new Rectangle
+        {
+            X = 226,
+            Y = 250,
+            Height = 22,
+            Width = 27
+        };
+
+        public static readonly Rectangle DLV3 = new Rectangle
+        {
+            X = 226,
+            Y = 323,
+            Height = 22,
+            Width = 27
+        };
+
+        public static readonly Rectangle DLV4 = new Rectangle
+        {
+            X = 226,
+            Y = 398,
+            Height = 22,
+            Width = 27
+        };
+
+        public static readonly Rectangle Oname1 = new Rectangle
+        {
+            X = 297,
+            Y = 207,
+            Height = 24,
+            Width = 90
+        };
+
+        public static readonly Rectangle Oname2 = new Rectangle
+        {
+            X = 297,
+            Y = 282,
+            Height = 24,
+            Width = 90
+        };
+
+        public static readonly Rectangle Oname3 = new Rectangle
+        {
+            X = 297,
+            Y = 354,
+            Height = 24,
+            Width = 90
+        };
+
+        public static readonly Rectangle Oname4 = new Rectangle
+        {
+            X = 729,
+            Y = 297,
+            Height = 24,
+            Width = 53
         };
     }
 }
