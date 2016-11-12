@@ -11,10 +11,13 @@ Also always keep in mind that with every online game there's always potential to
 ## Requirements
 1.Requires Bluestacks v2.0.4.5627
 http://filehippo.com...comments/65982/
+
 2.vc2015 install both x86 and x64
 https://www.microsoft.com/en-us/download/details.aspx?id=48145
+
 3.net framwork
 https://www.microsoft.com/en-us/download/details.aspx?id=48130
+
 4.patch need disable antivirus and windows defender and run as administrator
 https://mega.nz/#!B8tFSDwA!t1RwZEVb3175z8mMhJgEtK4nGfTRDiOSQB8xMnb4YXo 
 
