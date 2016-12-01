@@ -73,18 +73,18 @@ namespace SevenKnightsAI.Classes.Mappings
 
         public static readonly Rectangle Ownner = new Rectangle
         {
-            X = 729,
-            Y = 297,
-            Height = 24,
-            Width = 53
+            X = 763,
+            Y = 118,
+            Height = 23,
+            Width = 150
         };
 
         public static readonly Rectangle Attacker = new Rectangle
         {
-            X = 729,
-            Y = 297,
-            Height = 24,
-            Width = 53
+            X = 653,
+            Y = 260,
+            Height = 26,
+            Width = 150
         };
 
         public static readonly Rectangle DragonLV = new Rectangle

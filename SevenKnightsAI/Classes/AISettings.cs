@@ -63,6 +63,9 @@ namespace SevenKnightsAI.Classes
         [XmlElement(ElementName = "RD_StopOnDragonFound")]
         public bool RD_StopOnDragonFound;
 
+        [XmlElement(ElementName = "RD_TryOwnDragon")]
+        public bool RD_TryOwnDragon;
+
         [XmlElement(ElementName = "AD_StopOnLV30")]
         public bool AD_StopOnLV30;
 
@@ -294,9 +297,10 @@ namespace SevenKnightsAI.Classes
             this.AD_Continuous = false;
             this.AD_ElementHeroesOnly = false;
             this.AD_SkillType = SkillType.Both;
-            this.AD_StopOnFullHeroes = true;
-            this.AD_StopOnFullItems = true;
-            this.RD_StopOnDragonFound = true;
+            this.AD_StopOnFullHeroes = false;
+            this.AD_StopOnFullItems = false;
+            this.RD_StopOnDragonFound = false;
+            this.RD_TryOwnDragon = false;
             this.AD_StopOnLV30 = true;
             this.AD_CheckingHeroes = true;
             this.AD_Wave1Loop = false;
@@ -320,7 +324,7 @@ namespace SevenKnightsAI.Classes
             this.RD_EnableDragonLimit = false;
             this.RD_DragonLimit = 1;
             this.RD_DragonLV = 1;
-            this.RD_Limit = 0;
+            this.RD_Limit = 1;
             this.RD_SkillType = SkillType.Both;
             this.RD_Team1Loop = false;
             this.RD_Team2Loop = false;
@@ -484,6 +488,12 @@ namespace SevenKnightsAI.Classes
                 try
                 {
                     aISettings.RD_StopOnDragonFound = (bool)dictionary["RD_StopOnDragonFound"];
+                }
+                catch (Exception)
+                { }
+                try
+                {
+                    aISettings.RD_TryOwnDragon = (bool)dictionary["RD_TryOwnDragon"];
                 }
                 catch (Exception)
                 { }
@@ -989,6 +999,10 @@ namespace SevenKnightsAI.Classes
                 {
                     "RD_StopOnDragonFound",
                     this.RD_StopOnDragonFound
+                },
+                {
+                    "RD_TryOwnDragon",
+                    this.RD_TryOwnDragon
                 },
                 {
                     "AD_StopOnLV30",
