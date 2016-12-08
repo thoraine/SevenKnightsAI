@@ -30,9 +30,9 @@ namespace SevenKnightsAI.Classes.Mappings
 
         public static readonly PixelMapping RemoveButtonIcon = new PixelMapping
         {
-            X = 861,
-            Y = 458,
-            Color = 4202769,
+            X = 859,
+            Y = 471,
+            Color = 15058003,
             Type = MappingType.ANCHOR
         };
     }
