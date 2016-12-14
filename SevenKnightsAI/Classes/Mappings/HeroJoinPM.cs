@@ -17,7 +17,7 @@ namespace SevenKnightsAI.Classes.Mappings
         public static readonly PixelMapping JoinButtonIcon = new PixelMapping
         {
             X = 859,
-            Y = 471,
+            Y = 466,
             Color = 15058003,
             Type = MappingType.ANCHOR
         };
@@ -26,7 +26,7 @@ namespace SevenKnightsAI.Classes.Mappings
         {
             X = 594,
             Y = 481,
-            Color = 115520877,
+            Color = 15520877,
             Type = MappingType.BOTH
         };
 

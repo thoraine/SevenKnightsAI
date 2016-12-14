@@ -2364,11 +2364,13 @@ namespace SevenKnightsAI.Classes
                                                         this.MasteryChecked = false;
                                                         this.SelectTeam(SceneType.ADVENTURE_START);
                                                         this.CaptureFrame();
+                                                        /*
                                                         if (this.MatchMapping(AdventureStartPM.FriendHelp, 5))
                                                         {
                                                             this.WeightedClick(AdventureStartPM.FriendHelpBtn, 1.0, 1.0, 1, 0, "left");
                                                             Sleep(sT_Delay);
                                                         }
+                                                        */
                                                         if(this.MatchMapping(AdventureStartPM.BoostMode,5))
                                                         {
                                                             this.WeightedClick(AdventureStartPM.BoostMode, 1.0, 1.0, 1, 0, "left");
@@ -3310,13 +3312,13 @@ namespace SevenKnightsAI.Classes
                     return;
                 }
                 this.Escape();
-                SevenKnightsCore.Sleep(500);
-                if (!this.ExpectingScene(SceneType.HEROES, 5, 500))
+                SevenKnightsCore.Sleep(800);
+                if (!this.ExpectingScene(SceneType.HEROES, 8, 800))
                 {
                     return;
                 }
             }
-            SevenKnightsCore.Sleep(300);
+            SevenKnightsCore.Sleep(500);
             if (list2.Count <= 0)
             {
                 this.Log("Nothing to manage", this.COLOR_HEROES_MANAGEMENT);
@@ -3324,7 +3326,7 @@ namespace SevenKnightsAI.Classes
             }
             else
             {
-                if (!this.ExpectingScene(SceneType.HEROES, 5, 500))
+                if (!this.ExpectingScene(SceneType.HEROES, 8, 800))
                 {
                     return;
                 }
@@ -3338,9 +3340,10 @@ namespace SevenKnightsAI.Classes
                 while (num4 < 100 && !this.Worker.CancellationPending)
                 {
                     bool flag2 = false;
+                    SevenKnightsCore.Sleep(1000);
                     this.CaptureFrame();
                     Scene scene = this.SceneSearch();
-                    if (!this.ExpectingScene(SceneType.HEROES, 5, 500))
+                    if (!this.ExpectingScene(SceneType.HEROES, 8, 800))
                     {
                         return;
                     }
@@ -3362,7 +3365,7 @@ namespace SevenKnightsAI.Classes
                         {
                             r_HeroCard_Base.Y += HeroesPM.CARD_Y_DELTA + HeroesPM.CARD_LAST_Y_DELTA;
                         }
-                        SevenKnightsCore.Sleep(500);
+                        SevenKnightsCore.Sleep(800);
                         ulong num6 = 0uL;
                         using (this.CaptureFrame())
                         {
@@ -3382,7 +3385,7 @@ namespace SevenKnightsAI.Classes
                         continue;
                     IL_7A8:
                         this.WeightedClick(array2[num5], 1.0, 1.0, 1, 0, "left");
-                        SevenKnightsCore.Sleep(500);
+                        SevenKnightsCore.Sleep(1000);
                         if (this.Worker.CancellationPending)
                         {
                             return;
@@ -3391,10 +3394,11 @@ namespace SevenKnightsAI.Classes
                         {
                             SceneType.HERO_JOIN,
                             SceneType.HERO_REMOVE
-                        }, 5, 500))
+                        }, 8, 800))
                         {
                             return;
                         }
+                        SevenKnightsCore.Sleep(1000);
                         this.CaptureFrame();
                         scene = this.SceneSearch();
                         if (scene.SceneType == SceneType.HERO_JOIN)
@@ -3403,7 +3407,7 @@ namespace SevenKnightsAI.Classes
                             {
                                 this.Log("No more heroes less than level 30", this.COLOR_HEROES_MANAGEMENT);
                                 this.Escape();
-                                SevenKnightsCore.Sleep(300);
+                                SevenKnightsCore.Sleep(1000);
                                 this.CaptureFrame();
                                 scene = this.SceneSearch();
                                 if (flag4)
@@ -3422,10 +3426,10 @@ namespace SevenKnightsAI.Classes
                                     break;
                                 }
                             }
-                            else
+                            else if(this.ExpectingScene(SceneType.HERO_JOIN, 8, 800))
                             {
                                 this.WeightedClick(HeroJoinPM.JoinButton, 1.0, 1.0, 1, 0, "left");
-                                SevenKnightsCore.Sleep(500);
+                                SevenKnightsCore.Sleep(1000);
                                 this.CaptureFrame();
                                 scene = this.SceneSearch();
                                 if (this.Worker.CancellationPending || scene == null || scene.SceneType != SceneType.HEROES)
@@ -3457,7 +3461,7 @@ namespace SevenKnightsAI.Classes
                                     {
                                         break;
                                     }
-                                    SevenKnightsCore.Sleep(100);
+                                    SevenKnightsCore.Sleep(300);
                                     num9++;
                                 }
                                 int num10;
@@ -3483,7 +3487,7 @@ namespace SevenKnightsAI.Classes
                                 }
                                 int num11 = list2[num10];
                                 this.WeightedClick(array5[num11], 1.0, 1.0, 1, 0, "left");
-                                SevenKnightsCore.Sleep(500);
+                                SevenKnightsCore.Sleep(800);
                                 if (!this.ExpectingScenes(new List<SceneType>
                                 {
                                     SceneType.HEROES_SAME_TEAM_POPUP,
@@ -3492,6 +3496,7 @@ namespace SevenKnightsAI.Classes
                                 {
                                     return;
                                 }
+                                SevenKnightsCore.Sleep(1000);
                                 this.CaptureFrame();
                                 scene = this.SceneSearch();
                                 if (scene.SceneType == SceneType.HEROES_SAME_TEAM_POPUP)
@@ -4736,13 +4741,13 @@ namespace SevenKnightsAI.Classes
                     Scene result = new Scene(SceneType.HEROES_SAME_TEAM_POPUP);
                     return result;
                 }
-                if (this.MatchMapping(SharedPM.Hero_BlackBar, 2) && this.MatchMapping(SharedPM.Hero_BottomLeftBorder, 2) && this.MatchMapping(HeroJoinPM.JoinButtonIcon, 2))
+                if (this.MatchMapping(SharedPM.Hero_BlackBar, 2) && this.MatchMapping(SharedPM.Hero_BottomLeftBorder, 2) && this.MatchMapping(HeroJoinPM.JoinButtonIcon, 2) && this.MatchMapping(HeroJoinPM.SellButton, 2))
                 {
                     Scene result = new Scene(SceneType.HERO_JOIN);
                     return result;
                 }
-                if (this.MatchMapping(SharedPM.Hero_BlackBar, 2) &&
-                    this.MatchMapping(SharedPM.Hero_BottomLeftBorder, 2) &&
+                if (this.MatchMapping(HeroRemovePM.RemoveAllButton, 2) &&
+                    this.MatchMapping(HeroRemovePM.PositionButton, 2) &&
                     this.MatchMapping(HeroRemovePM.RemoveButtonIcon, 2))
                 {
                     Scene result = new Scene(SceneType.HERO_REMOVE);
@@ -5733,14 +5738,14 @@ namespace SevenKnightsAI.Classes
             if (!this.MatchMapping(HeroesPM.SortByBoxExpanded, 2))
             {
                 this.WeightedClick(HeroesPM.SortByBox, 1.0, 1.0, 1, 0, "left");
-                SevenKnightsCore.Sleep(300);
+                SevenKnightsCore.Sleep(800);
             }
             this.WeightedClick(HeroesPM.SortByRank, 1.0, 1.0, 1, 0, "left");
             SevenKnightsCore.Sleep(300);
             if (!this.MatchMapping(HeroesPM.SortButtonAscending, 2))
             {
                 this.WeightedClick(HeroesPM.SortButton, 1.0, 1.0, 1, 0, "left");
-                SevenKnightsCore.Sleep(500);
+                SevenKnightsCore.Sleep(800);
             }
             this.ScrollHeroCards(false);
             SevenKnightsCore.Sleep(500);
