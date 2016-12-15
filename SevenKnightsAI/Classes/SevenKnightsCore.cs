@@ -4768,7 +4768,8 @@ namespace SevenKnightsAI.Classes
                     Scene result = new Scene(SceneType.LEVEL_UP_DIALOG);
                     return result;
                 }
-                if (this.MatchMapping(LobbyPM.MenuButtonYellowLeft, 1) && this.MatchMapping(LobbyPM.MenuButtonYellowRight, 1))
+                //if (this.MatchMapping(LobbyPM.MenuButtonYellowLeft, 3) && this.MatchMapping(LobbyPM.MenuButtonYellowRight, 3) && this.MatchMapping(LobbyPM.TopChest, 3))
+                if (this.MatchMapping(LobbyPM.MenuButtonYellowLeft, 3) || this.MatchMapping(LobbyPM.MenuButtonYellowRight, 3) && this.MatchMapping(LobbyPM.TopChest, 3))
                 {
                     Scene result = new Scene(SceneType.LOBBY);
                     return result;

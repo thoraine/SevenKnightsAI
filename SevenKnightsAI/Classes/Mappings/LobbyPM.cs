@@ -170,9 +170,17 @@ namespace SevenKnightsAI.Classes.Mappings
             Type = MappingType.BUTTON
         };
 
+        public static readonly PixelMapping TopChest = new PixelMapping
+        {
+            X = 696,
+            Y = 27,
+            Color = 4077875,
+            Type = MappingType.ANCHOR
+        };
+
         public static readonly PixelMapping MenuButtonYellowLeft = new PixelMapping
         {
-            X = 847,
+            X = 838,
             Y = 17,
             Color = 16769626,
             Type = MappingType.ANCHOR
