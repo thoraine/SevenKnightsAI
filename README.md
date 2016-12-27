@@ -23,7 +23,7 @@ https://www.microsoft.com/en-us/download/details.aspx?id=48130
 
 4.patch need disable antivirus and windows defender and run as administrator
 
-https://mega.nz/#!B8tFSDwA!t1RwZEVb3175z8mMhJgEtK4nGfTRDiOSQB8xMnb4YXo 
+https://mega.nz/#!JwEhiSgJ!nH1QlGriGohmWXGaHsOYyxdrGB-67rcJUS0OpnclIdc
 
 1. unzip
 2. Run Bluestacks to the Android Tab
