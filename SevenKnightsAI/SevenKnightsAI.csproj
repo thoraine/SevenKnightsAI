@@ -111,6 +111,9 @@
     <Compile Include="Classes\HotTimeHelper.cs" />
     <Compile Include="Classes\Imaging\ImageHashing.cs" />
     <Compile Include="Classes\Imaging\LockBitmap.cs" />
+    <Compile Include="Classes\Mappings\SpDungeonEndPM.cs" />
+    <Compile Include="Classes\Mappings\SpDungeonStartPM.cs" />
+    <Compile Include="Classes\Mappings\SpDungeonLobbyPM.cs" />
     <Compile Include="Classes\Mappings\BluestackPM.cs" />
     <Compile Include="Classes\Mappings\AdsClosePM.cs" />
     <Compile Include="Classes\Mappings\AdsPM.cs" />
@@ -201,6 +204,7 @@
     <Compile Include="Classes\Mappings\SocialSelectPM.cs" />
     <Compile Include="Classes\Mappings\SpecialQuestPM.cs" />
     <Compile Include="Classes\Mappings\TapToPlayPM.cs" />
+    <Compile Include="Classes\Mappings\SpDungeonFight.cs" />
     <Compile Include="Classes\Mappings\TowerFightPM.cs" />
     <Compile Include="Classes\Mappings\TowerLostPM.cs" />
     <Compile Include="Classes\Mappings\TowerSelectPM.cs" />

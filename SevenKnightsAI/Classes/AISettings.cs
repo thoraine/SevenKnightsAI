@@ -192,6 +192,9 @@ namespace SevenKnightsAI.Classes
         [XmlElement(ElementName = "RD_DragonLV")]
         public int RD_DragonLV;
 
+        [XmlElement(ElementName = "SPD_Enable")]
+        public bool SPD_Enable;
+
         [XmlElement(ElementName = "RS_BuyKeyHonors")]
         public bool RS_BuyKeyHonors;
 
@@ -328,6 +331,7 @@ namespace SevenKnightsAI.Classes
             this.RD_SkillType = SkillType.Both;
             this.RD_Team1Loop = false;
             this.RD_Team2Loop = false;
+            this.SPD_Enable = false;
             this.RS_SellHeroes = false;
             this.RS_SellHeroStars = 1;
             this.RS_SellHeroAmount = 0;
@@ -722,6 +726,12 @@ namespace SevenKnightsAI.Classes
                 try
                 {
                     aISettings.RD_Team1Loop = (bool)dictionary["RD_Team1Loop"];
+                }
+                catch (Exception)
+                { }
+                try
+                {
+                    aISettings.SPD_Enable = (bool)dictionary["SPD_Enable"];
                 }
                 catch (Exception)
                 { }
@@ -1159,6 +1169,10 @@ namespace SevenKnightsAI.Classes
                 {
                     "RD_Team2Loop",
                     this.RD_Team2Loop
+                },
+                {
+                    "SPD_Enable",
+                    this.SPD_Enable
                 },
                 {
                     "RS_SellHeroes",

@@ -668,6 +668,10 @@ namespace SevenKnightsAI
                     this.AISettings.RD_Enable = @checked;
                     return;
 
+                case 4:
+                    this.AISettings.SPD_Enable = @checked;
+                    return;
+
                 default:
                     return;
             }
@@ -857,6 +861,7 @@ namespace SevenKnightsAI
             this.GC_masteryComboBox.SelectedIndex = 0;
             this.GC_wave1LoopCheckBox.Checked = this.AISettings.GC_Wave1Loop;
             this.GC_wave2LoopCheckBox.Checked = this.AISettings.GC_Wave2Loop;
+            this.SPD_enableCheckbox.Checked  = this.AISettings.SPD_Enable;
             switch (this.AISettings.GC_SkillType)
             {
                 case SkillType.Auto:
