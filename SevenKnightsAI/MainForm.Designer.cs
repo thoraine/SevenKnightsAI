@@ -431,6 +431,13 @@
             this.goldLabel = new System.Windows.Forms.Label();
             this.resourcesTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.aiPause = new System.Windows.Forms.Button();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
             this.tabControl.SuspendLayout();
             this.adventureTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.AD_limitNumericBox)).BeginInit();
@@ -965,6 +972,7 @@
             this.AD_wave3Panel.Controls.Add(this.AD_w3Skill08Button);
             this.AD_wave3Panel.Controls.Add(this.AD_w3Skill07Button);
             this.AD_wave3Panel.Controls.Add(this.AD_w3Skill06Button);
+            this.AD_wave3Panel.Controls.Add(this.label13);
             this.AD_wave3Panel.Controls.Add(this.AD_w3Skill13Button);
             this.AD_wave3Panel.Controls.Add(this.AD_w3Skill05Button);
             this.AD_wave3Panel.Controls.Add(this.AD_w3Skill04Button);
@@ -1149,11 +1157,12 @@
             // 
             // AD_wave3Label
             // 
-            this.AD_wave3Label.Location = new System.Drawing.Point(6, 7);
+            this.AD_wave3Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.AD_wave3Label.Location = new System.Drawing.Point(4, 4);
             this.AD_wave3Label.Name = "AD_wave3Label";
-            this.AD_wave3Label.Size = new System.Drawing.Size(60, 13);
+            this.AD_wave3Label.Size = new System.Drawing.Size(41, 13);
             this.AD_wave3Label.TabIndex = 0;
-            this.AD_wave3Label.Text = "Wave 3";
+            this.AD_wave3Label.Text = "Wave3";
             // 
             // AD_w3Skill01Button
             // 
@@ -1176,6 +1185,7 @@
             this.AD_wave2Panel.Controls.Add(this.AD_w2Skill14Button);
             this.AD_wave2Panel.Controls.Add(this.AD_w2Skill07Button);
             this.AD_wave2Panel.Controls.Add(this.AD_w2Skill06Button);
+            this.AD_wave2Panel.Controls.Add(this.label12);
             this.AD_wave2Panel.Controls.Add(this.AD_w2Skill05Button);
             this.AD_wave2Panel.Controls.Add(this.AD_w2Skill13Button);
             this.AD_wave2Panel.Controls.Add(this.AD_w2Skill04Button);
@@ -1360,11 +1370,12 @@
             // 
             // AD_wave2Label
             // 
-            this.AD_wave2Label.Location = new System.Drawing.Point(6, 7);
+            this.AD_wave2Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.AD_wave2Label.Location = new System.Drawing.Point(4, 5);
             this.AD_wave2Label.Name = "AD_wave2Label";
-            this.AD_wave2Label.Size = new System.Drawing.Size(60, 13);
+            this.AD_wave2Label.Size = new System.Drawing.Size(41, 14);
             this.AD_wave2Label.TabIndex = 0;
-            this.AD_wave2Label.Text = "Wave 2";
+            this.AD_wave2Label.Text = "Wave2";
             // 
             // AD_w2Skill01Button
             // 
@@ -1413,6 +1424,7 @@
             this.AD_wave1Panel.Controls.Add(this.AD_w1Skill08Button);
             this.AD_wave1Panel.Controls.Add(this.AD_w1Skill07Button);
             this.AD_wave1Panel.Controls.Add(this.AD_w1Skill06Button);
+            this.AD_wave1Panel.Controls.Add(this.label11);
             this.AD_wave1Panel.Controls.Add(this.AD_w1Skill13Button);
             this.AD_wave1Panel.Controls.Add(this.AD_w1Skill05Button);
             this.AD_wave1Panel.Controls.Add(this.AD_w1Skill04Button);
@@ -1597,11 +1609,12 @@
             // 
             // AD_wave1Label
             // 
-            this.AD_wave1Label.Location = new System.Drawing.Point(6, 7);
+            this.AD_wave1Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.AD_wave1Label.Location = new System.Drawing.Point(3, 3);
             this.AD_wave1Label.Name = "AD_wave1Label";
-            this.AD_wave1Label.Size = new System.Drawing.Size(60, 13);
+            this.AD_wave1Label.Size = new System.Drawing.Size(41, 13);
             this.AD_wave1Label.TabIndex = 0;
-            this.AD_wave1Label.Text = "Wave 1";
+            this.AD_wave1Label.Text = "Wave1";
             // 
             // AD_w1Skill01Button
             // 
@@ -1757,6 +1770,7 @@
             // 
             // GC_wave2Panel
             // 
+            this.GC_wave2Panel.Controls.Add(this.label15);
             this.GC_wave2Panel.Controls.Add(this.GC_wave2LoopCheckBox);
             this.GC_wave2Panel.Controls.Add(this.GC_w2Skill15Button);
             this.GC_wave2Panel.Controls.Add(this.GC_w2Skill10Button);
@@ -1949,11 +1963,12 @@
             // 
             // GC_wave2Label
             // 
-            this.GC_wave2Label.Location = new System.Drawing.Point(6, 7);
+            this.GC_wave2Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.GC_wave2Label.Location = new System.Drawing.Point(3, 3);
             this.GC_wave2Label.Name = "GC_wave2Label";
-            this.GC_wave2Label.Size = new System.Drawing.Size(60, 13);
+            this.GC_wave2Label.Size = new System.Drawing.Size(45, 17);
             this.GC_wave2Label.TabIndex = 0;
-            this.GC_wave2Label.Text = "Wave 2";
+            this.GC_wave2Label.Text = "Wave2";
             // 
             // GC_w2Skill01Button
             // 
@@ -1994,6 +2009,7 @@
             // 
             // GC_wave1Panel
             // 
+            this.GC_wave1Panel.Controls.Add(this.label14);
             this.GC_wave1Panel.Controls.Add(this.GC_wave1LoopCheckBox);
             this.GC_wave1Panel.Controls.Add(this.GC_w1Skill15Button);
             this.GC_wave1Panel.Controls.Add(this.GC_w1Skill10Button);
@@ -2186,11 +2202,12 @@
             // 
             // GC_wave1Label
             // 
-            this.GC_wave1Label.Location = new System.Drawing.Point(6, 7);
+            this.GC_wave1Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.GC_wave1Label.Location = new System.Drawing.Point(3, 3);
             this.GC_wave1Label.Name = "GC_wave1Label";
-            this.GC_wave1Label.Size = new System.Drawing.Size(60, 13);
+            this.GC_wave1Label.Size = new System.Drawing.Size(45, 17);
             this.GC_wave1Label.TabIndex = 0;
-            this.GC_wave1Label.Text = "Wave 1";
+            this.GC_wave1Label.Text = "Wave1";
             // 
             // GC_w1Skill01Button
             // 
@@ -2695,6 +2712,7 @@
             // 
             // RD_team2Panel
             // 
+            this.RD_team2Panel.Controls.Add(this.label17);
             this.RD_team2Panel.Controls.Add(this.RD_team2LoopCheckBox);
             this.RD_team2Panel.Controls.Add(this.RD_t2Skill15Button);
             this.RD_team2Panel.Controls.Add(this.RD_t2Skill10Button);
@@ -2887,11 +2905,12 @@
             // 
             // RD_team2Label
             // 
-            this.RD_team2Label.Location = new System.Drawing.Point(6, 7);
+            this.RD_team2Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.RD_team2Label.Location = new System.Drawing.Point(2, 3);
             this.RD_team2Label.Name = "RD_team2Label";
-            this.RD_team2Label.Size = new System.Drawing.Size(60, 13);
+            this.RD_team2Label.Size = new System.Drawing.Size(41, 17);
             this.RD_team2Label.TabIndex = 0;
-            this.RD_team2Label.Text = "Team 2";
+            this.RD_team2Label.Text = "Team2";
             // 
             // RD_t2Skill01Button
             // 
@@ -2932,6 +2951,7 @@
             // 
             // RD_team1Panel
             // 
+            this.RD_team1Panel.Controls.Add(this.label16);
             this.RD_team1Panel.Controls.Add(this.RD_team1LoopCheckBox);
             this.RD_team1Panel.Controls.Add(this.RD_t1Skill15Button);
             this.RD_team1Panel.Controls.Add(this.RD_t1Skill10Button);
@@ -3124,11 +3144,12 @@
             // 
             // RD_team1Label
             // 
-            this.RD_team1Label.Location = new System.Drawing.Point(6, 7);
+            this.RD_team1Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.RD_team1Label.Location = new System.Drawing.Point(3, 3);
             this.RD_team1Label.Name = "RD_team1Label";
-            this.RD_team1Label.Size = new System.Drawing.Size(60, 13);
+            this.RD_team1Label.Size = new System.Drawing.Size(41, 17);
             this.RD_team1Label.TabIndex = 0;
-            this.RD_team1Label.Text = "Team 1";
+            this.RD_team1Label.Text = "Team1";
             // 
             // RD_t1Skill01Button
             // 
@@ -5335,6 +5356,69 @@
             this.aiPause.UseVisualStyleBackColor = true;
             this.aiPause.Click += new System.EventHandler(this.aiPause_Click);
             // 
+            // label11
+            // 
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.label11.Location = new System.Drawing.Point(50, 12);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(27, 10);
+            this.label11.TabIndex = 0;
+            this.label11.Text = "A.Skill";
+            // 
+            // label12
+            // 
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.label12.Location = new System.Drawing.Point(51, 12);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(27, 10);
+            this.label12.TabIndex = 0;
+            this.label12.Text = "A.Skill";
+            // 
+            // label13
+            // 
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.label13.Location = new System.Drawing.Point(51, 13);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(27, 10);
+            this.label13.TabIndex = 0;
+            this.label13.Text = "A.Skill";
+            // 
+            // label14
+            // 
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.label14.Location = new System.Drawing.Point(50, 10);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(27, 10);
+            this.label14.TabIndex = 25;
+            this.label14.Text = "A.Skill";
+            // 
+            // label15
+            // 
+            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.label15.Location = new System.Drawing.Point(50, 12);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(27, 10);
+            this.label15.TabIndex = 25;
+            this.label15.Text = "A.Skill";
+            // 
+            // label16
+            // 
+            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.label16.Location = new System.Drawing.Point(50, 12);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(27, 10);
+            this.label16.TabIndex = 13;
+            this.label16.Text = "A.Skill";
+            // 
+            // label17
+            // 
+            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.label17.Location = new System.Drawing.Point(51, 12);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(27, 10);
+            this.label17.TabIndex = 13;
+            this.label17.Text = "A.Skill";
+            // 
             // MainForm
             // 
             this.AcceptButton = this.aiButton;
@@ -6448,5 +6532,12 @@
         private System.Windows.Forms.Button GC_w1Skill11Button;
         private System.Windows.Forms.CheckBox SPD_enableCheckbox;
         private System.Windows.Forms.TabPage spDunTab;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label16;
     }
 }

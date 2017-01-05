@@ -126,7 +126,6 @@ namespace SevenKnightsAI.Classes
         private BackgroundWorker Worker;
         private string MapZone;
         private bool DragonFound;
-        private bool SpecialDungeon;
 
         #endregion Private Fields
 
@@ -1610,7 +1609,6 @@ namespace SevenKnightsAI.Classes
             this.ReportAllResources();
             this.OneSecTimer.Enabled = true;
             this.DragonFound = false;
-            this.SpecialDungeon = this.AISettings.SPD_Enable;
         }
 
         private bool IsAnyQuestsEnabled()
@@ -2104,7 +2102,7 @@ namespace SevenKnightsAI.Classes
                                             this.UpdateTopaz(scene.SceneType);
                                             if (this.AISettings.RS_CollectLuckyChest && this.MatchMapping(LobbyPM.MaysLuckyChestAvailable_1, 4) && this.MatchMapping(LobbyPM.MaysLuckyChestAvailable_2, 4))
                                             {
-                                                if(!SpecialDungeon && this.CurrentObjective != Objective.GOLD_CHAMBER)
+                                                if(!this.AISettings.SPD_Enable && this.CurrentObjective != Objective.GOLD_CHAMBER)
                                                 this.WeightedClick(LobbyPM.MaysLuckyChestButton, 1.0, 1.0, 1, 0, "left");
                                             }
                                             else if (this.AISettings.RS_CollectLuckyBox && this.EnableLuckyBox && this.MatchMapping(LobbyPM.LuckyBoxAvailable_1, 4) && this.MatchMapping(LobbyPM.LuckyBoxAvailable_2, 4))
@@ -2259,8 +2257,8 @@ namespace SevenKnightsAI.Classes
                                             }
                                             else if (this.CurrentObjective == Objective.GOLD_CHAMBER)
                                             {
-                                                Sleep(2000);
-                                                if (SpecialDungeon)
+                                                Sleep(1000);
+                                                if (this.AISettings.SPD_Enable)
                                                 {
                                                     this.WeightedClick(AdventureModesPM.DailyDungeonButton, 1.0, 1.0, 1, 0, "left");
                                                 }
@@ -2947,12 +2945,12 @@ namespace SevenKnightsAI.Classes
                                             break;
 
                                         case SceneType.SPECIAL_DUNGEON_LOBBY:
-                                            Sleep(2000);
-                                            if (SpecialDungeon)
+                                            Sleep(1000);
+                                            if (this.AISettings.SPD_Enable)
                                             {
                                                 //klahan
                                                 this.WeightedClick(SpecialDungeonLobbyPM.Dungeon4, 1.0, 1.0, 1, 0, "left");
-                                                Sleep(1000);
+                                                Sleep(500);
                                                 this.WeightedClick(SpecialDungeonLobbyPM.ReadyButton, 1.0, 1.0, 1, 0, "left");
                                             }
                                             else
@@ -2971,7 +2969,7 @@ namespace SevenKnightsAI.Classes
 
                                         case SceneType.SPECIAL_DUNGEON_READY:
                                             Sleep(2000);
-                                            if (SpecialDungeon)
+                                            if (this.AISettings.SPD_Enable)
                                             {
                                                 //klahan
                                                 this.WeightedClick(SpecialDungeonLobbyPM.StartButton, 1.0, 1.0, 1, 0, "left");
@@ -4155,7 +4153,7 @@ namespace SevenKnightsAI.Classes
                         bool flag2 = this.AISettings.GC_SkillType == SkillType.Both;
                         bool shouldAssign = !flag || flag2;
                         this.ToggleAutoSkill(flag);
-                        if (SpecialDungeon) {
+                        if (this.AISettings.SPD_Enable) {
                             if (this.MatchMapping(SpecialDungeonFightPM.AtTurn1Of1, 3) || (this.MatchMapping(SpecialDungeonFightPM.AtTurn1Of2, 3) && this.MatchMapping(SpecialDungeonFightPM.Turn2Of2, 3)))
                             {
                                 int num = 1;
