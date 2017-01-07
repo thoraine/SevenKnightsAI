@@ -14,9 +14,9 @@ namespace SevenKnightsAI.Classes.Mappings
 
         public static readonly PixelMapping DungeonTicket = new PixelMapping
         {
-            X = 771,
+            X = 767,
             Y = 29,
-            Color = 4333079,
+            Color = 6571558,
             Type = MappingType.ANCHOR
         };
 
@@ -52,42 +52,106 @@ namespace SevenKnightsAI.Classes.Mappings
             Type = MappingType.ANCHOR
         };
 
-        public static readonly PixelMapping AllTab = new PixelMapping
+        public static readonly PixelMapping Tab1 = new PixelMapping
         {
             X = 62,
             Y = 81,
-            Color = 12350980,
-            Type = MappingType.ANCHOR
+            Color = 0,
+            Type = MappingType.BUTTON
+        };
+
+        public static readonly PixelMapping Tab2 = new PixelMapping
+        {
+            X = 181,
+            Y = 81,
+            Color = 0,
+            Type = MappingType.BUTTON
+        };
+
+        public static readonly PixelMapping Tab3 = new PixelMapping
+        {
+            X = 277,
+            Y = 81,
+            Color = 0,
+            Type = MappingType.BUTTON
+        };
+
+        public static readonly PixelMapping Tab4 = new PixelMapping
+        {
+            X = 372,
+            Y = 81,
+            Color = 0,
+            Type = MappingType.BUTTON
+        };
+
+        public static readonly PixelMapping Tab5 = new PixelMapping
+        {
+            X = 466,
+            Y = 81,
+            Color = 0,
+            Type = MappingType.BUTTON
         };
 
         public static readonly PixelMapping Dungeon1 = new PixelMapping
         {
-            X = 664,
-            Y = 495,
-            Color = 5186318,
-            Type = MappingType.BOTH
+            X = 285,
+            Y = 161,
+            Color = 0,
+            Type = MappingType.BUTTON
         };
 
         public static readonly PixelMapping Dungeon2 = new PixelMapping
         {
-            X = 664,
-            Y = 495,
-            Color = 5186318,
-            Type = MappingType.BOTH
+            X = 285,
+            Y = 254,
+            Color = 0,
+            Type = MappingType.BUTTON
         };
 
         public static readonly PixelMapping Dungeon3 = new PixelMapping
         {
-            X = 664,
-            Y = 495,
-            Color = 5186318,
-            Type = MappingType.BOTH
+            X = 285,
+            Y = 359,
+            Color = 0,
+            Type = MappingType.BUTTON
         };
 
         public static readonly PixelMapping Dungeon4 = new PixelMapping
         {
             X = 285,
             Y = 470,
+            Color = 0,
+            Type = MappingType.BUTTON
+        };
+
+        public static readonly PixelMapping DifficultButton = new PixelMapping
+        {
+            X = 824,
+            Y = 79,
+            Color = 12745476,
+            Type = MappingType.BOTH
+        };
+
+        public static readonly PixelMapping Difficult1 = new PixelMapping
+        {
+            X = 824,
+            Y = 124,
+            Color = 0,
+            Type = MappingType.BUTTON
+        };
+
+        public static readonly PixelMapping Difficult2 = new PixelMapping
+        {
+            X = 824,
+            Y = 158,
+            Color = 0,
+            Type = MappingType.BUTTON
+        };
+
+        public static readonly PixelMapping Difficult3 = new PixelMapping
+        {
+            X = 824,
+            Y = 197,
             Color = 0,
             Type = MappingType.BUTTON
         };

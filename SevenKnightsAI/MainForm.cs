@@ -987,6 +987,13 @@ namespace SevenKnightsAI
             this.ST_foregroundMode.Checked = this.AIProfiles.ST_ForegroundMode;
         }
 
+        private void InitSpecialDungeonTab()
+        {
+            this.SPD_dunTabComboBox.SelectedIndex = this.AISettings.SPD_DunTab;
+            this.SPD_dunSlotComboBox.SelectedIndex = this.AISettings.SPD_DunSlot;
+            this.SPD_dunDifficultyComboBox.SelectedIndex = this.AISettings.SPD_DunDifficult;
+        }
+
         private void LG_clearButton_Click(object sender, EventArgs e)
         {
             this.LG_logTextBox.Clear();
@@ -1243,6 +1250,7 @@ namespace SevenKnightsAI
             this.InitRaidTab();
             this.InitResourcesTab();
             this.InitLogsTab();
+            this.InitSpecialDungeonTab();
             if (refreshSettings)
             {
                 this.InitSettingsTab();
@@ -1902,5 +1910,31 @@ namespace SevenKnightsAI
         }
 
         #endregion Private Methods
+
+        private void spdSelectedIndexChanged(object sender, EventArgs e)
+        {
+            ComboBox comboBox = sender as ComboBox;
+            short tag = Convert.ToInt16(comboBox.Tag);
+            int selectedIndex = comboBox.SelectedIndex;
+            Console.WriteLine("tag = "+tag);
+            Console.WriteLine("selected = "+selectedIndex);
+            switch (tag)
+            {
+                case 0:
+                    this.AISettings.SPD_DunTab = selectedIndex;
+                    return;
+
+                case 1:
+                    this.AISettings.SPD_DunSlot = selectedIndex;
+                    return;
+
+                case 2:
+                    this.AISettings.SPD_DunDifficult = selectedIndex;
+                    return;
+
+                default:
+                    return;
+            }
+        }
     }
 }

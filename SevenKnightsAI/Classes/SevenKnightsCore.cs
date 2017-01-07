@@ -126,6 +126,7 @@ namespace SevenKnightsAI.Classes
         private BackgroundWorker Worker;
         private string MapZone;
         private bool DragonFound;
+        private bool SpeccialDunDifficult;
 
         #endregion Private Fields
 
@@ -1609,6 +1610,7 @@ namespace SevenKnightsAI.Classes
             this.ReportAllResources();
             this.OneSecTimer.Enabled = true;
             this.DragonFound = false;
+            this.SpeccialDunDifficult = false;
         }
 
         private bool IsAnyQuestsEnabled()
@@ -2945,12 +2947,46 @@ namespace SevenKnightsAI.Classes
                                             break;
 
                                         case SceneType.SPECIAL_DUNGEON_LOBBY:
-                                            Sleep(1000);
+                                            PixelMapping[] tabSelect = new PixelMapping[]
+                                            {
+                                                SpecialDungeonLobbyPM.Tab1,
+                                                SpecialDungeonLobbyPM.Tab2,
+                                                SpecialDungeonLobbyPM.Tab3,
+                                                SpecialDungeonLobbyPM.Tab4,
+                                                SpecialDungeonLobbyPM.Tab5
+                                            };
+                                            PixelMapping[] slotSelect = new PixelMapping[]
+                                            {
+                                                SpecialDungeonLobbyPM.Dungeon1,
+                                                SpecialDungeonLobbyPM.Dungeon2,
+                                                SpecialDungeonLobbyPM.Dungeon3,
+                                                SpecialDungeonLobbyPM.Dungeon4
+                                            };
+                                            PixelMapping[] dificultSelect = new PixelMapping[]
+                                            {
+                                                SpecialDungeonLobbyPM.Difficult1,
+                                                SpecialDungeonLobbyPM.Difficult2,
+                                                SpecialDungeonLobbyPM.Difficult3
+                                            };
                                             if (this.AISettings.SPD_Enable)
                                             {
+                                                //TabSelect
+                                                this.WeightedClick(tabSelect[this.AISettings.SPD_DunTab], 1.0, 1.0, 1, 0, "left");
+                                                Sleep(800);
+                                                //SlotSelect
+                                                this.WeightedClick(slotSelect[this.AISettings.SPD_DunSlot], 1.0, 1.0, 1, 0, "left");
+                                                Sleep(800);
+                                                //Difficult
+                                                if (!SpeccialDunDifficult)
+                                                {
+                                                    this.WeightedClick(SpecialDungeonLobbyPM.DifficultButton, 1.0, 1.0, 1, 0, "left");
+                                                    Sleep(800);
+                                                    this.WeightedClick(dificultSelect[this.AISettings.SPD_DunDifficult], 1.0, 1.0, 1, 0, "left");
+                                                    SpeccialDunDifficult = true;
+                                                }
                                                 //klahan
-                                                this.WeightedClick(SpecialDungeonLobbyPM.Dungeon4, 1.0, 1.0, 1, 0, "left");
-                                                Sleep(500);
+                                                //this.WeightedClick(SpecialDungeonLobbyPM.Dungeon2, 1.0, 1.0, 1, 0, "left");
+                                                Sleep(800);
                                                 this.WeightedClick(SpecialDungeonLobbyPM.ReadyButton, 1.0, 1.0, 1, 0, "left");
                                             }
                                             else
@@ -2963,6 +2999,7 @@ namespace SevenKnightsAI.Classes
                                             Sleep(1000);
                                             this.WeightedClick(SpecialDungeonLobbyPM.Xbutton, 1.0, 1.0, 1, 0, "left");
                                             Sleep(500);
+                                            SpeccialDunDifficult = false;
                                             this.Escape();
                                             this.NextPossibleObjective();
                                             break;
@@ -4931,6 +4968,26 @@ namespace SevenKnightsAI.Classes
                     Scene result = new Scene(SceneType.QUEST);
                     return result;
                 }
+                if (this.MatchMapping(SpecialDungeonLobbyPM.ReadyButton, 2) && this.MatchMapping(SpecialDungeonLobbyPM.DungeonTicket, 2) && this.MatchMapping(SpecialDungeonLobbyPM.DifficultButton, 2))
+                {
+                    Scene result = new Scene(SceneType.SPECIAL_DUNGEON_LOBBY);
+                    return result;
+                }
+                if (this.MatchMapping(SpecialDungeonLobbyPM.StartButton, 2) && this.MatchMapping(SpecialDungeonLobbyPM.DungeonTicket, 2))
+                {
+                    Scene result = new Scene(SceneType.SPECIAL_DUNGEON_READY);
+                    return result;
+                }
+                if (this.MatchMapping(SpecialDungeonEndPM.RepaetButton, 2) && this.MatchMapping(SpecialDungeonEndPM.LobbyButton, 2))
+                {
+                    Scene result = new Scene(SceneType.SPECIAL_DUNGEON_END);
+                    return result;
+                }
+                if (this.MatchMapping(SpecialDungeonLobbyPM.Xbutton, 2) && this.MatchMapping(SpecialDungeonLobbyPM.Vbutton, 2) && this.MatchMapping(SpecialDungeonLobbyPM.DimBackground, 2))
+                {
+                    Scene result = new Scene(SceneType.OUT_OF_DUNGEON_KEYS_POPUP);
+                    return result;
+                }
                 if (this.ExpectedFightScene(SceneType.ARENA_FIGHT) && this.MatchMapping(ArenaFightPM.ChatButton, 2) && this.MatchMapping(ArenaFightPM.PauseButton, 2))
                 {
                     Scene result = new Scene(SceneType.ARENA_FIGHT);
@@ -5098,27 +5155,6 @@ namespace SevenKnightsAI.Classes
                     Scene result = new Scene(SceneType.DISCONNECTED_POPUP);
                     return result;
                 }
-                if (this.MatchMapping(SpecialDungeonLobbyPM.ReadyButton, 2) && this.MatchMapping(SpecialDungeonLobbyPM.DungeonTicket, 2) && this.MatchMapping(SpecialDungeonLobbyPM.AllTab, 2))
-                {
-                    Scene result = new Scene(SceneType.SPECIAL_DUNGEON_LOBBY);
-                    return result;
-                }
-                if (this.MatchMapping(SpecialDungeonLobbyPM.StartButton, 2) && this.MatchMapping(SpecialDungeonLobbyPM.DungeonTicket, 2))
-                {
-                    Scene result = new Scene(SceneType.SPECIAL_DUNGEON_READY);
-                    return result;
-                }
-                if (this.MatchMapping(SpecialDungeonEndPM.RepaetButton, 2) && this.MatchMapping(SpecialDungeonEndPM.LobbyButton, 2))
-                {
-                    Scene result = new Scene(SceneType.SPECIAL_DUNGEON_END);
-                    return result;
-                }
-                if (this.MatchMapping(SpecialDungeonLobbyPM.Xbutton, 2) && this.MatchMapping(SpecialDungeonLobbyPM.Vbutton, 2) && this.MatchMapping(SpecialDungeonLobbyPM.DimBackground, 2))
-                {
-                    Scene result = new Scene(SceneType.OUT_OF_DUNGEON_KEYS_POPUP);
-                    return result;
-                }
-
                 if (this.MatchMapping(AdventureModesPM.BorderTopLeft, 7) &&
                     this.MatchMapping(AdventureModesPM.BorderBottomRight, 4) &&
                     this.MatchMapping(AdventureModesPM.KeyIcon, 4))
@@ -5159,7 +5195,7 @@ namespace SevenKnightsAI.Classes
                     Scene result = new Scene(SceneType.BATTLE_MODES);
                     return result;
                 }
-                if (this.MatchMapping(ArenaReadyPM.RecordBorder, 2) && this.MatchMapping(ArenaReadyPM.ReadyButtonBackground, 2) && !this.MatchMapping(SpecialDungeonLobbyPM.DungeonTicket, 2) && !this.MatchMapping(SpecialDungeonLobbyPM.AllTab, 2))
+                if (this.MatchMapping(ArenaReadyPM.RecordBorder, 2) && this.MatchMapping(ArenaReadyPM.ReadyButtonBackground, 2) && this.MatchMapping(ArenaReadyPM.CollectButton, 2) && this.MatchMapping(ArenaReadyPM.RewardButton, 2))
                 {
                     Scene result = new Scene(SceneType.ARENA_READY);
                     return result;

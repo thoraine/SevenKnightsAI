@@ -195,6 +195,15 @@ namespace SevenKnightsAI.Classes
         [XmlElement(ElementName = "SPD_Enable")]
         public bool SPD_Enable;
 
+        [XmlElement(ElementName = "SPD_DunTab")]
+        public int SPD_DunTab;
+
+        [XmlElement(ElementName = "SPD_DunSlot")]
+        public int SPD_DunSlot;
+
+        [XmlElement(ElementName = "SPD_DunDifficul")]
+        public int SPD_DunDifficult;
+
         [XmlElement(ElementName = "RS_BuyKeyHonors")]
         public bool RS_BuyKeyHonors;
 
@@ -332,6 +341,9 @@ namespace SevenKnightsAI.Classes
             this.RD_Team1Loop = false;
             this.RD_Team2Loop = false;
             this.SPD_Enable = false;
+            this.SPD_DunTab = 0;
+            this.SPD_DunSlot = 0;
+            this.SPD_DunDifficult = 0;
             this.RS_SellHeroes = false;
             this.RS_SellHeroStars = 1;
             this.RS_SellHeroAmount = 0;
@@ -732,6 +744,24 @@ namespace SevenKnightsAI.Classes
                 try
                 {
                     aISettings.SPD_Enable = (bool)dictionary["SPD_Enable"];
+                }
+                catch (Exception)
+                { }
+                try
+                {
+                    aISettings.SPD_DunTab = Convert.ToInt32(dictionary["SPD_DunTab"]);
+                }
+                catch (Exception)
+                { }
+                try
+                {
+                    aISettings.SPD_DunSlot = Convert.ToInt32(dictionary["SPD_DunSlot"]);
+                }
+                catch (Exception)
+                { }
+                try
+                {
+                    aISettings.SPD_DunDifficult = Convert.ToInt32(dictionary["SPD_DunDifficult"]);
                 }
                 catch (Exception)
                 { }
@@ -1173,6 +1203,18 @@ namespace SevenKnightsAI.Classes
                 {
                     "SPD_Enable",
                     this.SPD_Enable
+                },
+                {
+                    "SPD_DunTab",
+                    this.SPD_DunTab
+                },
+                {
+                    "SPD_DunSlot",
+                    this.SPD_DunSlot
+                },
+                {
+                    "SPD_DunDifficult",
+                    this.SPD_DunDifficult
                 },
                 {
                     "RS_SellHeroes",
