@@ -5010,7 +5010,9 @@ namespace SevenKnightsAI.Classes
                 if ((this.ExpectedFightScene(SceneType.TOWER_FIGHT) &&
                     (this.MatchMapping(TowerFightPM.PauseButton, 2)) &&
                     this.MatchMapping(TowerFightPM.ChatButton, 2) &&
-                    !(this.MatchMapping(AdventureFightPM.GoldIcon, 5))) ||
+                    !(this.MatchMapping(AdventureFightPM.GoldIcon, 5)) &&
+                    this.MatchMapping(TowerFightPM.CharL, 5) &&
+                    this.MatchMapping(TowerFightPM.CharH, 5)) ||
                     ((this.MatchMapping(SpecialDungeonFightPM.PauseButton, 2)) &&
                     (this.MatchMapping(SpecialDungeonFightPM.ChatButton, 2)))
                     )
