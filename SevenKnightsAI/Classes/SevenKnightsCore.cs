@@ -6453,6 +6453,7 @@ namespace SevenKnightsAI.Classes
                             if (curCount <= 100)
                             {
                                 this.Log(string.Format("Max Heroes  level up per day : {0}/100", curCount),Color.Purple);
+				this.PushNote("Max Heroes Report", string.Format("Max Heroes  level up per day : {0}/100", curCount));
                             }
                             if (curCount == 100 && array[1].Equals("100"))
                             {
