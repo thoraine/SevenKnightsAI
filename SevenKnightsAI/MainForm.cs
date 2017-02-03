@@ -15,6 +15,7 @@ using System.Reflection;
 using System.Security.Principal;
 using System.Threading;
 using System.Windows.Forms;
+using Telegram;
 
 namespace SevenKnightsAI
 {
@@ -60,7 +61,7 @@ namespace SevenKnightsAI
             }
         };
 
-        private readonly List<Button>[] _skillButtons = new List<Button>[7];
+        private readonly List<Button>[] _skillButtons = new List<Button>[10];
 
         private readonly Color COLOR_SEQUENCE_ERROR = Color.FromArgb(255, 127, 123);
 
@@ -989,9 +990,44 @@ namespace SevenKnightsAI
 
         private void InitSpecialDungeonTab()
         {
+            for (int i = 7; i < 10; i++)
+            {
+                this._skillButtons[i] = new List<Button>();
+            }
             this.SPD_dunTabComboBox.SelectedIndex = this.AISettings.SPD_DunTab;
             this.SPD_dunSlotComboBox.SelectedIndex = this.AISettings.SPD_DunSlot;
             this.SPD_dunDifficultyComboBox.SelectedIndex = this.AISettings.SPD_DunDifficult;
+
+            this.SPD_wave1LoopCheckBox.Checked = this.AISettings.SPD_Wave1Loop;
+            this.SPD_wave2LoopCheckBox.Checked = this.AISettings.SPD_Wave2Loop;
+            this.SPD_wave3LoopCheckBox.Checked = this.AISettings.SPD_Wave3Loop;
+            switch (this.AISettings.SPD_SkillType)
+            {
+                case SkillType.Auto:
+                    this.SPD_autoSkillRadio.Checked = true;
+                    break;
+
+                case SkillType.Manual:
+                    this.SPD_manualSkillRadio.Checked = true;
+                    break;
+
+                case SkillType.Both:
+                    this.SPD_bothSkillRadio.Checked = true;
+                    break;
+            }
+            Panel[] wavePanels = new Panel[]
+            {
+                this.SPD_wave1Panel,
+                this.SPD_wave2Panel,
+                this.SPD_wave3Panel
+            };
+            int[][] waveSkill = new int[][]
+            {
+                this.AISettings.SPD_Wave1Skills,
+                this.AISettings.SPD_Wave2Skills,
+                this.AISettings.SPD_Wave3Skills
+            };
+            this.LoadWaveSkills(wavePanels, waveSkill, 7);
         }
 
         private void LG_clearButton_Click(object sender, EventArgs e)
@@ -1530,6 +1566,10 @@ namespace SevenKnightsAI
                     this.AISettings.RD_SkillType = skillType;
                     return;
 
+                case 3:
+                    this.AISettings.SPD_SkillType = skillType;
+                    return;
+
                 default:
                     return;
             }
@@ -1615,6 +1655,18 @@ namespace SevenKnightsAI
                     this.AISettings.RD_Team2Skills = array;
                     return;
 
+                case 7:
+                    this.AISettings.SPD_Wave1Skills = array;
+                    return;
+
+                case 8:
+                    this.AISettings.SPD_Wave2Skills = array;
+                    return;
+
+                case 9:
+                    this.AISettings.SPD_Wave3Skills = array;
+                    return;
+
                 default:
                     return;
             }
@@ -1683,6 +1735,18 @@ namespace SevenKnightsAI
 
                 case 6:
                     this.AISettings.RD_Team2Loop = @checked;
+                    return;
+
+                case 7:
+                    this.AISettings.SPD_Wave1Loop = @checked;
+                    return;
+
+                case 8:
+                    this.AISettings.SPD_Wave2Loop = @checked;
+                    return;
+
+                case 9:
+                    this.AISettings.SPD_Wave3Loop = @checked;
                     return;
 
                 default:
@@ -1935,6 +1999,67 @@ namespace SevenKnightsAI
                 default:
                     return;
             }
+        }
+
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            while (true)
+            {
+                bot.update = "true";
+                if(bot.message_text == "Start AI")
+                {
+                    if (!this.started)
+                    {
+                        this.StartAI();
+                        bot.sendMessage.send(bot.chat_id, "AI Started!");
+                    }
+                    else
+                    {
+                        bot.sendMessage.send(bot.chat_id, "AI Already Started!");
+                    }
+                }
+                if(bot.message_text == "Stop AI") {
+                        if (this.started)
+                        {
+                            this.StopAI();
+                            bot.sendMessage.send(bot.chat_id, "Bot Stopped");
+                        }else
+                        {
+                            bot.sendMessage.send(bot.chat_id, "Bot Already Stopped");
+                        }
+                }
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckForIllegalCrossThreadCalls = false;
+            backgroundWorker1.RunWorkerAsync();
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            if (bot.update == "false")
+            {
+                MessageBox.Show("Token Error");
+            }
+            else
+            {
+                bot.token = this.AIProfiles.ST_TelegramToken;
+                MessageBox.Show("Token Good");
+            }
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            string text = textBox.Text;
+            this.AIProfiles.ST_TelegramToken = text;
         }
     }
 }
