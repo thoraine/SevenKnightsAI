@@ -41,6 +41,9 @@ namespace SevenKnightsAI.Classes
         [XmlElement(ElementName = "ST_PushbulletEnable")]
         public bool ST_PushbulletEnable;
 
+        [XmlElement(ElementName = "ST_TelegramEnable")]
+        public bool ST_TelegramEnable;
+
         [XmlElement(ElementName = "ST_ReconnectInterruptEnable")]
         public bool ST_ReconnectInterruptEnable;
 
@@ -70,6 +73,7 @@ namespace SevenKnightsAI.Classes
             this.ST_HotTimeProfile = null;
             this.ST_BlueStacksForceActive = false;
             this.ST_PushbulletEnable = false;
+            this.ST_TelegramEnable = false;
             this.ST_ForegroundMode = false;
         }
 
@@ -154,6 +158,12 @@ namespace SevenKnightsAI.Classes
                 { }
                 try
                 {
+                    aIProfiles.ST_TelegramEnable = (bool)dictionary["ST_TelegramEnable"];
+                }
+                catch (Exception)
+                { }
+                try
+                {
                     aIProfiles.ST_TelegramToken = ((dictionary["ST_TelegramToken"] == null) ? null : dictionary["ST_TelegramToken"].ToString());
                 }
                 catch (Exception)
@@ -233,6 +243,10 @@ namespace SevenKnightsAI.Classes
                 {
                     "ST_TelegramToken",
                     this.ST_TelegramToken
+                },
+                {
+                    "ST_TelegramEnable",
+                    this.ST_TelegramEnable
                 },
                 {
                     "ST_ForegroundMode",

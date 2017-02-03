@@ -398,9 +398,9 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label18 = new System.Windows.Forms.Label();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.ST_TelegramEnable = new System.Windows.Forms.CheckBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.ST_TelegramTokenTextBox = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label10 = new System.Windows.Forms.Label();
@@ -452,6 +452,8 @@
             this.resourcesTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.aiPause = new System.Windows.Forms.Button();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
             this.tabControl.SuspendLayout();
             this.adventureTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.AD_limitNumericBox)).BeginInit();
@@ -5049,9 +5051,9 @@
             // 
             this.groupBox2.Controls.Add(this.pictureBox1);
             this.groupBox2.Controls.Add(this.label18);
-            this.groupBox2.Controls.Add(this.checkBox1);
+            this.groupBox2.Controls.Add(this.ST_TelegramEnable);
             this.groupBox2.Controls.Add(this.button1);
-            this.groupBox2.Controls.Add(this.textBox1);
+            this.groupBox2.Controls.Add(this.ST_TelegramTokenTextBox);
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Location = new System.Drawing.Point(6, 6);
             this.groupBox2.Name = "groupBox2";
@@ -5080,16 +5082,16 @@
             this.label18.TabIndex = 10;
             this.label18.Text = "You will need to create a Telegram Bot and install the app on your device.";
             // 
-            // checkBox1
+            // ST_TelegramEnable
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(9, 19);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(131, 17);
-            this.checkBox1.TabIndex = 9;
-            this.checkBox1.Text = "Enable Telegram BOT";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            this.ST_TelegramEnable.AutoSize = true;
+            this.ST_TelegramEnable.Location = new System.Drawing.Point(9, 19);
+            this.ST_TelegramEnable.Name = "ST_TelegramEnable";
+            this.ST_TelegramEnable.Size = new System.Drawing.Size(131, 17);
+            this.ST_TelegramEnable.TabIndex = 9;
+            this.ST_TelegramEnable.Text = "Enable Telegram BOT";
+            this.ST_TelegramEnable.UseVisualStyleBackColor = true;
+            this.ST_TelegramEnable.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // button1
             // 
@@ -5101,14 +5103,14 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
-            // textBox1
+            // ST_TelegramTokenTextBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(114, 93);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(356, 20);
-            this.textBox1.TabIndex = 6;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.ST_TelegramTokenTextBox.Location = new System.Drawing.Point(114, 93);
+            this.ST_TelegramTokenTextBox.Multiline = true;
+            this.ST_TelegramTokenTextBox.Name = "ST_TelegramTokenTextBox";
+            this.ST_TelegramTokenTextBox.Size = new System.Drawing.Size(356, 20);
+            this.ST_TelegramTokenTextBox.TabIndex = 6;
+            this.ST_TelegramTokenTextBox.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // label6
             // 
@@ -5121,6 +5123,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label20);
+            this.groupBox1.Controls.Add(this.label19);
             this.groupBox1.Controls.Add(this.label10);
             this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.label8);
@@ -5137,36 +5141,36 @@
             this.label10.AutoSize = true;
             this.label10.Location = new System.Drawing.Point(6, 104);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(129, 13);
+            this.label10.Size = new System.Drawing.Size(192, 13);
             this.label10.TabIndex = 3;
-            this.label10.Text = "ResumeBot - Resume Bot";
+            this.label10.Text = "[NotAvailable]Resume AI - Resume Bot";
             // 
             // label9
             // 
             this.label9.AutoSize = true;
             this.label9.Location = new System.Drawing.Point(6, 79);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(111, 13);
+            this.label9.Size = new System.Drawing.Size(174, 13);
             this.label9.TabIndex = 2;
-            this.label9.Text = "PauseBot - Pause Bot";
+            this.label9.Text = "[NotAvailable]Pause AI - Pause Bot";
             // 
             // label8
             // 
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(6, 54);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(115, 13);
+            this.label8.Size = new System.Drawing.Size(112, 13);
             this.label8.TabIndex = 1;
-            this.label8.Text = "StopBot - Stopping Bot";
+            this.label8.Text = "Stop AI - Stopping Bot";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(6, 26);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(109, 13);
+            this.label7.Size = new System.Drawing.Size(106, 13);
             this.label7.TabIndex = 0;
-            this.label7.Text = "StartBot - Starting Bot";
+            this.label7.Text = "Start AI - Starting Bot";
             // 
             // statusStrip
             // 
@@ -5621,7 +5625,26 @@
             // 
             // backgroundWorker1
             // 
+            this.backgroundWorker1.WorkerSupportsCancellation = true;
             this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(262, 27);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(199, 13);
+            this.label19.TabIndex = 4;
+            this.label19.Text = "[Test]Enable Mode - Enable Some Mode";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(262, 54);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(203, 13);
+            this.label20.TabIndex = 5;
+            this.label20.Text = "[Test]Disable Mode - Disable Some Mode";
             // 
             // MainForm
             // 
@@ -6757,11 +6780,13 @@
         private System.Windows.Forms.Label label7;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox ST_TelegramEnable;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox ST_TelegramTokenTextBox;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label20;
     }
 }

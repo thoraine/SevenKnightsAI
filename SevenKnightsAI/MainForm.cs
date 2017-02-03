@@ -985,6 +985,8 @@ namespace SevenKnightsAI
             this.ST_forceActiveCheckBox.Checked = this.AIProfiles.ST_BlueStacksForceActive;
             this.ST_pushbulletCheckBox.Checked = this.AIProfiles.ST_PushbulletEnable;
             this.ST_pushbulletEmailTextBox.Text = this.AIProfiles.ST_PushbulletEmail;
+            this.ST_TelegramEnable.Checked = this.AIProfiles.ST_TelegramEnable;
+            this.ST_TelegramTokenTextBox.Text = this.AIProfiles.ST_TelegramToken;
             this.ST_foregroundMode.Checked = this.AIProfiles.ST_ForegroundMode;
         }
 
@@ -2003,43 +2005,107 @@ namespace SevenKnightsAI
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-            while (true)
+            if (this.backgroundWorker1.CancellationPending)
             {
-                bot.update = "true";
-                if(bot.message_text == "Start AI")
+                e.Cancel = true;
+                return;
+            } else {
+                while (true)
                 {
-                    if (!this.started)
+                    bot.update = "true";
+                    if (bot.message_text == "Start AI")
                     {
-                        this.StartAI();
-                        bot.sendMessage.send(bot.chat_id, "AI Started!");
+                        if (!this.started)
+                        {
+                            this.StartAI();
+                            bot.sendMessage.send(bot.chat_id, "AI Started!");
+                        }
+                        else
+                        {
+                            bot.sendMessage.send(bot.chat_id, "AI Already Started!");
+                        }
                     }
-                    else
-                    {
-                        bot.sendMessage.send(bot.chat_id, "AI Already Started!");
-                    }
-                }
-                if(bot.message_text == "Stop AI") {
+                    if (bot.message_text == "Stop AI") {
                         if (this.started)
                         {
                             this.StopAI();
                             bot.sendMessage.send(bot.chat_id, "Bot Stopped");
-                        }else
+                        } else
                         {
                             bot.sendMessage.send(bot.chat_id, "Bot Already Stopped");
                         }
+                    }
+                    if (bot.message_text == "Enable Mode")
+                    {
+                        bot.send_inline_keyboard.keyboard_R1_1 = "Adventure";
+                        bot.send_inline_keyboard.keyboard_R1_1_callback_data = "EnableAdventure";
+                        bot.send_inline_keyboard.keyboard_R1_2 = "Arena";
+                        bot.send_inline_keyboard.keyboard_R1_2_callback_data = "EnableArena";
+                        bot.send_inline_keyboard.keyboard_R1_3 = "Gold Chamber";
+                        bot.send_inline_keyboard.keyboard_R1_3_callback_data = "EnableGoldChamber";
+                        bot.send_inline_keyboard.keyboard_R1_4 = "Raid";
+                        bot.send_inline_keyboard.keyboard_R1_4_callback_data = "EnableRaid";
+                        bot.send_inline_keyboard.send(bot.chat_id, "Select Mode You Want To Enable : ");
+                    }
+                    if(bot.data == "EnableAdventure")
+                    {
+                        this.AISettings.AD_Enable = true;
+                    }
+                    if (bot.data == "EnableArena")
+                    {
+                        this.AISettings.AR_Enable = true;
+                    }
+                    if (bot.data == "EnableGoldChamber")
+                    {
+                        this.AISettings.GC_Enable = true;
+                    }
+                    if (bot.data == "EnableRaid")
+                    {
+                        this.AISettings.RD_Enable = true;
+                    }
+                    if (bot.message_text == "Disable Mode")
+                    {
+                        bot.send_inline_keyboard.keyboard_R1_1 = "Adventure";
+                        bot.send_inline_keyboard.keyboard_R1_1_callback_data = "DisableAdventure";
+                        bot.send_inline_keyboard.keyboard_R1_2 = "Arena";
+                        bot.send_inline_keyboard.keyboard_R1_2_callback_data = "DisableArena";
+                        bot.send_inline_keyboard.keyboard_R1_3 = "Gold Chamber";
+                        bot.send_inline_keyboard.keyboard_R1_3_callback_data = "DisableGoldChamber";
+                        bot.send_inline_keyboard.keyboard_R1_4 = "Raid";
+                        bot.send_inline_keyboard.keyboard_R1_4_callback_data = "DisableRaid";
+                        bot.send_inline_keyboard.send(bot.chat_id, "Select Mode You Want To Disable : ");
+                    }
+                    if (bot.data == "DisableAdventure")
+                    {
+                        this.AISettings.AD_Enable = false;
+                    }
+                    if (bot.data == "DisableArena")
+                    {
+                        this.AISettings.AR_Enable = false;
+                    }
+                    if (bot.data == "DisableGoldChamber")
+                    {
+                        this.AISettings.GC_Enable = false;
+                    }
+                    if (bot.data == "DisableRaid")
+                    {
+                        this.AISettings.RD_Enable = false;
+                    }
                 }
             }
         }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
+            CheckBox checkBox = sender as CheckBox;
+            bool @checked = checkBox.Checked;
+            this.AIProfiles.ST_TelegramEnable = @checked;
+            if(checkBox.Checked == true) { 
             CheckForIllegalCrossThreadCalls = false;
             backgroundWorker1.RunWorkerAsync();
+            }else
+            {
+                backgroundWorker1.CancelAsync();
+            }
         }
 
         private void button1_Click_1(object sender, EventArgs e)
