@@ -11,7 +11,7 @@ Also always keep in mind that with every online game there's always potential to
 ## Requirements
 1.Requires Bluestacks v2.0.4.5627
 
-http://filehippo.com...comments/65982/
+http://filehippo.com/download_bluestacks_app_player/65982/
 
 2.vc2015 install both x86 and x64
 
