@@ -13,6 +13,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Timers;
 using System.Windows.Forms;
+using System.Net;
 using Tesseract;
 using ImageMagick;
 using Telegram;
@@ -205,7 +206,7 @@ namespace SevenKnightsAI.Classes
                 if (this.AdventureLimitCount >= this.AISettings.AD_Limit)
                 {
                     this.Log("Limit reached [Adventure]", this.COLOR_LIMIT);
-                    bot.sendMessage.send(bot.chat_id, "Limit Reached [Adventure]");
+                    SendMessage("Limit Reached [Adventure]");
                     this.AdventureLimitCount = 0;
                     this.NextPossibleObjective();
                 }
@@ -240,7 +241,7 @@ namespace SevenKnightsAI.Classes
                 if (this.ArenaLimitCount >= this.AISettings.AR_Limit)
                 {
                     this.Log("Limit reached [Arena]", this.COLOR_LIMIT);
-                    bot.sendMessage.send(bot.chat_id, "Limit Reached [Arena]");
+                    SendMessage("Limit Reached [Arena]");
                     this.ArenaLimitCount = 0;
                     this.NextPossibleObjective();
                 }
@@ -280,7 +281,7 @@ namespace SevenKnightsAI.Classes
                 ShopPM.Key100Ruby100
             };
             this.Log("Start buying keys", this.COLOR_BUY_KEYS);
-            bot.sendMessage.send(bot.chat_id, "AI will buy the keys with honors first, then with rubies.");
+            SendMessage("AI will buy the keys with honors first, then with rubies.");
             this.WeightedClick(ShopPM.KeyTab, 1.0, 1.0, 1, 0, "left");
             SevenKnightsCore.Sleep(500);
             Scene scene;
@@ -360,7 +361,7 @@ namespace SevenKnightsAI.Classes
                 string text = string.Format("Unable to buy keys using {0}", flag ? "honors" : "rubies");
                 this.Log(text, this.COLOR_BUY_KEYS);
                 string errormessages = "Failed to buy keys "+ text +" .";
-                bot.sendMessage.send(bot.chat_id, errormessages);
+                SendMessage(errormessages);
 
             }
             if (scene != null && scene.SceneType != SceneType.SHOP_BUY_POPUP)
@@ -587,7 +588,7 @@ namespace SevenKnightsAI.Classes
                 this.AISettings.RS_InboxTickets
             };
             this.Log("Start collecting inbox", this.COLOR_INBOX);
-            bot.sendMessage.send(bot.chat_id, "AI is collecting your inbox.");
+            SendMessage("AI is collecting your inbox.");
             List<int> list = new List<int>();
             for (int i = 0; i < array2.Length; i++)
             {
@@ -700,7 +701,7 @@ namespace SevenKnightsAI.Classes
                 this.AISettings.RS_QuestsSocial
             };
             this.Log("Start collecting quests", this.COLOR_QUEST);
-            bot.sendMessage.send(bot.chat_id, "AI is collecting quests.");
+            SendMessage("AI is collecting quests.");
             List<int> list = new List<int>();
             for (int i = 0; i < array2.Length; i++)
             {
@@ -786,7 +787,7 @@ namespace SevenKnightsAI.Classes
                 this.AISettings.RS_SpecialQuestsMonthly
             };
             this.Log("Start collecting special quests", this.COLOR_QUEST);
-            bot.sendMessage.send(bot.chat_id, "AI is collecting special quests.");
+            SendMessage("AI is collecting special quests.");
             List<int> list = new List<int>();
             for (int i = 0; i < array2.Length; i++)
             {
@@ -1130,7 +1131,7 @@ namespace SevenKnightsAI.Classes
         private void DoneBuyKeys()
         {
             this.Log("Done buying keys", this.COLOR_BUY_KEYS);
-            bot.sendMessage.send(bot.chat_id, "AI has finished buying keys.");
+            SendMessage("AI has finished buying keys.");
             this.NextPossibleObjective();
             if (this.CurrentObjective == Objective.ADVENTURE)
             {
@@ -1155,7 +1156,7 @@ namespace SevenKnightsAI.Classes
         private void DoneCollectInbox()
         {
             this.Log("Done collecting inbox", this.COLOR_INBOX);
-            bot.sendMessage.send(bot.chat_id, "AI has finished collecting your inbox.");
+            SendMessage("AI has finished collecting your inbox.");
             this.NextPossibleObjective();
             SevenKnightsCore.Sleep(300);
             this.Escape();
@@ -1165,7 +1166,7 @@ namespace SevenKnightsAI.Classes
         private void DoneCollectQuests()
         {
             this.Log("Done collecting quests", this.COLOR_QUEST);
-            bot.sendMessage.send(bot.chat_id, "AI has finished collecting quests.");
+            SendMessage("AI has finished collecting quests.");
             this.CollectQuestsCount++;
             if (this.CollectQuestsCount == this.CollectQuestsTotal)
             {
@@ -1179,7 +1180,7 @@ namespace SevenKnightsAI.Classes
         private void DoneCollectSpecialQuests()
         {
             this.Log("Done collecting special quests", this.COLOR_QUEST);
-            bot.sendMessage.send(bot.chat_id, "AI has finished collecting special quests.");
+            SendMessage("AI has finished collecting special quests.");
 
             this.CollectQuestsCount++;
             if (this.CollectQuestsCount == this.CollectQuestsTotal)
@@ -1194,7 +1195,7 @@ namespace SevenKnightsAI.Classes
         private void DoneManageHeroes()
         {
             this.Log("Done managing heroes", this.COLOR_HEROES_MANAGEMENT);
-            bot.sendMessage.send(bot.chat_id, "AI has finished managing your team.");
+            SendMessage("AI has finished managing your team.");
             this.HeroManageAttemps = 0;
             this.NextPossibleObjective();
             this.Escape();
@@ -1218,7 +1219,7 @@ namespace SevenKnightsAI.Classes
         private void DoneSellHeroes(int sellCount)
         {
             this.Log("Done selling heroes", this.COLOR_SELL_HEROES);
-            bot.sendMessage.send(bot.chat_id, "AI has finished selling your heroes.");
+            SendMessage("AI has finished selling your heroes.");
             if (sellCount == 0)
             {
                 this.Log("No more heroes that satisfied the conditions", this.COLOR_SELL_HEROES);
@@ -1233,7 +1234,7 @@ namespace SevenKnightsAI.Classes
         private void DoneSellItems(int sellCount)
         {
             this.Log("Done selling items", this.COLOR_SELL_ITEMS);
-            bot.sendMessage.send(bot.chat_id, "AI has finished selling your items.");
+            SendMessage("AI has finished selling your items.");
             if (sellCount == 0)
             {
                 this.Log("No more items that satisfied the conditions", this.COLOR_SELL_ITEMS);
@@ -1248,7 +1249,7 @@ namespace SevenKnightsAI.Classes
         private void DoneSendHonors()
         {
             this.Log("Done sending honors", this.COLOR_HONOR);
-            bot.sendMessage.send(bot.chat_id, "AI has finished sending honors.");
+            SendMessage("AI has finished sending honors.");
             this.NextPossibleObjective();
             SevenKnightsCore.Sleep(300);
             this.Escape();
@@ -1392,7 +1393,7 @@ namespace SevenKnightsAI.Classes
                 if (this.GoldChamberLimitCount >= this.AISettings.GC_Limit)
                 {
                     this.Log("Limit reached [Gold Chamber]", this.COLOR_LIMIT);
-                    bot.sendMessage.send(bot.chat_id, "Limit reached [Gold Chamber]");
+                    SendMessage("Limit reached [Gold Chamber]");
                     this.GoldChamberLimitCount = 0;
                     this.NextPossibleObjective();
                 }
@@ -1430,7 +1431,7 @@ namespace SevenKnightsAI.Classes
                 if (scene.SceneType == SceneType.INBOX_SELECT_HERO)
                 {
                     this.Log("Found a hero card that needs to be selected", this.COLOR_INBOX);
-                    bot.sendMessage.send(bot.chat_id, "AI will skip and not collect this card.");
+                    SendMessage("AI will skip and not collect this card.");
                     return false;
                 }
                 if (scene.SceneType != SceneType.INBOX_COLLECT_FAILED_POPUP)
@@ -1486,7 +1487,7 @@ namespace SevenKnightsAI.Classes
                 if (this.CurrentObjective != Objective.BUY_KEYS)
                 {
                     this.ChangeObjective(Objective.BUY_KEYS);
-                    bot.sendMessage.send(bot.chat_id, "Change Objective : Buy Keys");
+                    SendMessage("Change Objective : Buy Keys");
                     return;
                 }
             }
@@ -1850,7 +1851,7 @@ namespace SevenKnightsAI.Classes
             if (!this.BlueStacks.Hook())
             {
                 errorMessage = "BlueStacks is not active or not yet initialized";
-                bot.sendMessage.send(bot.chat_id, "ERROR : BlueStacks is not active or not yet initialized");
+                SendMessage("ERROR : BlueStacks is not active or not yet initialized");
                 this.LogError(errorMessage);
                 this.SynchronizationContext.Send(delegate (object callback)
                 {
@@ -1861,7 +1862,7 @@ namespace SevenKnightsAI.Classes
             if (this.BlueStacks.NeedResize() || this.BlueStacks.NeedRenderConfig())
             {
                 string text = "BlueStacks needs to be resized. Proceed?";
-                bot.sendMessage.send(bot.chat_id, "ERROR : Bluestacks needs to be resized.Check now!");
+                SendMessage("ERROR : Bluestacks needs to be resized.Check now!");
                 DialogResult dialogResult = MessageBox.Show(text, "Restart Required", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
                 if (dialogResult == DialogResult.OK)
                 {
@@ -1923,7 +1924,7 @@ namespace SevenKnightsAI.Classes
                                 if (this.HangCounter >= 30000)
                                 {
                                     this.Log("Restarting Seven Knights", Color.DarkRed);
-                                    bot.sendMessage.send(bot.chat_id, "The game is not responding... AI will restart the game and continue.");
+                                    SendMessage("The game is not responding... AI will restart the game and continue.");
                                     this.HangCounter = 0;
                                     if (!this.BlueStacks.RestartGame(5))
                                     {
@@ -2200,7 +2201,7 @@ namespace SevenKnightsAI.Classes
                                             break;
 
                                         case SceneType.GIFT_REWARDS_POPUP:
-                                            bot.sendMessage.send(bot.chat_id, "AI has collected May's Lucky Chest or Lucky Box.");
+                                            SendMessage("AI has collected May's Lucky Chest or Lucky Box.");
                                             this.WeightedClick(SharedPM.Rewards_OkButton, 1.0, 1.0, 1, 0, "left");
                                             SevenKnightsCore.Sleep(300);
                                             break;
@@ -2357,12 +2358,12 @@ namespace SevenKnightsAI.Classes
                                             if (this.AISettings.AD_StopOnFullItems)
                                             {
                                                 this.Alert("Items Full");
-                                                bot.sendMessage.send(bot.chat_id, "AI has stopped because Your inventory is full");
+                                                SendMessage("AI has stopped because Your inventory is full");
                                                 this.Escape();
                                             }
                                             if (!flag)
                                             {
-                                                bot.sendMessage.send(bot.chat_id, "Your inventory is full. AI will start selling them if enabled.");
+                                                SendMessage("Your inventory is full. AI will start selling them if enabled.");
                                                 flag = true;
                                             }
                                             if (this.AISettings.RS_SellItems && this.CooldownSellItems <= 0)
@@ -2384,12 +2385,12 @@ namespace SevenKnightsAI.Classes
                                             if (this.AISettings.AD_StopOnFullHeroes)
                                             {
                                                 this.Alert("Heroes Full");
-                                                bot.sendMessage.send(bot.chat_id, "AI has stopped Because Your hero cards are full");
+                                                SendMessage("AI has stopped Because Your hero cards are full");
                                                 this.Escape();
                                             }
                                             if (!flag2)
                                             {
-                                                bot.sendMessage.send(bot.chat_id, "Your hero cards are full. AI will start selling them if enabled.");
+                                                SendMessage("Your hero cards are full. AI will start selling them if enabled.");
                                                 flag2 = true;
                                             }
                                             if (this.AISettings.RS_SellHeroes && this.CooldownSellHeroes <= 0)
@@ -2490,7 +2491,7 @@ namespace SevenKnightsAI.Classes
                                         case SceneType.ADVENTURE_LOST:
                                             this.AdventureAfterFight();
                                             this.Log("Your team lost the battle [Adventure]", this.COLOR_DEATH);
-                                            bot.sendMessage.send(bot.chat_id, "[Adventure] Your team has lost a battle. Continuing AI.");
+                                            SendMessage("[Adventure] Your team has lost a battle. Continuing AI.");
                                             this.WeightedClick(AdventureLostPM.AdventureButton, 1.0, 1.0, 1, 0, "left");
                                             break;
 
@@ -2538,13 +2539,13 @@ namespace SevenKnightsAI.Classes
                                         case SceneType.OUT_OF_KEYS_OFFER:
                                             if (!flag3)
                                             {
-                                                bot.sendMessage.send(bot.chat_id, "[Adventure] AI will buy more keys or play other modes while waiting.");
+                                                SendMessage("[Adventure] AI will buy more keys or play other modes while waiting.");
                                                 flag3 = true;
                                             }
                                             if (this.CurrentObjective != Objective.BUY_KEYS)
                                             {
                                                 this.ChangeObjective(Objective.BUY_KEYS);
-                                                bot.sendMessage.send(bot.chat_id, "Change Objective : Buy Keys");
+                                                SendMessage("Change Objective : Buy Keys");
                                             }
                                             this.Escape();
                                             break;
@@ -2552,7 +2553,7 @@ namespace SevenKnightsAI.Classes
                                         case SceneType.OUT_OF_KEYS_POPUP:
                                             if (!flag3)
                                             {
-                                                bot.sendMessage.send(bot.chat_id, "[Adventure] AI will buy more keys or play other modes while waiting.");
+                                                SendMessage("[Adventure] AI will buy more keys or play other modes while waiting.");
                                                 flag3 = true;
                                             }
                                             this.HandleOutOfKey(scene.SceneType);
@@ -2610,7 +2611,7 @@ namespace SevenKnightsAI.Classes
                                         case SceneType.TOWER_LOST:
                                             this.GoldChamberAfterFight();
                                             this.Log("Your team lost the battle [Tower]", this.COLOR_DEATH);
-                                            bot.sendMessage.send(bot.chat_id, "[Gold Chamber] Your team has lost a battle. Continuing AI.");
+                                            SendMessage("[Gold Chamber] Your team has lost a battle. Continuing AI.");
                                             this.WeightedClick(TowerLostPM.ReadyButton, 1.0, 1.0, 1, 0, "left");
                                             break;
 
@@ -2701,13 +2702,13 @@ namespace SevenKnightsAI.Classes
                                             if (this.MatchMapping(ArenaEndPM.GetStrongerButton, 2))
                                             {
                                                 this.Log("Arena Lose", this.COLOR_ARENA);
-                                                bot.sendMessage.send(bot.chat_id, "[Arena] Your team has lost a battle. Continuing AI.");
+                                                SendMessage("[Arena] Your team has lost a battle. Continuing AI.");
                                                 this.ArenaAfterFight(false);
                                             }
                                             else
                                             {
                                                 this.Log("Arena Victory", this.COLOR_ARENA);
-                                                bot.sendMessage.send(bot.chat_id, "[Gold Chamber] Your team has Win a battle. Continuing AI.");
+                                                SendMessage("[Gold Chamber] Your team has Win a battle. Continuing AI.");
                                                 this.ArenaAfterFight(true);
                                             }
                                             if (this.CurrentObjective == Objective.ARENA)
@@ -2730,7 +2731,7 @@ namespace SevenKnightsAI.Classes
                                             {
                                                 string arenaTelegram = string.Format("Entering arena using Ruby ({0})", this.ArenaRubiesCount + 1);
                                                 this.Log(string.Format("Entering arena using Ruby ({0})", this.ArenaRubiesCount + 1), this.COLOR_ARENA);
-                                                bot.sendMessage.send(bot.chat_id, arenaTelegram);
+                                                SendMessage(arenaTelegram);
                                                 this.WeightedClick(OutOfSwordsPopupPM.EnterButton, 1.0, 1.0, 1, 0, "left");
                                                 SevenKnightsCore.Sleep(1000);
                                                 this.ArenaRubiesCount++;
@@ -6700,7 +6701,7 @@ namespace SevenKnightsAI.Classes
                             {
                                 this.Log(string.Format("Max Heroes  level up per day : {0}/100", curCount),Color.Purple);
                                 string HeroLvUPCountTelegram = string.Format("Max Heroes  level up per day : {0}/100", curCount);
-                                bot.sendMessage.send(bot.chat_id, HeroLvUPCountTelegram);
+                                SendMessage(HeroLvUPCountTelegram);
                             }
                             if (curCount == 100 && array[1].Equals("100"))
                             {
@@ -7134,7 +7135,17 @@ namespace SevenKnightsAI.Classes
         {
             this.BlueStacks.MainWindowAS.Click(mapping.X, mapping.Y, numClicks, delay, button);
         }
+        private void SendMessage(string message)
+        {
+            string URI = "https://api.telegram.org/bot" + this.AIProfiles.ST_TelegramToken + "/SendMessage";
+            string myParameters = "text=" + message + "&chat_id=" + this.AIProfiles.ST_TelegramChatID;
 
-#endregion Private Methods
+            using (WebClient wc = new WebClient())
+            {
+                wc.Headers[HttpRequestHeader.ContentType] = "application/x-www-form-urlencoded";
+                string HtmlResult = wc.UploadString(URI, myParameters);
+            }
+        }
+        #endregion Private Methods
     }
 }

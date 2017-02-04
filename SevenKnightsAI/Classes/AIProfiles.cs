@@ -38,6 +38,9 @@ namespace SevenKnightsAI.Classes
         [XmlElement(ElementName = "ST_TelegramToken")]
         public string ST_TelegramToken;
 
+        [XmlElement(ElementName = "ST_TelegramChatID")]
+        public string ST_TelegramChatID;
+
         [XmlElement(ElementName = "ST_PushbulletEnable")]
         public bool ST_PushbulletEnable;
 
@@ -160,6 +163,12 @@ namespace SevenKnightsAI.Classes
                 { }
                 try
                 {
+                    aIProfiles.ST_TelegramChatID = ((dictionary["ST_TelegramChatID"] == null) ? null : dictionary["ST_TelegramChatID"].ToString());
+                }
+                catch (Exception)
+                { }
+                try
+                {
                     aIProfiles.ST_ForegroundMode = (bool)dictionary["ST_ForegroundMode"];
                 }
                 catch (Exception)
@@ -233,6 +242,10 @@ namespace SevenKnightsAI.Classes
                 {
                     "ST_TelegramToken",
                     this.ST_TelegramToken
+                },
+                {
+                    "ST_TelegramChatID",
+                    this.ST_TelegramChatID
                 },
                 {
                     "ST_ForegroundMode",

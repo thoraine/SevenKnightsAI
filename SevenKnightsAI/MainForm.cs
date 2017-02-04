@@ -1910,6 +1910,7 @@ namespace SevenKnightsAI
             this.Worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(this.BackgroundWorkerOnCompleted);
             this.started = true;
             this.aiButton.Text = "Stop AI";
+            tabControl.SelectedIndex = 5;
             this.EnablePause(true);
             this.LG_LogPixel.Enabled = true;
             this.LG_SaveScreen.Enabled = true;
@@ -2006,7 +2007,17 @@ namespace SevenKnightsAI
             while (true)
             {
                 bot.update = "true";
-                if(bot.message_text == "Start AI")
+                if(bot.message_text == "/start" || bot.message_text == "/Start")
+                {
+                    bot.sendKeyboard.keyboard_R1_1 = "/StartBot";
+                    bot.sendKeyboard.keyboard_R1_2 = "/StopBot";
+                    bot.sendKeyboard.keyboard_R1_3 = "/PauseBot";
+                    bot.sendKeyboard.keyboard_R1_4 = "/ResumeBot";
+                    bot.sendKeyboard.keyboard_R2_1 = "/EnableMode";
+                    bot.sendKeyboard.keyboard_R2_2 = "/DisableMode";
+                    bot.sendKeyboard.send(bot.chat_id, "Welcome to Seven Knights AI Telegram Bot.");
+                }
+                if(bot.message_text == "/StartBot")
                 {
                     if (!this.started)
                     {
@@ -2018,7 +2029,7 @@ namespace SevenKnightsAI
                         bot.sendMessage.send(bot.chat_id, "AI Already Started!");
                     }
                 }
-                if(bot.message_text == "Stop AI") {
+                if(bot.message_text == "/StopBot") {
                         if (this.started)
                         {
                             this.StopAI();
@@ -2027,6 +2038,85 @@ namespace SevenKnightsAI
                         {
                             bot.sendMessage.send(bot.chat_id, "Bot Already Stopped");
                         }
+                }
+              if(bot.message_text == "/PauseBot")
+                {
+                    if (this.started)
+                    {
+                        this.PauseAI();
+                        bot.sendMessage.send(bot.chat_id, "Bot Paused");
+                    }
+                    else
+                    {
+                        bot.sendMessage.send(bot.chat_id, "Bot Not Running");
+                    }
+                }
+              if(bot.message_text == "/ResumeBot")
+                {
+                    if (this.AIProfiles.TMP_Paused)
+                    {
+                        this.ResumeAI();
+                        bot.sendMessage.send(bot.chat_id, "Bot Resume");
+                    }else
+                    {
+                        bot.sendMessage.send(bot.chat_id, "Bot Not Paused");
+                    }
+                }
+                if (bot.message_text == "/EnableMode")
+                {
+                    bot.send_inline_keyboard.keyboard_R1_1 = "Adventure";
+                    bot.send_inline_keyboard.keyboard_R1_1_callback_data = "EnableAdventure";
+                    bot.send_inline_keyboard.keyboard_R1_2 = "Arena";
+                    bot.send_inline_keyboard.keyboard_R1_2_callback_data = "EnableArena";
+                    bot.send_inline_keyboard.keyboard_R1_3 = "Gold Chamber";
+                    bot.send_inline_keyboard.keyboard_R1_3_callback_data = "EnableGoldChamber";
+                    bot.send_inline_keyboard.keyboard_R1_4 = "Raid";
+                    bot.send_inline_keyboard.keyboard_R1_4_callback_data = "EnableRaid";
+                    bot.send_inline_keyboard.send(bot.chat_id, "Select Mode You Want To Enable : ");
+                }
+                if (bot.data == "EnableAdventure")
+                {
+                    this.AISettings.AD_Enable = true;
+                }
+                if (bot.data == "EnableArena")
+                {
+                    this.AISettings.AR_Enable = true;
+                }
+                if (bot.data == "EnableGoldChamber")
+                {
+                    this.AISettings.GC_Enable = true;
+                }
+                if (bot.data == "EnableRaid")
+                {
+                    this.AISettings.RD_Enable = true;
+                }
+                if (bot.message_text == "/DisableMode")
+                {
+                    bot.send_inline_keyboard.keyboard_R1_1 = "Adventure";
+                    bot.send_inline_keyboard.keyboard_R1_1_callback_data = "DisableAdventure";
+                    bot.send_inline_keyboard.keyboard_R1_2 = "Arena";
+                    bot.send_inline_keyboard.keyboard_R1_2_callback_data = "DisableArena";
+                    bot.send_inline_keyboard.keyboard_R1_3 = "Gold Chamber";
+                    bot.send_inline_keyboard.keyboard_R1_3_callback_data = "DisableGoldChamber";
+                    bot.send_inline_keyboard.keyboard_R1_4 = "Raid";
+                    bot.send_inline_keyboard.keyboard_R1_4_callback_data = "DisableRaid";
+                    bot.send_inline_keyboard.send(bot.chat_id, "Select Mode You Want To Disable : ");
+                }
+                if (bot.data == "DisableAdventure")
+                {
+                    this.AISettings.AD_Enable = false;
+                }
+                if (bot.data == "DisableArena")
+                {
+                    this.AISettings.AR_Enable = false;
+                }
+                if (bot.data == "DisableGoldChamber")
+                {
+                    this.AISettings.GC_Enable = false;
+                }
+                if (bot.data == "DisableRaid")
+                {
+                    this.AISettings.RD_Enable = false;
                 }
             }
         }
@@ -2060,6 +2150,29 @@ namespace SevenKnightsAI
             TextBox textBox = sender as TextBox;
             string text = textBox.Text;
             this.AIProfiles.ST_TelegramToken = text;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            using (WebClient wc = new WebClient())
+            {
+                string json = wc.DownloadString("https://api.telegram.org/bot"+this.AIProfiles.ST_TelegramToken+"/getupdates?offset=0");
+                var test = JSON.Parse(json);
+                if (json.Length > 23) { 
+                foreach(JSONNode r in test["result"].AsArray)
+                {
+                        string test2 = r["message"]["chat"]["id"];
+                        ST_TelegramChatIDTB.Text = test2;
+                }
+                }
+            }
+        }
+
+        private void ST_TelegramChatIDTB_TextChanged(object sender, EventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            string text = textBox.Text;
+            this.AIProfiles.ST_TelegramChatID = text;
         }
     }
 }
