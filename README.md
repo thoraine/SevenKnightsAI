@@ -38,6 +38,11 @@ The Username is a short name, to be used in mentions and telegram.me links. User
 
 The token is a string along the lines of 110201543:AAHdqTcvCH1vGWJxfSeofSAs0K5PALDsaw that is required to authorize the bot and send requests to the Bot API.
 
-1. unzip
-2. Run Bluestacks to the Android Tab
-3. Run SevenKnightsAI
+6.ChatID 
+How to get chatID? 
+1.Click GetID Button 
+2.Send Anything to Bot 
+3.Click GetID Again
+4.If ID Not Showed in ChatID Textbox . Repeat again from beginning.
+
+
